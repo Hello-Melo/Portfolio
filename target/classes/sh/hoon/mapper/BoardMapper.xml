@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sh.hoon.mapper.BoardMapper">
+	
+	<sql id="search">
+		<where>
+			<trim prefixOverrides="or">
+				<foreach collection="typeCollection" item="ty">
+					<trim prefix="or">
+						<choose>
+							<when test="ty == 'T'.toString()">
+								title like concat('%', #{keyword}, '%')
+							</when>
+							<when test="ty == 'C'.toString()">
+								contents like concat('%', #{keyword}, '%')
+							</when>
+							<when test="ty == 'W'.toString()">
+								writer like concat('%', #{keyword}, '%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>		
+			</trim>
+		</where>
+	</sql>
+
+
+	<select id="getList" resultType="sh.hoon.model.BoardVO">
+		select * from board_tbl
+		<include refid="search" />
+		order by	bno desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+
+	<select id="totalCount" resultType="Integer">
+		select count(*) from board_tbl
+		<include refid="search" />
+	</select>
+
+	<select id="get" resultType="sh.hoon.model.BoardVO">
+		select * from board_tbl where bno =	#{bno}
+	</select>
+	<insert id="insert">
+		<selectKey keyProperty="bno" resultType="java.lang.Long" order="AFTER"> 
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into board_tbl(title,contents, writer)
+		values
+		(#{title}, #{contents}, #{writer})
+	</insert>
+	<update id="update">
+		update board_tbl set
+		title = #{title},
+		contents	=#{contents},
+		updateDate = now()
+		where bno = #{bno}
+	</update>
+	<delete id="delete">
+		delete from board_tbl where bno = #{bno}
+	</delete>
+
+	<!-- 댓글 증감 카운트-->
+		<update id="updateReplyCnt">
+			update board_tbl set replyCnt = replyCnt + #{amount}
+			where bno = #{bno};
+		</update>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sh.hoon.mapper.MemberMapper">
+
+	<select id="getList" resultType="sh.hoon.model.MemberVO">
+		select * from member_tbl order by uno desc
+	</select>
+	
+	<select id="get" resultType="sh.hoon.model.MemberVO">
+		select * from member_tbl where uno = #{uno}
+	</select>
+
+	<insert id="insert">
+		<selectKey keyProperty="uno" resultType="java.lang.Long" order="AFTER"> 
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into member_tbl(userId, userPw, userName, userEmail)
+		value(#{userId}, #{userPw}, #{userName}, #{userEmail})
+	</insert>
+
+	<update id="update">
+		update member_tbl set
+		userId = #{userId},
+		userPw = #{userPw},
+		userName = #{userName},
+		userEmail = #{userEmail}
+		where uno = #{uno}
+	</update>
+
+	<delete id="delete">
+		delete from member_tbl where uno = #{uno}
+	</delete>
+
+</mapper>

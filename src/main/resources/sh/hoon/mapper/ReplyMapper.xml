@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sh.hoon.mapper.ReplyMapper">
+
+	<select id="getList" resultType="sh.hoon.model.ReplyVo">
+		select * from reply_tbl where bno = #{bno}
+	</select>
+
+	<select id="get" resultType="sh.hoon.model.ReplyVo">
+		select * from reply_tbl where rno = #{rno}
+	</select>
+
+	<insert id="insert">
+		insert into reply_tbl(bno, reply, replyer)
+		value(#{bno}, #{reply}, #{replyer})
+	</insert>
+
+	<delete id="delete">
+		delete from reply_tbl where rno = #{rno}
+	</delete>
+
+	<update id="update">
+		update reply_tbl
+		set reply=#{reply},
+		updateDate = now()
+		where rno = #{rno}
+	</update>
+
+
+</mapper>
