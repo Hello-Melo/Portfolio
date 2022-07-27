@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-<script  src="${pageContext.request.contextPath}/resources/js/reply.js" ></script>
-<script  src="${pageContext.request.contextPath}/resources/js/get.js" ></script>
+<script  src="${pageContext.request.contextPath}/resources/js/reply/reply.js" ></script>
+<script  src="${pageContext.request.contextPath}/resources/js/reply/get.js" ></script>
+<script  src="${contextPath}/resources/js/board/get.js" ></script>
 
 
 		<div class="p-5 mb-4 bg-light rounded-3">
@@ -166,17 +167,5 @@
 
 </script>
 
-<script>
-  $(document).ready(function() {
-	  (function() {
-					let bno = $('#bno');
-					console.log(1);
-					$.getJSON("/board/getAttachList", {bno : bno}, function(arr) {
-						console.log(arr);
-					});
-				});
-		  })
-
-</script>
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

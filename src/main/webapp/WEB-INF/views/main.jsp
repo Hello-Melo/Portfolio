@@ -72,5 +72,9 @@
         </div>
      </div>
 </main>
+
+<script>
+
+</script>
   
     <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

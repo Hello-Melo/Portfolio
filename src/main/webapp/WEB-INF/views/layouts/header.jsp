@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>구미 봉곡태권도에 오신 것을 환영합니다</title>
-	<link rel="stylesheet"  href="${contextPath}/resources/css/reset.css">
+	<link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
@@ -23,7 +23,8 @@
 		let csrfTokenName = "${_csrf.token}";
 </script>
 	<!-- <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script> -->
-	<script  src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	<script  src="${contextPath}/resources/ckeditor/ckeditor.js"></script>
+ 	<script  src="${contextPath}/resources/js/common/common.js"></script> 
 	<link rel="stylesheet"  href="${contextPath}/resources/css/style.css">
 </head>
 <body>

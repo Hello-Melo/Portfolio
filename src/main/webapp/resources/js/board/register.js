@@ -1,46 +1,7 @@
-
-
-$(document).ready(function() {
-	// 표현언어로 컨텍스트 패스 불러올수 없으니, 헤더에 선언해준 변수 contextPath로 사용하면된다!
-
-	let form = $('#registerForm');
-	let submitBtn = $('#registerForm button');
-	
-	submitBtn.on("click", function(e){
-		let str ='';
-				$('.uploadResult ul li').each(function (i, obj) {
-					let jobj = $(obj);
-					console.log(jobj.data('filename'));
-					
-					str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
-				});
-				form.append(str).submit();
-	})
-	
-	$(function() {
-			let form = $('#registerForm');
-			let submitBtn = $('#registerForm button');
-			
-			// 기본동작 금지하는 펑션(prevent)
-			 submitBtn.on('click', function (e) {
-				e.preventDefault();
-				let str ='';
-				
-				$('.uploadResult ul li').each(function (i, obj) {
-					let jobj = $(obj);
-					console.log(jobj.data('filename'));
-					
-					str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
-				});
-				form.append(str).submit();
-			 })
-	})	
+/*function showImage(path) {
+		let imgTag = "<img  src='"+contextPath+"/display?fileName=" + encodeURI(path) + "'>"
+		$('.oImg').html(imgTag);
+	}
 
 	let regex = new RegExp("(.*?)\.(exe|sh|js|alz)$"); //정규표현식, 해당 확장자들을 regex에 선언
 	let maxSize = 5242880; //5mb 파일크기 제한
@@ -59,7 +20,7 @@ $(document).ready(function() {
 	}
 
 	//result 부분 처리
-	let uploadResult = $('.uploadResult ul');
+		let uploadResult = $('.uploadResult ul');
 		function showUploadResult(uploadResultArr) {
 			
 			if(!uploadResultArr || uploadResultArr.length == 0) return;
@@ -96,14 +57,35 @@ $(document).ready(function() {
 			})
 			uploadResult.append(str);
 		}
-		
 
+
+*/
+$(document).ready(function() {
+	// 표현언어로 컨텍스트 패스 불러올수 없으니, 헤더에 선언해준 변수 contextPath로 사용하면된다!
+
+	let form = $('#registerForm');
+	let submitBtn = $('#registerForm button');
+	
+	submitBtn.on("click", function(e){
+		let str ='';
+				$('.uploadResult ul li').each(function (i, obj) {
+					let jobj = $(obj);
+					console.log(jobj.data('filename'));
+					str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>";
+					str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>";
+					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
+					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
+				});
+				form.append(str).submit();
+	})
+	
 	//삭제 
 		$('.uploadResult ul').on('click', 'span', function() {
 				alert('삭제');
 				let targetFile = $(this).data('file');
 				let type = $(this).data('type');
 				let targetLi = $(this).closest('li');
+				
 				
 				$.ajax({
 					url : contextPath + '/deleteFile',
@@ -139,15 +121,8 @@ $(document).ready(function() {
 					}
 				})
 			})
-	
-	
-		
-	
-	
 }) // function 끝
 
-function showImage(path) {
-	let imgTag = "<img  src='"+contextPath+"/display?fileName=" + encodeURI(path) + "'>"
-	$('.oImg').html(imgTag);
-}
 
+
+	

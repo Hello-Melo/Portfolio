@@ -22,7 +22,10 @@ import sh.hoon.exception.NotFoundBoardException;
 import sh.hoon.mapper.BoardAttachMapper;
 import sh.hoon.model.BoardAttachVO;
 import sh.hoon.model.BoardVO;
+import sh.hoon.model.Criteria;
+import sh.hoon.model.ReplyVo;
 import sh.hoon.service.BoardService;
+import sh.hoon.service.ReplyService;
 
 @Controller
 @RequestMapping("/board")
@@ -30,6 +33,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@GetMapping("/register")
 	public String registerForm() {
@@ -63,8 +69,11 @@ public class BoardController {
 	
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
+		Criteria criteria = new Criteria();
 		List<BoardAttachVO> list = service.getAttachList(bno);
+		List<ReplyVo> list2 = replyService.readAll(criteria, bno);
 		deleteFiles(list);
+		
 		service.remove(bno);
 		
 		rttr.addFlashAttribute("result","remove")

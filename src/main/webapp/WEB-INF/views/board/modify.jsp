@@ -3,6 +3,7 @@
 	
 <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 let bno2 = '${board.bno}';
@@ -60,7 +61,7 @@ let bno2 = '${board.bno}';
 			<!--  ckEditor 불러오기 + 파일업로드!-->
 		<script  src="${contextPath}/resources/js/CkEditor.js" ></script> 
 			<!--  update Js 불러오기 -->
-		<script  src="${contextPath}/resources/js/update.js" ></script> 
+		<script  src="${contextPath}/resources/js/board/update.js" ></script>
 
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

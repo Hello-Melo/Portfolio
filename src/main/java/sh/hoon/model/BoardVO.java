@@ -24,6 +24,7 @@ public class BoardVO {
 		private LocalDateTime updateDate;
 		private int replyCnt;
 		private long viewCount;
+		private String category;
 		
 		private List<BoardAttachVO> attachList;
 }

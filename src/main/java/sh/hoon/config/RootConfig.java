@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -14,6 +16,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan("sh.hoon.mapper")
+@EnableScheduling
 public class RootConfig {
 
 	
