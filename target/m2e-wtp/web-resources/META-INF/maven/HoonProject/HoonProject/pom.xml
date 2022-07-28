@@ -8,6 +8,8 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+	
+			<!-- Spring 관련 maven -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
@@ -20,16 +22,6 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<groupId>com.zaxxer</groupId>
-				<artifactId>HikariCP</artifactId>
-				<version>3.4.5</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>8.0.29</version>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>5.2.20.RELEASE</version>
@@ -39,6 +31,8 @@
 				<artifactId>spring-jdbc</artifactId>
 				<version>5.2.20.RELEASE</version>
 			</dependency>
+			
+			<!-- mybatis maven -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
@@ -49,6 +43,21 @@
 				<artifactId>mybatis-spring</artifactId>
 				<version>1.3.2</version>
 			</dependency>
+			
+			<!-- SQL연결을 위한 Maven -->
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP</artifactId>
+				<version>3.4.5</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>8.0.29</version>
+			</dependency>
+			<!-- SQL연결을 위한 Maven -->
+			
+			<!-- log4j 와 logback -->
 			<dependency>
 				<groupId>org.bgee.log4jdbc-log4j2</groupId>
 				<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
@@ -59,6 +68,8 @@
 				<artifactId>logback-classic</artifactId>
 				<version>1.2.3</version>
 			</dependency> 
+			
+			<!-- validation maven! -->
 			<dependency>
 			    <groupId>javax.validation</groupId>
 			    <artifactId>validation-api</artifactId>
@@ -69,12 +80,15 @@
 			    <artifactId>hibernate-validator</artifactId>
 			    <version>6.2.0.Final</version>
 			</dependency>
+			
+			<!-- jstl maven -->
 			<dependency>
 			    <groupId>javax.servlet</groupId>
 			    <artifactId>jstl</artifactId>
 			    <version>1.2</version>
 			</dependency>
 			
+		<!--  CkEditor 이미지 업로드 관련 Maven -->
 		<dependency>
 		    <groupId>commons-beanutils</groupId>
 		    <artifactId>commons-beanutils</artifactId>
@@ -95,12 +109,17 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>1.3.3</version>
 		</dependency>
+		<!--  CkEditor 이미지 업로드 관련 Maven 끝 -->
+		
+		
+		<!-- 썸네일 관련 Maven -->
 		<dependency>
 		    <groupId>net.coobird</groupId>
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.8</version>
 		</dependency>
 		
+		<!-- 업로드된 파일의 타입과 이름, 경로등을 파악하는 Maven -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
@@ -111,25 +130,51 @@
 		    <artifactId>jackson-dataformat-xml</artifactId>
 		    <version>2.13.3</version>
 		</dependency>
+		<!-- 업로드된 파일의 타입과 이름, 경로등을 파악하는 Maven 끝-->
 	
+		<!-- LocalDateTime 직렬화 해결 관련 maven  -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.datatype</groupId>
 		    <artifactId>jackson-datatype-jsr310</artifactId>
 		    <version>2.13.3</version>
 		</dependency>
+		
 			
+		<!-- Scheduler 관련 maven -->
 		<dependency>
 		    <groupId>org.quartz-scheduler</groupId>
 		    <artifactId>quartz</artifactId>
 		    <version>2.3.2</version>
 		</dependency>
-		
 			<dependency>
 		    <groupId>org.quartz-scheduler</groupId>
 		    <artifactId>quartz-jobs</artifactId>
 		    <version>2.3.2</version>
 		</dependency>
+		<!-- Scheduler maven 끝 -->
 		
+		<!-- 스프링 시큐리티 관련 maven -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>5.1.5.RELEASE</version>
+		</dependency>
+		<!-- 스프링 시큐리티 관련 maven 끝 -->
 
 	</dependencies>
 		

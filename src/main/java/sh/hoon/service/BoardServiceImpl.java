@@ -72,5 +72,4 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardAttachVO> getAttachList(Long bno) {
 		return attachMapper.findByBno(bno);
 	}
-
 }

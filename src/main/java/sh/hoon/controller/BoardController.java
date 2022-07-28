@@ -13,10 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import sh.hoon.exception.NotFoundBoardException;
 import sh.hoon.mapper.BoardAttachMapper;
@@ -38,7 +41,8 @@ public class BoardController {
 	private ReplyService replyService;
 	
 	@GetMapping("/register")
-	public String registerForm() {
+	public String registerForm(Criteria criteria, Model model) {
+		model.addAttribute("criteria", criteria);
 		return "board/register";
 	}
 	
@@ -48,7 +52,7 @@ public class BoardController {
 		service.register(vo);
 		rttr.addFlashAttribute("result", "register")
 				.addFlashAttribute("bno", vo.getBno());
-		return "redirect:/list";
+		return "redirect:/list/" + vo.getCategory();
 	}
 	
 	@GetMapping("/modify")
@@ -62,23 +66,22 @@ public class BoardController {
 	@PostMapping("/modify")
 	public String modify(BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
+		System.out.println("카테고리 : "+vo.getCategory());
 		rttr.addFlashAttribute("result","modify")
 			  .addFlashAttribute("bno", vo.getBno());
-		return "redirect:/list";
+		return "redirect:/list/"+ vo.getCategory();
 	}
 	
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		Criteria criteria = new Criteria();
 		List<BoardAttachVO> list = service.getAttachList(bno);
-		List<ReplyVo> list2 = replyService.readAll(criteria, bno);
 		deleteFiles(list);
-		
 		service.remove(bno);
 		
 		rttr.addFlashAttribute("result","remove")
 			  .addFlashAttribute("bno", bno);
-		return "redirect:/list";
+		return "redirect:/list/"+criteria.getCategory();
 	}
 	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)

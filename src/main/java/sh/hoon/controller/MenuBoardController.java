@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sh.hoon.exception.NotFoundBoardException;
@@ -26,8 +27,14 @@ public class MenuBoardController {
 		return "menu/boardIntro";
 	}
 	
-	@GetMapping("/notice")
-	public String notice() {
+	@GetMapping("/notice/{category}")
+	public String notice(@PathVariable String category, Criteria criteria, Model model) {
+		criteria.setCategory(category);
+		PageMaker maker = new PageMaker(criteria, service.totalCount(criteria));
+		
+		List<BoardVO> list = service.readAll(criteria);
+		model.addAttribute("pageMaker", maker);
+		model.addAttribute("list", list);
 		return "menu/boardNotice";
 	}
 	
@@ -57,11 +64,13 @@ public class MenuBoardController {
 	}
 	
 	
-	@GetMapping("/list")
-	public String readAll(Criteria criteria, Model model) {
+	@GetMapping("/list/{category}")
+	public String readAll(@PathVariable String category, Criteria criteria, Model model) {
+		criteria.setCategory(category);
 		PageMaker maker = new PageMaker(criteria, service.totalCount(criteria));
 		
 		List<BoardVO> list = service.readAll(criteria);
+		model.addAttribute("category", category);
 		model.addAttribute("pageMaker", maker);
 		model.addAttribute("list", list);
 		return "menu/boardList";

@@ -17,6 +17,7 @@
 						<input type="hidden" name="bno" id="bno" value="${board.bno}">
 						<input type="hidden" name="title" id="title" value="${board.title}">
 						<input	type="hidden" name="writer" id="writer" value="${board.writer}">
+						<input type="hidden" name="category" id="category" value="${board.category}">
 						<input	type="hidden" name="regDate" id="regDate" value="${board.regDate}">
 						<input	type="hidden" name="updateDate" id="updateDate" value="${board.updateDate}">
 					
@@ -122,7 +123,7 @@
 			getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'}))
 					      .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
 					      .append($('<input/>', {type:'hidden',name:'keyword',value:'${param.keyword}'}));
-			getForm.attr("action", "list");
+			getForm.attr("action", "list/${board.category}");
 			getForm.attr("method", "get");
 			
 			//이건 키워드가 없을 경우 주소창 초기화 코드!

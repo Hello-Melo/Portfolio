@@ -16,6 +16,5 @@ public interface BoardService {
 	void remove(Long bno);
 	
 	int totalCount(Criteria criteria);
-	
 	List<BoardAttachVO> getAttachList(Long bno);
 }

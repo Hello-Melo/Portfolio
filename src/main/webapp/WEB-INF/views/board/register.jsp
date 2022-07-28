@@ -8,12 +8,13 @@
 	
 		<div class="p-5 mb-4 bg-light rounded-3">
 			<div class="d-flex justify-content-center">
-				<h1 class="display-5 fw-bold">글쓰기</h1>
+				<h1 class="display-5 fw-bold">관원 게시판 글쓰기</h1>
 			</div>
 		</div>
 		
 		<div class="container">
 			<form action="${contextPath}/board/register" method="post" id="registerForm">
+				 <input type="hidden" name="category" value="${criteria.category}" readonly>
 				<div class="form-group">
 					<label>제목 : </label> <input type="text" class="form-control" name="title">
 				</div>

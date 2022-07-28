@@ -20,7 +20,8 @@ public class BoardMapperTest extends AppTest{
 	
 	@Test
 	@Ignore
-	public void getListTest(Criteria criteria) {
+	public void getListTest() {
+		Criteria criteria = new Criteria();
 		 List<BoardVO> list = mapper.getList(criteria);
 		 assertEquals(3, list.size());
 	}
@@ -33,13 +34,14 @@ public class BoardMapperTest extends AppTest{
 	}
 	
 	@Test
-	@Ignore
+	
 	public void insertTest() {
 		BoardVO vo = new BoardVO();
 		for(int i = 1 ; i <402 ; i++) {
 		vo.setTitle("제목테스트" + i + "입니다"+ i);
 		vo.setContents("내용테스트 입니다" + i);
 		vo.setWriter("글쓴이 " + i + " 지롱" + i);
+		vo.setCategory("free");
 		mapper.insert(vo);
 		}
 	}

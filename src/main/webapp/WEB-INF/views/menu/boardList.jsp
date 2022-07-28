@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-
+<c:set var="category" value="${pageMaker.criteria.category}" />
 		<!--  점보트론  -->
 		<div class="p-5 mb-4 bg-light rounded-3">
 			<div class="d-flex justify-content-center">
 				<h1 class="display-5 fw-bold">관원 게시판</h1>
 			</div>
+
 		</div>
 		<!--  점보트론  종료-->
 		
 		<!--  검색창  -->
 		<div class="container d-flex justify-content-end">
 			<div class="searchArea ">
-				<form action="${contextPath}/list" id="searchForm">
+				<form  id="searchForm">
 					<select name="type" id="type">
 						<option value="">=====</option>
 						<option value="T" ${pageMaker.criteria.type eq 'T' ? 'selected' : '' }>제목</option>
@@ -24,6 +25,7 @@
 						<option value="CW" ${pageMaker.criteria.type eq 'CW' ? 'selected' : '' }>내용+작성자</option>
 					</select>
 					<input type="search" name="keyword" value="${pageMaker.criteria.keyword}" id="keyword">
+					<input type="hidden" name="category" value="${pageMaker.criteria.category}" id="category">
 					<button class="btn btn-secondary button"> 검색</button>
 				</form>
 			</div>
@@ -42,20 +44,21 @@
 					<th>수정일</th>
 				</tr>
 				<c:forEach items="${list}" var="b">
-					<tr>
-						<td>${b.bno}</td>
-						<td><a href="${b.bno}">${b.title}<b>[${b.replyCnt}]</b></a></td>
-						<td>${b.writer}</td>
-						<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
-						<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
-						<td><fmt:parseDate var="updateDate" value="${b.updateDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
-						 <fmt:formatDate value="${updateDate}" pattern="yyyy년 MM월 dd일" /></td>
-					</tr>
+						<tr>
+							<td>${b.bno}</td>
+							<td><a href="${b.bno}">${b.title}<b>[${b.replyCnt}]</b></a></td>
+							<td>${b.writer}</td>
+							<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
+							<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
+							<td><fmt:parseDate var="updateDate" value="${b.updateDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
+							 <fmt:formatDate value="${updateDate}" pattern="yyyy년 MM월 dd일" /></td>
+						</tr>
 				</c:forEach>
 			</table>
 		
 				<form action="${contextPath}/board/register" class="d-flex justify-content-end">
 						<button class="btn btn-primary">글쓰기</button>
+						<input type="hidden" name="category" value="${pageMaker.criteria.category}">
 				</form>
 			
 		</div>
@@ -85,7 +88,7 @@
 							.append($('<input/>', {type:'hidden',name:'type',value:'${pageMaker.criteria.type}'}))
 							.append($('<input/>', {type:'hidden',name:'keyword',value:'${pageMaker.criteria.keyword}'}));
 			
-			pageForm.attr("action", "get");
+			pageForm.attr("action", "${contextPath}/get");
 			pageForm.attr("method", "get");
 			pageForm.appendTo('body');
 			pageForm.submit();
@@ -129,6 +132,7 @@
 				return;
 			};
 			//if문이 둘다 false일때 그냥 검색 실행되는 코드!
+			$('#searchForm').attr('action','${contextPath}/list/${pageMaker.criteria.category}')
 			$('#searchForm').submit();
 		});
 	});

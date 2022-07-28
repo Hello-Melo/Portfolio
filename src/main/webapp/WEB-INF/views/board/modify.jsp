@@ -19,6 +19,7 @@ let bno2 = '${board.bno}';
 
 	<div class="container">
 		<form action="${contextPath}/board/modify" method="post" enctype="multipart/form-data" id="modifyForm">
+			<input type="hidden" name="category" value="${criteria.category}" readonly>
 			<input type="hidden" name="bno" value="${board.bno}" id="bno">
 			<div class="form-group">
 				<label>제목 : </label> <input type="text" class="form-control"

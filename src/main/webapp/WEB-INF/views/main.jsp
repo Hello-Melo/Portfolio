@@ -55,7 +55,7 @@
                 <div class="card">
                     <img src="${contextPath}/resources/imgs/kids.jpg" class="card-img-top botLogo" alt="...">
                     <div class="card-body">
-                      <h2 class="card-text text-center"><a href="${contextPath}/list"> 회원게시판</a></h2>
+                      <h2 class="card-text text-center"><a href="${contextPath}/list/free"> 회원게시판</a></h2>
                     </div>
                   </div>
             </div>

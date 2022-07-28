@@ -4,22 +4,25 @@
 	
 	<sql id="search">
 		<where>
-			<trim prefixOverrides="or">
-				<foreach collection="typeCollection" item="ty">
-					<trim prefix="or">
-						<choose>
-							<when test="ty == 'T'.toString()">
-								title like concat('%', #{keyword}, '%')
-							</when>
-							<when test="ty == 'C'.toString()">
-								contents like concat('%', #{keyword}, '%')
-							</when>
-							<when test="ty == 'W'.toString()">
-								writer like concat('%', #{keyword}, '%')
-							</when>
-						</choose>
-					</trim>
-				</foreach>		
+				<trim suffixOverrides="AND">
+					category = #{category}
+				</trim>
+				<trim prefixOverrides="OR" prefix="AND">
+					<foreach collection="typeCollection" item="ty">
+						<trim prefix="or" >
+							<choose>
+								<when test="ty == 'T'.toString()">
+									title like concat('%', #{keyword}, '%')
+								</when>
+								<when test="ty == 'C'.toString()">
+									contents like concat('%', #{keyword}, '%')
+								</when>
+								<when test="ty == 'W'.toString()">
+									writer like concat('%', #{keyword}, '%')
+								</when>
+							</choose>
+						</trim>
+					</foreach>		
 			</trim>
 		</where>
 	</sql>
@@ -36,10 +39,12 @@
 		select count(*) from board_tbl
 		<include refid="search" />
 	</select>
-
+	
 	<select id="get" resultType="sh.hoon.model.BoardVO">
 		select * from board_tbl where bno =	#{bno}
 	</select>
+	
+	
 	<insert id="insert">
 		<selectKey keyProperty="bno" resultType="java.lang.Long" order="AFTER"> 
 			SELECT LAST_INSERT_ID()
@@ -52,7 +57,6 @@
 		update board_tbl set
 		title = #{title},
 		contents	=#{contents},
-		category = #{category},
 		updateDate = now()
 		where bno = #{bno}
 	</update>

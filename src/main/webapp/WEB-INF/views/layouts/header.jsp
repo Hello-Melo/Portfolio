@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${contextPath}/notice">공지사항</a>
+              <a class="nav-link active" aria-current="page" href="${contextPath}/notice/notice">공지사항</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="${contextPath}/table">수련시간표</a>
@@ -49,7 +49,7 @@
               <a class="nav-link" href="#">관리자게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/list">관원게시판</a>
+              <a class="nav-link" href="${contextPath}/list/free">관원게시판</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="${contextPath}/map">상담 및 견학 안내</a>
