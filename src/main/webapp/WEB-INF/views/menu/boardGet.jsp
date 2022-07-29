@@ -149,6 +149,7 @@
 		$('#getForm .remove').on('click', function(e) {
 			e.preventDefault();
 			getForm.append($('#bno'));
+			getForm.append($('<input/>', {type:'hidden',name:'page',value:'${board.category}'}))
 			getForm.attr("action", "board/remove");
 			getForm.attr("method", "post");
 			getForm.submit();

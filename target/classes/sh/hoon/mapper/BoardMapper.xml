@@ -26,9 +26,27 @@
 			</trim>
 		</where>
 	</sql>
+	
+		 <resultMap type="sh.hoon.model.BoardVO" id="attach_result">
+				 	<result property="bno" column="bno" />
+				 	<result property="title" column="title" />
+				 	<result property="contents" column="contents" />
+				 	<result property="writer" column="writer" />
+				 	<result property="regDate" column="regDate" />
+				 	<result property="updateDate" column="updateDate" />
+				 	<result property="replyCnt" column="replyCnt" />
+				 	<result property="viewCount" column="viewCount" />
+				 	<collection property="attachList" column="bno" javaType="java.util.ArrayList" 
+				 	ofType="sh.hoon.model.BoardAttachVO" select="attachList"/>
+		 </resultMap>
+	
+	  	<select id="attachList" resultType="sh.hoon.model.BoardAttachVO">
+ 			select * from attach_tbl where bno=#{bno} and fileType='1'
+		</select>
+	
 
 
-	<select id="getList" resultType="sh.hoon.model.BoardVO">
+	<select id="getList" resultMap="attach_result">
 		select * from board_tbl
 		<include refid="search" />
 		order by	bno desc

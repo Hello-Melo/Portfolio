@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sh.hoon.exception.NotFoundBoardException;
 import sh.hoon.model.BoardVO;
@@ -85,6 +87,21 @@ public class MenuBoardController {
 		
 	}
 	
+	
+	@GetMapping("/register2")
+	public String registerForm(Criteria criteria, Model model) {
+		model.addAttribute("criteria", criteria);
+		return "board/noticeRegister";
+	}
+	
+	@PostMapping("/register2")
+	public String register(BoardVO vo, RedirectAttributes rttr) {
+		
+		service.register(vo);
+		rttr.addFlashAttribute("result", "register")
+				.addFlashAttribute("bno", vo.getBno());
+		return "redirect:/notice/" + vo.getCategory();
+	}
 	
 	
 	

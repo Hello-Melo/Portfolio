@@ -74,14 +74,15 @@ public class BoardController {
 	
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
-		Criteria criteria = new Criteria();
+		String category = service.read(bno).getCategory();
+		System.out.println("카테고리는 : " + category);
 		List<BoardAttachVO> list = service.getAttachList(bno);
 		deleteFiles(list);
 		service.remove(bno);
 		
 		rttr.addFlashAttribute("result","remove")
 			  .addFlashAttribute("bno", bno);
-		return "redirect:/list/"+criteria.getCategory();
+		return "redirect:/list/"+ category;
 	}
 	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)

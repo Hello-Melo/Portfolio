@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import sh.hoon.model.BoardAttachVO;
 import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 
@@ -22,4 +23,5 @@ public interface BoardMapper {
 			@Param("amount") int amount
 			);
 		
+	List<BoardAttachVO> attachList(Long bno);
 }
