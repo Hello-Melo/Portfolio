@@ -6,12 +6,16 @@
 
 	let regex = new RegExp("(.*?)\.(exe|sh|js|alz)$"); //정규표현식, 해당 확장자들을 regex에 선언
 	let maxSize = 5242880; //5mb 파일크기 제한
-
+	let minSize = 51200;
 	//파일 상태 체크 함수
 	let checkExtension = (function checkExtension(fileName, fileSize) {
 
 		if (fileSize >= maxSize) {
-			alert("파일 사이즈 초과");
+			alert("파일 사이즈 5mb 미만 업로드 가능");
+			return false;
+		}
+		if(fileSize<=minSize){
+			alert('파일 사이즈 50kb 이상 업로드 가능');
 			return false;
 		}
 		if (regex.test(fileName)) {

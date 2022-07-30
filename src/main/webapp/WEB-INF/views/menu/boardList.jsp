@@ -59,6 +59,9 @@
 				<form action="${contextPath}/board/register" class="d-flex justify-content-end">
 						<button class="btn btn-primary">글쓰기</button>
 						<input type="hidden" name="category" value="${pageMaker.criteria.category}">
+						<input type="hidden" name="page" id="page" value="${pageMaker.criteria.page}">
+						<input type="hidden" name="type" id="type" value="${pageMaker.criteria.type}">
+						<input type="hidden" name="keyword" id="keyword" value="${pageMaker.criteria.keyword}">
 				</form>
 			
 		</div>

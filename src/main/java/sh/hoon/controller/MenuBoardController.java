@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sh.hoon.exception.NotFoundBoardException;
+import sh.hoon.model.BoardAttachVO;
 import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.PageMaker;
@@ -103,6 +104,19 @@ public class MenuBoardController {
 		return "redirect:/notice/" + vo.getCategory();
 	}
 	
+	
+	
+	@GetMapping("notice/get")
+	public String readN(Long bno, Model model) {
+		BoardVO vo = service.read(bno);
+		List<BoardAttachVO> list = service.getAttachList(bno);
+		if(vo == null) throw new NotFoundBoardException();
+		model.addAttribute("board", vo);
+		model.addAttribute("list", list);
+		
+		return "menu/noticeGet";
+		
+	}
 	
 	
 }

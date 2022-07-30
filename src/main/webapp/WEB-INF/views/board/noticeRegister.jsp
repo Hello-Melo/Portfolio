@@ -13,8 +13,8 @@
 		</div>
 		
 		<div class="container">
-			<form action="${contextPath}/register2" method="post" id="registerForm">
-				 <input type="hidden" name="category" value="${criteria.category}" readonly>
+			<form id="registerForm">
+			<input type="hidden" name="category" id="category" value="${criteria.category}">
 				<div class="form-group">
 					<label>제목 : </label> <input type="text" class="form-control" name="title">
 				</div>
@@ -26,8 +26,8 @@
 					<label>작성자 : </label> <input type="text" class="form-control"	name="writer">
 				</div>
 				<br>
-				<button type="button" class="btn btn-primary">등록</button>
-				<button type="reset" class="btn btn-info">뒤로</button>
+				<button type="button" class="btn btn-primary submit">등록</button>
+				<button type="reset" class="btn btn-info reset">뒤로</button>
 			</form>
 
 		<div class="row my-5">
@@ -57,5 +57,39 @@
 		<script  src="${contextPath}/resources/js/CkEditor.js" ></script> 
 		<!-- register js 파일 -->
 		<script  src="${contextPath}/resources/js/board/noticeRegister.js" ></script>
+		
+		<script>
+			$(function() {
+				let getForm = $('#registerForm');
+				//목록으로 돌어가기 버튼
+				$('#registerForm .reset').on('click', function(e) {
+					e.preventDefault();
+					//해당 태그들로 
+/* 					getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'}))
+							      .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
+							      .append($('<input/>', {type:'hidden',name:'keyword',value:'${param.keyword}'})); */
+					getForm.attr("action", "${contextPath}/notice/notice");
+					getForm.attr("method", "get");
+					
+					/* //이건 키워드가 없을 경우 주소창 초기화 코드!
+					let keyword = getForm.find('input[name="keyword"]').val();
+					//만약 keyword가 null이라면, page input을 복사해서 getform을 비우고 page만 복사하는 코드!
+					if(keyword.trim() ==  '' ){
+						let pageCut = getForm.find('input[name="page"]').clone(); 
+						getForm.empty();
+						getForm.append(pageCut);
+					}*/
+					getForm.submit();
+				})
+				
+				//해당 글의 수정 버튼
+		$('#registerForm .submit').on('click', function(e) {
+			e.preventDefault();
+			getForm.attr("action", "${contextPath}/register2");
+			getForm.attr("method", "post");
+			getForm.submit();
+		})
+	})
+	</script>
 		
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

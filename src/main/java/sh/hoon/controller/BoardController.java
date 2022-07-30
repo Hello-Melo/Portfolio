@@ -63,6 +63,14 @@ public class BoardController {
 		return "board/modify";
 	}
 	
+	@GetMapping("/modify2")
+	public String modifyForm2(Long bno, Model model) {
+		BoardVO read = service.read(bno);
+		if(read == null) throw new NotFoundBoardException();
+		model.addAttribute("board", read);
+		return "board/noticeModify";
+	}
+	
 	@PostMapping("/modify")
 	public String modify(BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
@@ -71,6 +79,16 @@ public class BoardController {
 			  .addFlashAttribute("bno", vo.getBno());
 		return "redirect:/list/"+ vo.getCategory();
 	}
+	
+	@PostMapping("/modify2")
+	public String modify2(BoardVO vo, RedirectAttributes rttr) {
+		service.modify(vo);
+		System.out.println("카테고리 : "+vo.getCategory());
+		rttr.addFlashAttribute("result","modify")
+			  .addFlashAttribute("bno", vo.getBno());
+		return "redirect:/notice/"+ vo.getCategory();
+	}
+	
 	
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
@@ -84,6 +102,21 @@ public class BoardController {
 			  .addFlashAttribute("bno", bno);
 		return "redirect:/list/"+ category;
 	}
+	
+	@PostMapping("/remove2")
+	public String remove2(Long bno, RedirectAttributes rttr) {
+		String category = service.read(bno).getCategory();
+		System.out.println("카테고리는 : " + category);
+		List<BoardAttachVO> list = service.getAttachList(bno);
+		deleteFiles(list);
+		service.remove(bno);
+		
+		rttr.addFlashAttribute("result","remove")
+			  .addFlashAttribute("bno", bno);
+		return "redirect:/notice/"+ category;
+	}
+	
+	
 	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
