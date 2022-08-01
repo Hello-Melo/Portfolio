@@ -56,17 +56,6 @@ public class MenuBoardController {
 		return "menu/boardChat";
 	}
 	
-	@GetMapping("/join")
-	public String join() {
-		return "member/join";
-	}
-	
-	@GetMapping("/login")
-	public String login() {
-		return "member/login";
-	}
-	
-	
 	@GetMapping("/list/{category}")
 	public String readAll(@PathVariable String category, Criteria criteria, Model model) {
 		criteria.setCategory(category);

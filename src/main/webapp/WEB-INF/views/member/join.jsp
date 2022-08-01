@@ -11,18 +11,18 @@
 </div>
 
 <section class="bg-light22">
-	<div class="container py-4">
+	<div class="container py-2">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<form class="validation-form" novalidate>
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="name">성</label> <input type="text"
+							<label for="name">이름</label> <input type="text"
 								class="form-control" id="name" placeholder="" value="" required>
 							<div class="invalid-feedback">성을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="nickname">이름</label> <input type="text"
+							<label for="nickname">비밀번호</label> <input type="text"
 								class="form-control" id="nickname" placeholder="" value=""
 								required>
 							<div class="invalid-feedback">이름을 입력해주세요.</div>

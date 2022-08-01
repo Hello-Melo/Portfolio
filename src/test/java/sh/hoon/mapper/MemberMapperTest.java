@@ -27,7 +27,6 @@ public class MemberMapperTest extends AppTest{
 	@Ignore
 	public void getTest() {
 		MemberVO vo = mapper.get(1L);
-		assertEquals("test", vo.getUserId());
 		
 	}
 	
@@ -36,7 +35,6 @@ public class MemberMapperTest extends AppTest{
 	public void insertTest() {
 		MemberVO vo = new MemberVO();
 		for(int i = 0; i < 50; i++) {
-			vo.setUserId("sky" + i);
 			vo.setUserPw("1234");
 			vo.setUserName("테스투"+i);
 			vo.setUserEmail(i+"test@dream.com");
@@ -49,7 +47,6 @@ public class MemberMapperTest extends AppTest{
 	public void updateTest() {
 		MemberVO vo = new  MemberVO();
 		vo.setUno(4L);
-		vo.setUserId("okseunghoon");
 		vo.setUserPw("1234");
 		vo.setUserName("옥승훈");
 		vo.setUserEmail("ock87@nate.com");
@@ -62,5 +59,14 @@ public class MemberMapperTest extends AppTest{
 		mapper.delete(5L);
 	}
 	
+	
+	@Test
+	@Ignore
+	public void readTest() {
+		MemberVO vo = mapper.read(4L);
+		vo.getAuthList().forEach(authVO -> 
+		System.out.println(authVO.getAuth()) );
+		
+	}
 	
 }

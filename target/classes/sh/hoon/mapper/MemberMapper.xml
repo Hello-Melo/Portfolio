@@ -2,6 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sh.hoon.mapper.MemberMapper">
 
+		<sql id="search">
+				<where>
+					<trim prefixOverrides="OR">
+						<foreach collection="typeCollection">
+							<trim prefix="OR">
+								<choose>
+									<when test="type == 'N'.toString()">
+										userName like concat('%', #{keyword}, '%')
+									</when>
+									<when test="type == 'E'.toString()">
+										email like concat('%', #{keyword}, '%')
+									</when>
+								</choose>
+							</trim>
+						</foreach>
+					</trim>
+				</where>
+			</sql>
+		
+		<resultMap type="sh.hoon.model.MemberVO" id="memberMap">
+					<id property="uno" column="uno" />
+				 <!--  property 는 자바 파라미터, column은 sql 파라미터 -->
+				 <result property="uno" column="uno" />
+				<result property="userEmail" column="userEmail" />
+				<result property="userName" column="userName" />
+				<result property="userPw" column="userPw" />
+				<result property="enabled" column="enabled" />
+				<result property="regDate" column="regDate" />
+				<result property="updateDate" column="updateDate" />
+				<collection property="authList" resultMap="authMap" />
+		</resultMap>
+		
+		<resultMap type="sh.hoon.model.AuthVO" id="authMap">
+				<result property="uno" column="uno" />
+				<result property="auth" column="auth" />
+		</resultMap>
+		
+		<select id="read" resultMap="memberMap">
+			select * from member_tbl M
+			inner join member_auth A
+			on M.uno = A.uno
+			where M.uno = #{uno};
+		</select>
+		
+		<select id="findByEmail" resultMap="memberMap">
+			select * from member_tbl M
+			inner join member_auth A
+			on M.uno = A.uno
+			where M.userEmail = #{userEmail};
+		</select>
+		
+		
+		
+	<select id="totalCount" resultType="Integer">
+		select count(*) from member_tbl
+		<include refid="search" />
+	</select>
+
+
 	<select id="getList" resultType="sh.hoon.model.MemberVO">
 		select * from member_tbl order by uno desc
 	</select>
@@ -14,16 +73,15 @@
 		<selectKey keyProperty="uno" resultType="java.lang.Long" order="AFTER"> 
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into member_tbl(userId, userPw, userName, userEmail)
-		value(#{userId}, #{userPw}, #{userName}, #{userEmail})
+		insert into member_tbl(userEmail,  userName, userPw )
+		value(#{userEmail}, #{userName}, #{userPw})
 	</insert>
 
 	<update id="update">
 		update member_tbl set
-		userId = #{userId},
-		userPw = #{userPw},
+		userEmail = #{userEmail},
 		userName = #{userName},
-		userEmail = #{userEmail}
+		userPw = #{userPw}
 		where uno = #{uno}
 	</update>
 

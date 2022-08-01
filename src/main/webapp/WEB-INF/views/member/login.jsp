@@ -11,14 +11,13 @@
 
  <div class="container">
 		<div id="logreg-forms">
-			<form class="form-signin">
+			<form class="form-signin" action="${contextPath}/member/login" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
 				<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
 					LOGIN</h1>
 								
-				<input type="email" id="inputEmail" class="form-control"
-					placeholder="Email address" required="" autofocus=""> <input
-					type="password" id="inputPassword" class="form-control"
-					placeholder="Password" required="">
+				<input type="email" name="loginEmail" id="loginEmail" class="form-control" placeholder="Email address"  autofocus="" value="">
+				<input	type="password" name="loginPw" id="loginPw" class="form-control" placeholder="Password"  value="">
 				<span class="d-flex justify-content-center">
 					<button class="btn btn-success btn-block" type="submit">
 						<i class="fas fa-sign-in-alt"></i> Login
