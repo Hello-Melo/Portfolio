@@ -47,7 +47,7 @@
               <a class="nav-link" href="${contextPath}/table">수련시간표</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">관리자게시판</a>
+              <a class="nav-link" href="${contextPath}/member/list">관리자게시판</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="${contextPath}/list/free">관원게시판</a>

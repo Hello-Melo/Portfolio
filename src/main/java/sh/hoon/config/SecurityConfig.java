@@ -1,8 +1,6 @@
 package sh.hoon.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -11,16 +9,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
+import sh.hoon.security.HoonAccessDeniedHandler;
 
 
 @Configuration
 @EnableWebSecurity
-@Import(value= {SecurityBean.class})
+@Import(value = {SecurityBean.class})
 @ComponentScan("sh.hoon.security")
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
@@ -30,12 +31,27 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService detailsService;
 	
+	@Autowired
+	PasswordEncoder encoder;
+
+	@Autowired
+	PersistentTokenRepository persistentTokenRepository;
+	
+	@Autowired
+	AuthenticationFailureHandler failureHandler;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("utf-8");
+		filter.setForceEncoding(true);
+		http.addFilterBefore(filter, CsrfFilter.class);
+		
 		http.authorizeRequests()
 				.antMatchers("/security/all").permitAll()
-				.antMatchers("/security/member").access("hasRole('MEMBER')")
-				.antMatchers("/security/admin").access("hasRole('ADMIN')");
+				.antMatchers("/security/member").access("hasRole('ROLE_MEMBER')")
+				.antMatchers("/security/admin").access("hasRole('ROLE_ADMIN')");
 		
 		http.formLogin()
 				.usernameParameter("loginEmail")
@@ -45,10 +61,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 				.successHandler(loginSuccessHandler);
 		
 		http.logout()
-				.logoutUrl("/member/logout")
+				.logoutUrl("/logout")
 				.invalidateHttpSession(true)
-				.deleteCookies("E-mail기억하기", "JSESSION_ID");
+				.deleteCookies("remember-me", "JSESSION_ID");
 		
+		http.rememberMe().key("project").tokenRepository(persistentTokenRepository)
+				.tokenValiditySeconds(604800);
+		
+		http.exceptionHandling()
+		.accessDeniedHandler( new HoonAccessDeniedHandler());
 	}	
 	
 	@Override
@@ -56,11 +77,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		//auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
 		//auth.inMemoryAuthentication().withUser("memeber").password("{noop}1234").roles("MEMBER");
 		
-		auth.userDetailsService(detailsService).passwordEncoder(bcrayptPwEncoder());
+		auth.userDetailsService(detailsService).passwordEncoder(encoder);
 	}
 	
-	@Bean
-	public PasswordEncoder bcrayptPwEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 }

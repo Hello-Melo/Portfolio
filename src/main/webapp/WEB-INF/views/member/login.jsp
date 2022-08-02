@@ -23,7 +23,9 @@
 						<i class="fas fa-sign-in-alt"></i> Login
 					</button>
 				</span>
-				<a href="#" id="forgot_pswd">비밀번호 찾기</a>
+				<div class="d-flex justify-content-between">
+				<span><input type="checkbox" name="remember-me">E-Mail 기억하기<a href="#" id="forgot_pswd">비밀번호 찾기</a></span>
+				</div>
 				<hr>
 				<!-- <p>Don't have an account!</p>  -->
 			

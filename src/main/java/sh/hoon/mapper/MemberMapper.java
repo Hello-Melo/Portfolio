@@ -7,7 +7,7 @@ import sh.hoon.model.MemberVO;
 
 public interface MemberMapper {
 
-	List<MemberVO> getList();
+	List<MemberVO> getList(Criteria criteria);
 	MemberVO get(Long uno);
 	void insert(MemberVO vo);
 	void update(MemberVO vo);

@@ -31,17 +31,17 @@ public class HoonLoginSuccessHandler implements AuthenticationSuccessHandler {
 		//관리자와 회원간의 차이 나타내기
 		if(roleName.contains("ADMIN")) {
 			System.out.println("관리자 로그인");
-			response.sendRedirect(request.getContextPath()+"/security/admin");
+			response.sendRedirect(request.getContextPath()+"/sec/member");
 			return;
 		}
-		if(roleName.contains("MEMBER")) {
+		else if(roleName.contains("MEMBER")) {
 			System.out.println("회원 로그인");
-			response.sendRedirect(request.getContextPath()+"/security/member");
+			response.sendRedirect(request.getContextPath()+"/sec/member");
 			return;
 		}
 		
 		//여기서는 조건이 2개 (회원 / 관리자)뿐이기에 여기까지 올 일은 없다.
-		response.sendRedirect(request.getContextPath()+"/");
+		response.sendRedirect(request.getContextPath()+"/sec/member");
 	}
 	
 		

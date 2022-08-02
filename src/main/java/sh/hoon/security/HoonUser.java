@@ -32,6 +32,7 @@ public class HoonUser extends User {
 				);
 		System.out.println("User 생성");
 		this.memberVO = memberVo;
+		System.out.println(memberVo.getAuthList().toString());
 		//autoVO -> SimplegreatedAutrity로 변환
 	}
 

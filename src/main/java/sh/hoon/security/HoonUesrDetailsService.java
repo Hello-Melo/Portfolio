@@ -17,7 +17,6 @@ public class HoonUesrDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-		System.out.println("ddddddddddddddddddddddddddddddddd");
 		System.out.println("유저 정보 확인 by uername : " + userEmail);
 		MemberVO vo = mapper.findByEmail(userEmail); 
 		return vo != null ? new HoonUser(vo) : null ;
