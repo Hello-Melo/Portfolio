@@ -46,9 +46,11 @@
             <li class="nav-item">
               <a class="nav-link" href="${contextPath}/table">수련시간표</a>
             </li>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/member/list">관리자게시판</a>
+              <a class="nav-link" href="${contextPath}/member/list">회원게시판</a>
             </li>
+             </sec:authorize>
             <li class="nav-item">
               <a class="nav-link" href="${contextPath}/list/free">관원게시판</a>
             </li>
@@ -56,9 +58,21 @@
               <a class="nav-link" href="${contextPath}/map">상담 및 견학 안내</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <a href="${contextPath}/join">회원가입</a> <span>|</span> <a href="${contextPath}/login">로그인</a>
-          </form>
+	          <sec:authorize access="isAnonymous()">
+		          <form class="d-flex">
+		            <a href="${contextPath}/join">회원가입</a> <span>|</span> <a href="${contextPath}/login">로그인</a>
+		          </form>
+	           </sec:authorize>
+               <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
+		          <form class="d-flex">
+		            <a href="${contextPath}/myPage">마이페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		          </form>
+	           </sec:authorize>
+	              <sec:authorize access="hasRole('ROLE_ADMIN')">
+		          <form class="d-flex">
+		            <a href="${contextPath}/myPage">관리자페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		          </form>
+	           </sec:authorize>
         </div>
       </div>
     </nav>

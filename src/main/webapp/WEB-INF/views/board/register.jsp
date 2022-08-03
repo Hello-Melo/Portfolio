@@ -3,7 +3,6 @@
 	
 <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	
 		<div class="p-5 mb-4 bg-light rounded-3">
@@ -23,11 +22,13 @@
 					<textarea class="form-control" name="contents" id="contents"></textarea>
 				</div>
 				<div class="form-group">
-					<label>작성자 : </label> <input type="text" class="form-control"	name="writer">
+					<label>작성자 : </label> <input class="form-control"	name="writer" readonly
+															value="<sec:authentication property="principal.memberVO.userName"/>"> 
 				</div>
 				<br>
 				<button type="button" class="btn btn-primary submit">등록</button>
 				<button type="reset" class="btn btn-info reset">뒤로</button>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
 			</form>
 
 		<div class="row my-5">

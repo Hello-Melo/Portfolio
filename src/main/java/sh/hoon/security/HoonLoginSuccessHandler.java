@@ -29,12 +29,16 @@ public class HoonLoginSuccessHandler implements AuthenticationSuccessHandler {
 			roleName.add(authoity.getAuthority());
 		});
 		//관리자와 회원간의 차이 나타내기
-		if(roleName.contains("ADMIN")) {
+		if(roleName.contains("ROLE_ADMIN")) {
 			System.out.println("관리자 로그인");
+			response.sendRedirect(request.getContextPath()+"/sec/admin");
+			return;
+		}else if(roleName.contains("ROLE_MANAGER")) {
+			System.out.println("회원 로그인");
 			response.sendRedirect(request.getContextPath()+"/sec/member");
 			return;
 		}
-		else if(roleName.contains("MEMBER")) {
+		else if(roleName.contains("ROLE_MEMBER")) {
 			System.out.println("회원 로그인");
 			response.sendRedirect(request.getContextPath()+"/sec/member");
 			return;

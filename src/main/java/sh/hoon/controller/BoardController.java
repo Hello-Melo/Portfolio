@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +41,14 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public String registerForm(Criteria criteria, Model model) {
 		model.addAttribute("criteria", criteria);
 		return "board/register";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(BoardVO vo, RedirectAttributes rttr) {
 		
@@ -55,6 +58,7 @@ public class BoardController {
 		return "redirect:/list/" + vo.getCategory();
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify")
 	public String modifyForm(Long bno, Model model) {
 		BoardVO read = service.read(bno);
@@ -63,6 +67,7 @@ public class BoardController {
 		return "board/modify";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify2")
 	public String modifyForm2(Long bno, Model model) {
 		BoardVO read = service.read(bno);
@@ -71,6 +76,7 @@ public class BoardController {
 		return "board/noticeModify";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify")
 	public String modify(BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
@@ -80,6 +86,7 @@ public class BoardController {
 		return "redirect:/list/"+ vo.getCategory();
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify2")
 	public String modify2(BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
@@ -90,6 +97,7 @@ public class BoardController {
 	}
 	
 	
+	@PreAuthorize("isAuthenticated() and principal.memberVO.userName == #board.writer")
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		String category = service.read(bno).getCategory();
@@ -103,6 +111,8 @@ public class BoardController {
 		return "redirect:/list/"+ category;
 	}
 	
+	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove2")
 	public String remove2(Long bno, RedirectAttributes rttr) {
 		String category = service.read(bno).getCategory();

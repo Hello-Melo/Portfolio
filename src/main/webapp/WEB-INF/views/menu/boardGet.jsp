@@ -6,6 +6,11 @@
 <script  src="${pageContext.request.contextPath}/resources/js/reply/get.js" ></script>
 <script  src="${contextPath}/resources/js/board/get.js" ></script>
 
+		<!--  아래 코드는 로그인이 되었을시에 sername을 불러와 userId에 저장한는 의미
+		이 부분이 없으면 겟을 부를때 에러가 남-->
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.memberVO.userName" var="userId"/>
+	</sec:authorize>
 
 		<div class="p-5 mb-4 bg-light rounded-3">
 		    <div class="d-flex justify-content-center">
@@ -40,8 +45,10 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
+						<c:if test="${userId eq board.writer }">
 							<button class="btn btn-warning modify">수정</button>
 							<button class="btn btn-info remove">삭제</button>
+						</c:if>
 							<button class="btn btn-secondary list">목록</button>
 						</div>
 						<div>
@@ -67,9 +74,14 @@
 							<span>댓글</span>
 								<!--  댓글동록버튼-->	
 								<span class="float-right">
-								<button class="btn btn-primary btn-sm"  data-target="#replyForm" id="addReplyBtn">
-									 댓글 달기
-								</button>
+									<sec:authorize access="isAuthenticated()">
+										<button class="btn btn-primary btn-sm"  data-target="#replyForm" id="addReplyBtn">
+											 댓글 달기
+										</button>
+									</sec:authorize>
+									<sec:authorize access="Anonymous">
+										로그인 필요
+									</sec:authorize>
 								</span>
 						</div>
 		
@@ -112,6 +124,7 @@
 </div><!--  container 끝 -->	
 
 <script>
+	let userId = "${userId}";
 	$(function() {
 		
 		let getForm = $('#getForm');

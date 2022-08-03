@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import sh.hoon.AppTest;
+import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 
 public class MemberMapperTest extends AppTest{
@@ -19,7 +20,8 @@ public class MemberMapperTest extends AppTest{
 	@Test
 	@Ignore
 	public void getListTest() {
-		List<MemberVO> list = mapper.getList();
+		Criteria criteria = new Criteria();
+		List<MemberVO> list = mapper.getList(criteria);
 		assertEquals(2, list.size());
 	}
 

@@ -81,13 +81,15 @@ $(function () {
 		alert(test2);
 		})		
 		
+		console.log(userId)
 		// 댓글 이벤트처리
 	$('.chat').on('click','li', function(e) {
 			let rno = $(this).data('rno');
-		
+			
 			replyService.get(rno, function(reply) {
+				if(userId != reply.replyer && userId  != "관리자") return; // 사용자 확인 
 				modalInputReply.val(reply.reply);
-				modalInputReplyer.val(reply.replyer);
+				modalInputReplyer.val(reply.replyer).attr("readonly", "readonly");;
 				modalInputReplyDate.val(replyService.displayTime(reply.updateDate)).attr("readonly", "readonly");
 				modal.data("rno", reply.rno)
 				

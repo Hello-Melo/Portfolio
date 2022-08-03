@@ -35,8 +35,8 @@ public class MemberTest extends AppTest{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, "hoon@dream.com");
-			pstmt.setString(2, "옥승훈");
+			pstmt.setString(1, "lim@dream.com");
+			pstmt.setString(2, "임창정");
 			pstmt.setString(3, encoder.encode("1234"));
 
 			pstmt.executeUpdate();

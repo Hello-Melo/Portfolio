@@ -34,6 +34,7 @@ let bno2 = '${board.bno}';
 			</div>
 			<br>
 			<button class="btn btn-primary">수정하기</button>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
 		</form>
 		
 			<!-- 등록된 파일 -->

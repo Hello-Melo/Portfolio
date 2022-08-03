@@ -5,6 +5,8 @@ $(document).ready(function() {
 	let form = $('#registerForm');
 	let submitBtn = $('#registerForm button');
 	
+	let csrf;
+	
 	submitBtn.on("click", function(e){
 		let str ='';
 				$('.uploadResult ul li').each(function (i, obj) {
