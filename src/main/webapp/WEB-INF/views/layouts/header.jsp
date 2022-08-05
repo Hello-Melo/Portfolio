@@ -29,7 +29,7 @@
 	<link rel="stylesheet"  href="${contextPath}/resources/css/style.css">
 </head>
 <body>
- 
+
     <!-- 네이게이션 바 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -64,13 +64,14 @@
 		          </form>
 	           </sec:authorize>
                <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
+                <sec:authentication property="principal.memberVO.uno" var="uno"/>
 		          <form class="d-flex">
-		            <a href="${contextPath}/myPage">마이페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		            <a href="${contextPath}/sec/myPage/${uno}">마이페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
 		          </form>
 	           </sec:authorize>
 	              <sec:authorize access="hasRole('ROLE_ADMIN')">
 		          <form class="d-flex">
-		            <a href="${contextPath}/myPage">관리자페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		            <a href="${contextPath}/sec/admin">관리자페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
 		          </form>
 	           </sec:authorize>
         </div>

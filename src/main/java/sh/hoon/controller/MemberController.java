@@ -47,6 +47,7 @@ public class MemberController {
 		 * new MemberValidator().validate(member, errors); if(errors.hasErrors()) {
 		 * return "member/register"; }else { service.insert(member); }
 		 */
+		 service.register(member);
 		return "redirect:/";
 	}
 

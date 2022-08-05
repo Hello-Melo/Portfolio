@@ -22,12 +22,17 @@
 			</sql>
 		
 		<resultMap type="sh.hoon.model.MemberVO" id="memberMap">
-					<id property="uno" column="uno" />
+				<id property="uno" column="uno" />
 				 <!--  property 는 자바 파라미터, column은 sql 파라미터 -->
 				 <result property="uno" column="uno" />
 				<result property="userEmail" column="userEmail" />
 				<result property="userName" column="userName" />
 				<result property="userPw" column="userPw" />
+				<result property="userPhone" column="userPhone" />
+				<result property="userAddr" column="userAddr" />
+				<result property="userAddrD" column="userAddrD" />
+				<result property="userBirth" column="userBirth" />
+				<result property="userGender" column="userGender" />
 				<result property="enabled" column="enabled" />
 				<result property="regDate" column="regDate" />
 				<result property="updateDate" column="updateDate" />
@@ -73,15 +78,19 @@
 		<selectKey keyProperty="uno" resultType="java.lang.Long" order="AFTER"> 
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into member_tbl(userEmail,  userName, userPw )
-		value(#{userEmail}, #{userName}, #{userPw})
+		insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender)
+		value(#{userEmail}, #{userName}, #{userPw}, #{userPhone}, #{userAddr}, #{userAddrD}, #{userBirth}, #{userGender})
 	</insert>
 
 	<update id="update">
 		update member_tbl set
 		userEmail = #{userEmail},
 		userName = #{userName},
-		userPw = #{userPw}
+		userPw = #{userPw},
+		userPhone = #{userPhone},
+		userAddr = #{userAddr},
+		userAddrD = #{userAddrD},
+		userBirth = #{userBirth}
 		where uno = #{uno}
 	</update>
 

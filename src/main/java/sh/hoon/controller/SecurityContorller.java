@@ -20,6 +20,14 @@ public class SecurityContorller {
 		return "member/member";
 	}
 	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
+	@GetMapping("/sec/admin")
+	public String adminPage() {
+		return "member/admin";
+	}
+	
+	
+	
 	//@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/sec/myPage/{uno}")

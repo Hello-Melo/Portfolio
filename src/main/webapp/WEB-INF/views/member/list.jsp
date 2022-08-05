@@ -24,7 +24,7 @@
 						<td><a href="${b.uno}" class="get"> ${b.userName }</a></td>
 						<td>${b.userEmail }</td>
 						<td>
-							<fmt:parseDate var="regDate" value="${b.regDate}"	pattern="yyyy-MM-dd'T'HH:mm:ss" />
+							<fmt:parseDate var="regDate" value="${b.regDate}"	pattern="yyyy-MM-dd'T'" />
 							<fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd" />
 						 </td>
 					</tr>

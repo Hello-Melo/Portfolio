@@ -52,6 +52,8 @@ let bno2 = '${board.bno}';
 		  							<ul class="list-group">
 		  							</ul>
 		  						</div>
+		  						<div class="oImg">
+  								</div>
 		  					</div> <!-- panel body -->
 		  				</div> <!-- panel end-->
 		  			</div><!-- col end -->

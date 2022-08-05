@@ -1,6 +1,7 @@
 package sh.hoon.security;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import sh.hoon.model.MemberVO;
+
 @Component
 public class HoonLoginSuccessHandler implements AuthenticationSuccessHandler {
+
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -21,31 +25,34 @@ public class HoonLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		System.out.println("로긴 성공");
 		System.out.println(authentication.getAuthorities());
-		
+
 		List<String> roleName = new ArrayList<String>();
 		
 		//authroity로 설정해준 회원권한 얻어오기
 		authentication.getAuthorities().forEach(authoity -> {
 			roleName.add(authoity.getAuthority());
 		});
+		
+		
+
 		//관리자와 회원간의 차이 나타내기
 		if(roleName.contains("ROLE_ADMIN")) {
 			System.out.println("관리자 로그인");
-			response.sendRedirect(request.getContextPath()+"/sec/admin");
+			response.sendRedirect(request.getContextPath()+"/");
 			return;
 		}else if(roleName.contains("ROLE_MANAGER")) {
-			System.out.println("회원 로그인");
-			response.sendRedirect(request.getContextPath()+"/sec/member");
+			System.out.println("매니저 로그인");
+			response.sendRedirect(request.getContextPath()+"/");
 			return;
 		}
 		else if(roleName.contains("ROLE_MEMBER")) {
 			System.out.println("회원 로그인");
-			response.sendRedirect(request.getContextPath()+"/sec/member");
+			response.sendRedirect(request.getContextPath()+"/");
 			return;
 		}
 		
 		//여기서는 조건이 2개 (회원 / 관리자)뿐이기에 여기까지 올 일은 없다.
-		response.sendRedirect(request.getContextPath()+"/sec/member");
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 	
 		

@@ -58,7 +58,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 				.passwordParameter("loginPw")
 				.loginPage("/login")
 				.loginProcessingUrl("/member/login")
-				.successHandler(loginSuccessHandler);
+				.successHandler(loginSuccessHandler)
+				.failureHandler(failureHandler); 
 		
 		http.logout()
 				.logoutUrl("/logout")

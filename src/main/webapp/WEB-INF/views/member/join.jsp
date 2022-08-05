@@ -14,16 +14,16 @@
 	<div class="container py-2">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<form class="validation-form" novalidate>
+				<form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="name">이름</label> <input type="text"
-								class="form-control" id="name" placeholder="" value="" required>
+								class="form-control" id="userName" name="userName" placeholder="" value="" required>
 							<div class="invalid-feedback">성을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="nickname">비밀번호</label> <input type="text"
-								class="form-control" id="nickname" placeholder="" value=""
+							<label for="password">비밀번호</label> <input type="password"
+								class="form-control" id="userPw" name="userPw" placeholder="" value=""
 								required>
 							<div class="invalid-feedback">이름을 입력해주세요.</div>
 						</div>
@@ -31,28 +31,28 @@
 
 					<div class="mb-3">
 						<label for="email">이메일</label> <input type="email"
-							class="form-control" id="email" placeholder="you@example.com"
+							class="form-control" id="email" name="userEmail" placeholder="you@example.com"
 							required>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="email">연락처</label> <input type="email"
-							class="form-control" id="email" placeholder="000-0000-0000"
+						<label for="email">연락처</label> <input type="text"
+							class="form-control" id="userPhone" name="userPhone" placeholder="000-0000-0000"
 							required>
 						<div class="invalid-feedback">연락처를 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="address">주소</label> <input type="text"
-							class="form-control" id="address" placeholder="경상북도 구미시 봉곡동"
+							class="form-control" id="userAddr" name="userAddr" placeholder="경상북도 구미시 봉곡동"
 							required>
 						<div class="invalid-feedback">주소를 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="address2">상세주소<span class="text-muted">&nbsp;(필수
-								아님)</span></label> <input type="text" class="form-control" id="address2"
+								아님)</span></label> <input type="text" class="form-control" id="userAddrD" name="userAddrD"
 							placeholder="상세주소를 입력해주세요.">
 					</div>
 
@@ -61,13 +61,13 @@
 						<div class="d-flex row">
 							<div class="bir_yy col-sm-4">
 								<span class="ps_box"> <input type="text"
-									class="form-control" id="yy" placeholder="년(4자)" maxlength="4"
+									class="form-control" id="yy" placeholder="년(4자)" maxlength="4" name="birth1"
 									required>
 								</span>
 							</div>
 							<div class="bir_mm col-sm-4">
 								<span class="ps_box focus"> <select class="form-select"
-									id="exampleFormControlSelect1">
+									id="exampleFormControlSelect1" name="birth2">
 										<option>월</option>
 										<option>1</option>
 										<option>2</option>
@@ -86,7 +86,7 @@
 							</div>
 							<div class="bir_dd col-sm-4">
 								<span class="ps_box"> <input type="text"
-									class="form-control" id="dd" placeholder="일" maxlength="2"
+									class="form-control" id="dd" placeholder="일" maxlength="2" name="birth3"
 									required>
 								</span>
 							</div>
@@ -95,10 +95,10 @@
 
 					<div class="form-group">
 						<label for="exampleFormControlSelect1" class="form-label mt-4">성별</label>
-						<select class="form-select" id="exampleFormControlSelect1"
+						<select class="form-select" id="exampleFormControlSelect1" name="userGender"
 							required>
-							<option>남자</option>
-							<option>여자</option>
+							<option value="M"  >남자</option>
+							<option value="F">여자</option>
 						</select>
 					</div>
 
@@ -112,6 +112,7 @@
 					<div class="mb-4"></div>
 					<button class="btn btn-primary btn-lg btn-block" type="submit">가입
 						완료</button>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
 				</form>
 			</div>
 		</div>

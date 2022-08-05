@@ -20,10 +20,37 @@ public class MemberVO {
 		private String userEmail;
 		private String userName;
 		private String userPw;
+		private String userPhone; 
+		private String userAddr;
+		private String userAddrD;
+		private String userBirth;
+		private GENDER userGender;
 		private boolean enabled;
 		private LocalDateTime regDate;
 		private LocalDateTime updateDate;
 		
 		private List<AuthVO> authList;
+		
+		private String birth1;
+		private String birth2;
+		private String birth3;
+		
+		enum GENDER {M, F};
+		
+		
+		
+		/*
+		 * public void setUserBirth() { StringBuilder builder = new StringBuilder();
+		 * builder.append(birth1) .append(birth2) .append(birth3); this.userBirth =
+		 * builder.toString(); }
+		 */
+	
+		public String getUserBirth() {
+			StringBuilder builder = new StringBuilder();
+			builder.append(birth1)
+				.append(birth2)
+				.append(birth3);
+			return builder.toString();
+		}
 		
 }

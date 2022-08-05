@@ -3,6 +3,7 @@ package sh.hoon.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sh.hoon.mapper.MemberMapper;
@@ -14,6 +15,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@Override
 	public List<MemberVO> readAll(Criteria criteria) {
@@ -27,6 +31,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void register(MemberVO vo) {
+		String pwEncode = encoder.encode(vo.getUserPw());
+		vo.setUserPw(pwEncode);
 		mapper.insert(vo);
 	}
 
