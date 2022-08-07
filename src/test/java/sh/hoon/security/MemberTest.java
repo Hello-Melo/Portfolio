@@ -3,6 +3,10 @@ package sh.hoon.security;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.sql.DataSource;
 
@@ -27,7 +31,9 @@ public class MemberTest extends AppTest{
 	@Test
 	@Ignore
 	public void memberInsertTest() {
-		String sql = "insert into member_tbl(userEmail, userName, userPw) values(?, ?, ?)";
+		String sql =
+				"insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender, userStatus, userPass)"
+				+ " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -35,9 +41,16 @@ public class MemberTest extends AppTest{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, "lim@dream.com");
-			pstmt.setString(2, "임창정");
+			pstmt.setString(1, "hoon@dream.com");
+			pstmt.setString(2, "옥승훈");
 			pstmt.setString(3, encoder.encode("1234"));
+			pstmt.setString(4, "010-1111-2222");
+			pstmt.setString(5, "도량동");
+			pstmt.setString(6, "파크맨션");
+			pstmt.setString(7,"1987-04-21");
+			pstmt.setString(8, "M");
+			pstmt.setInt(9, 2);
+			pstmt.setInt(10, 1);
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -47,11 +60,17 @@ public class MemberTest extends AppTest{
 
 	@Test
 	@Ignore
-	public void adminInsertTest2() {
-		String sql = "insert into member_tbl(userEmail, userName, userPw) values(?, ?, ?)";
+	public void adminInsertTest2() throws ParseException {
+		String sql =
+				"insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender, userStatus, userPass)"
+				+ " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
+		   String str_date="1987-11-03T12:50:58";
+		   DateFormat   formatter = new SimpleDateFormat("yyyy-MM-dd");
+		   Date date = (Date)formatter.parse(str_date);
+		   java.sql.Date sqlDate2 = new java.sql.Date(date.getTime());
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -59,6 +78,13 @@ public class MemberTest extends AppTest{
 			pstmt.setString(1, "admin@dream.com");
 			pstmt.setString(2, "관리자");
 			pstmt.setString(3, encoder.encode("1234"));
+			pstmt.setString(4, "010-1111-2222");
+			pstmt.setString(5, "봉곡동");
+			pstmt.setString(6, "현대아파트");
+			pstmt.setString(7,"1987-11-03");
+			pstmt.setString(8, "M");
+			pstmt.setInt(9, 3);
+			pstmt.setInt(10, 1);
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

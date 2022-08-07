@@ -25,7 +25,8 @@ public class MemberVO {
 		private String userAddrD;
 		private String userBirth;
 		private GENDER userGender;
-		private boolean enabled;
+		private int userStatus;
+		private int userPass;
 		private LocalDateTime regDate;
 		private LocalDateTime updateDate;
 		
@@ -37,18 +38,18 @@ public class MemberVO {
 		
 		enum GENDER {M, F};
 		
-		
-		
-		/*
-		 * public void setUserBirth() { StringBuilder builder = new StringBuilder();
-		 * builder.append(birth1) .append(birth2) .append(birth3); this.userBirth =
-		 * builder.toString(); }
-		 */
+	
+//		 public void setUserBirth() { StringBuilder builder = new StringBuilder();
+//		  builder.append(birth1) .append(birth2) .append(birth3); this.userBirth =
+//		  builder.toString(); }
+
 	
 		public String getUserBirth() {
 			StringBuilder builder = new StringBuilder();
 			builder.append(birth1)
+				.append("-")
 				.append(birth2)
+				.append("-")
 				.append(birth3);
 			return builder.toString();
 		}

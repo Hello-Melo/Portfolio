@@ -112,8 +112,7 @@
 			$('#feedback').modal('show');
 		};
 		
-		//검색창 버튼 클릭시 이벤트 코드
-	$('#searchForm .button').on('click', function(e) {
+		$('#searchForm .button').on('click', function(e) {
 			e.preventDefault();
 			// 각각 아이디로 지역 변수 선언
 			let option = $('#type').val();
@@ -138,8 +137,9 @@
 			$('#searchForm').attr('action','${contextPath}/list/${pageMaker.criteria.category}')
 			$('#searchForm').submit();
 		});
-	});
-	
+		
+		
+	})	
 	</script>		
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

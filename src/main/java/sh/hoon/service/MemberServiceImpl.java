@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sh.hoon.mapper.MemberMapper;
+import sh.hoon.model.AuthVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 
@@ -54,6 +55,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO findByEmail(String email) {
 		return mapper.findByEmail(email);
+	}
+
+	@Override
+	public void insertAuth(AuthVO authVO) {
+			mapper.insertAuth(authVO);
+	}
+
+	@Override
+	public void updateApprove(MemberVO vo) {
+		mapper.updateApprove(vo);
+	}
+
+	@Override
+	public void updateDeni(MemberVO vo) {
+		mapper.updateDeni(vo);
+	}
+
+	@Override
+	public void updateDrop(MemberVO vo) {
+		mapper.updateDrop(vo);
 	}
 
 }

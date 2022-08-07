@@ -33,6 +33,8 @@
 				<result property="userAddrD" column="userAddrD" />
 				<result property="userBirth" column="userBirth" />
 				<result property="userGender" column="userGender" />
+				<result property="userStatus" column="userStatus" />
+				<result property="userPass" column="userPass" />
 				<result property="enabled" column="enabled" />
 				<result property="regDate" column="regDate" />
 				<result property="updateDate" column="updateDate" />
@@ -90,7 +92,8 @@
 		userPhone = #{userPhone},
 		userAddr = #{userAddr},
 		userAddrD = #{userAddrD},
-		userBirth = #{userBirth}
+		userBirth = #{userBirth},
+		userGender = #{userGender}
 		where uno = #{uno}
 	</update>
 
@@ -98,4 +101,20 @@
 		delete from member_tbl where uno = #{uno}
 	</delete>
 
+	<update id="updateApprove">
+		update member_tbl set userPass=1 , userStatus = 1 where uno = #{uno};
+	</update>
+
+	<update id="updateDeni">
+		update member_tbl set userPass=2  where uno = #{uno};
+	</update>
+
+	<update id="updateDrop">
+		update member_tbl set userPass=3  where uno = #{uno};
+	</update>
+	
+	<insert id="insertAuth">
+		insert into member_auth(uno, auth) values(#{uno}, 'ROLE_MEMBER');
+	</insert>
+	
 </mapper>

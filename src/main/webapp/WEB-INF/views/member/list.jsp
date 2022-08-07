@@ -21,7 +21,7 @@
 				<c:forEach items="${list}" var="b" varStatus="status">
 					<tr>
 						<td>${b.uno}</td>
-						<td><a href="${b.uno}" class="get"> ${b.userName }</a></td>
+						<td><a href="get?uno=${b.uno}" class="get"> ${b.userName }</a></td>
 						<td>${b.userEmail }</td>
 						<td>
 							<fmt:parseDate var="regDate" value="${b.regDate}"	pattern="yyyy-MM-dd'T'" />

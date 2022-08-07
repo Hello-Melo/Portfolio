@@ -61,23 +61,23 @@
 						<div class="d-flex row">
 							<div class="bir_yy col-sm-4">
 								<span class="ps_box"> <input type="text"
-									class="form-control" id="yy" placeholder="년(4자)" maxlength="4" name="birth1"
+									class="form-control" id="birth1" placeholder="년(4자)" maxlength="4" name="birth1"
 									required>
 								</span>
 							</div>
 							<div class="bir_mm col-sm-4">
 								<span class="ps_box focus"> <select class="form-select"
-									id="exampleFormControlSelect1" name="birth2">
+									id="birth2" name="birth2">
 										<option>월</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
+										<option>01</option>
+										<option>02</option>
+										<option>03</option>
+										<option>04</option>
+										<option>05</option>
+										<option>06</option>
+										<option>07</option>
+										<option>08</option>
+										<option>09</option>
 										<option>10</option>
 										<option>11</option>
 										<option>12</option>
@@ -86,7 +86,7 @@
 							</div>
 							<div class="bir_dd col-sm-4">
 								<span class="ps_box"> <input type="text"
-									class="form-control" id="dd" placeholder="일" maxlength="2" name="birth3"
+									class="form-control" id="birth3" placeholder="일" maxlength="2" name="birth3"
 									required>
 								</span>
 							</div>

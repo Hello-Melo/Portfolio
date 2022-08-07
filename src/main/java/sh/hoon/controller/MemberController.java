@@ -5,13 +5,16 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sh.hoon.model.AuthVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 import sh.hoon.model.PageMaker;
@@ -32,7 +35,7 @@ public class MemberController {
 		List<MemberVO> list = service.readAll(criteria);
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", maker);
-		return "member/list";
+		return "member/approval";
 	}
 	
 	@GetMapping("/register")
@@ -75,6 +78,40 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
+	@PostMapping("/approve")
+	public String approve(Long bno, AuthVO authVO, RedirectAttributes rtts) {
+		MemberVO member = service.read(bno);
+		service.insertAuth(authVO);
+		service.updateApprove(member);
+
+		rtts.addFlashAttribute("result", "approve")
+		  	   .addFlashAttribute("bno", bno);
+		return "redirect:/member/list";
+	}
 	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
+	@PostMapping("/deni")
+	public String deni(Long bno, RedirectAttributes rtts) {
+		MemberVO member = service.read(bno);
+	
+		service.updateDeni(member);
+
+		rtts.addFlashAttribute("result", "deni")
+		  	   .addFlashAttribute("bno", bno);
+		return "redirect:/member/list";
+	}
+	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
+	@PostMapping("/drop")
+	public String drop(Long bno, RedirectAttributes rtts) {
+		MemberVO member = service.read(bno);
+	
+		service.updateDrop(member);
+
+		rtts.addFlashAttribute("result", "deni")
+		  	   .addFlashAttribute("bno", bno);
+		return "redirect:/member/list";
+	}
 	
 }

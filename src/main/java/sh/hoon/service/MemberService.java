@@ -2,6 +2,7 @@ package sh.hoon.service;
 
 import java.util.List;
 
+import sh.hoon.model.AuthVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 
@@ -16,5 +17,10 @@ public interface MemberService {
 	int totalCount(Criteria criteria);
 	
 	MemberVO findByEmail(String email);
+	
+	void insertAuth(AuthVO authVO);
+	void updateApprove(MemberVO vo);
+	void updateDeni(MemberVO vo);
+	void updateDrop(MemberVO vo);
 	
 }
