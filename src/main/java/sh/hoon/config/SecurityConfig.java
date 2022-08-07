@@ -72,7 +72,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		http.exceptionHandling()
 		.accessDeniedHandler( new HoonAccessDeniedHandler());
 		
-		http.csrf().ignoringAntMatchers("/uploadAjaxAction", "/deleteFile", "/adm/fileupload.do", "/replies/**");
+		http.csrf().ignoringAntMatchers("/uploadAjaxAction", "/deleteFile", "/adm/fileupload.do", 
+				"/replies/**", "/member/approve", "/member/deni", "/member/drop");
 		
 	}	
 	

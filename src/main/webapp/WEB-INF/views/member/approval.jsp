@@ -23,6 +23,7 @@
 					<th>가입승인</th>
 				</tr>
 				<c:forEach items="${list}" var="b" varStatus="status">
+				<input type="hidden" name="uno" value="${b.uno}" id="uno">
 					<tr>
 						<td>${b.uno}</td>
 						<td>
@@ -44,13 +45,13 @@
 							<c:choose>
 								<c:when test="${b.userPass == 0 }">
 									<td>
-										<button class="btn btn-primary appro" value="승인"  name="userPass1" id="appro">승인</button>
-										<button class="btn btn-warning deni" value="거부" name="userPass2"  id="deni">거부</button>
+										<button class="btn btn-primary appro" value="승인"  name="userPass1" id="appro" data-user-id="${b.uno}">승인</button>
+										<button class="btn btn-warning deni" value="거부" name="userPass2"  id="deni" data-user-id="${b.uno}">거부</button>
 									</td>
 								</c:when>
 								<c:when test="${b.userPass == 1 }">
 									<td>
-										<button class="btn btn-secondary drop" value="승인" name="userPass3" id="drop">회원 탈퇴</button>
+										<button class="btn btn-secondary drop" value="승인" name="userPass3" id="drop" data-user-id="${b.uno}">회원 탈퇴</button>
 									</td>
 								</c:when>				
 								<c:when test="${b.userPass == 2 }">
@@ -72,16 +73,17 @@
 	
 
 <script>
-	let getBno = $(this).attr("href");
-	let pageForm = $('<form></form>');
-	
+
+		
+		
 	$(function() {
 		//get페이지로 들어갈때 코드
 		$('.table a').on('click',function(e){
 			e.preventDefault();
-			
+			let getUno = $(this).attr("href");
+			let pageForm = $('<form></form>');
 			//input 태그를 여기서 붙여주는 것. So Easy~~ bno를 붙여줘야 페이지로 이동함
-			pageForm.append($('<input/>', {type:'hidden',name:'bno',value:getBno}))
+			pageForm.append($('<input/>', {type:'hidden',name:'uno',value:getUno}))
 							.append($('<input/>', {type:'hidden',name:'page',value:'${pageMaker.criteria.page}'}))
 							.append($('<input/>', {type:'hidden',name:'type',value:'${pageMaker.criteria.type}'}))
 							.append($('<input/>', {type:'hidden',name:'keyword',value:'${pageMaker.criteria.keyword}'}));
@@ -95,7 +97,9 @@
 		//가입승인 버튼(누를시 관원 상태로 변경 및 가입 승인 상태 부여)
 		$('.appro').click(function(e){
 			e.preventDefault();
-			pageForm.append($('<input/>', {type:'hidden',name:'bno',value:getBno}))
+			let Uno = $('.table a').attr("href");
+			let pageForm = $('<form></form>');
+			pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
 			pageForm.attr("action", "${contextPath}/member/approve");
 			pageForm.attr("method", "post");
 			pageForm.appendTo('body');
@@ -105,7 +109,9 @@
 		  // 가입거부 버튼 클릭시 요청 삭제
 		  $('.deni').click(function(e){
 				e.preventDefault();
-				pageForm.append($('<input/>', {type:'hidden',name:'bno',value:getBno}))
+				let Uno = $('.table a').attr("href");
+				let pageForm = $('<form></form>');
+				pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
 				pageForm.attr("action", "${contextPath}/member/deni");
 				pageForm.attr("method", "post");
 				pageForm.appendTo('body');
@@ -116,7 +122,10 @@
 		  // 회원탈퇴 버튼 클릭시 탈퇴
 		  $('.drop').click(function(e){
 				e.preventDefault();
-				pageForm.append($('<input/>', {type:'hidden',name:'bno',value:getBno}))
+				let Uno = $('.table a').attr("href");
+	
+				let pageForm = $('<form></form>');
+				pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
 				pageForm.attr("action", "${contextPath}/member/drop");
 				pageForm.attr("method", "post");
 				pageForm.appendTo('body');

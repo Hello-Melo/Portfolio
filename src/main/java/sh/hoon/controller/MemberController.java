@@ -29,6 +29,7 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@GetMapping("/list")
 	public String findAll(Criteria criteria, Model model) {
 		PageMaker maker = new PageMaker(criteria, service.totalCount(criteria));
@@ -55,8 +56,8 @@ public class MemberController {
 	}
 
 	@GetMapping("/get")
-	public String findByid(Long id, Model model) {
-		MemberVO member = service.read(id);
+	public String findByid(Long uno, Model model) {
+		MemberVO member = service.read(uno);
 		model.addAttribute("member", member);
 		return "member/get";
 	}
@@ -80,37 +81,38 @@ public class MemberController {
 	
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@PostMapping("/approve")
-	public String approve(Long bno, AuthVO authVO, RedirectAttributes rtts) {
-		MemberVO member = service.read(bno);
+	public String approve(Long uno, AuthVO authVO, RedirectAttributes rtts) {
+		MemberVO member = service.read(uno);
+		System.out.println(member);
 		service.insertAuth(authVO);
 		service.updateApprove(member);
 
 		rtts.addFlashAttribute("result", "approve")
-		  	   .addFlashAttribute("bno", bno);
+		  	   .addFlashAttribute("bno", uno);
 		return "redirect:/member/list";
 	}
 	
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@PostMapping("/deni")
-	public String deni(Long bno, RedirectAttributes rtts) {
-		MemberVO member = service.read(bno);
+	public String deni(Long uno, RedirectAttributes rtts) {
+		MemberVO member = service.read(uno);
 	
 		service.updateDeni(member);
 
 		rtts.addFlashAttribute("result", "deni")
-		  	   .addFlashAttribute("bno", bno);
+		  	   .addFlashAttribute("bno", uno);
 		return "redirect:/member/list";
 	}
 	
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@PostMapping("/drop")
-	public String drop(Long bno, RedirectAttributes rtts) {
-		MemberVO member = service.read(bno);
+	public String drop(Long uno, RedirectAttributes rtts) {
+		MemberVO member = service.read(uno);
 	
 		service.updateDrop(member);
 
 		rtts.addFlashAttribute("result", "deni")
-		  	   .addFlashAttribute("bno", bno);
+		  	   .addFlashAttribute("bno", uno);
 		return "redirect:/member/list";
 	}
 	
