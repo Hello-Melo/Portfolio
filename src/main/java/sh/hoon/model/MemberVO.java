@@ -38,20 +38,26 @@ public class MemberVO {
 		
 		enum GENDER {M, F};
 		
-	
+		private List<BoardVO> userBoardList;
+		private List<ReplyVo> userReplyList;
+		
+		
 //		 public void setUserBirth() { StringBuilder builder = new StringBuilder();
-//		  builder.append(birth1) .append(birth2) .append(birth3); this.userBirth =
-//		  builder.toString(); }
+//		  builder.append(birth1)  .append("-").append(birth2) .append("-") .append(birth3); 
+//		  this.userBirth =  builder.toString(); }
 
 	
 		public String getUserBirth() {
-			StringBuilder builder = new StringBuilder();
-			builder.append(birth1)
-				.append("-")
-				.append(birth2)
-				.append("-")
-				.append(birth3);
-			return builder.toString();
+			if(birth1!=null & birth2!=null & birth3!=null) {
+				StringBuilder builder = new StringBuilder();
+				builder.append(birth1)
+					.append("-")
+					.append(birth2)
+					.append("-")
+					.append(birth3);
+					return builder.toString();
+			}
+			return this.userBirth;
 		}
 		
 }

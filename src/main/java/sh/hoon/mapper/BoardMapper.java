@@ -24,4 +24,5 @@ public interface BoardMapper {
 			);
 		
 	List<BoardAttachVO> attachList(Long bno);
+	
 }

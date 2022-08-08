@@ -3,6 +3,7 @@ package sh.hoon.mapper;
 import java.util.List;
 
 import sh.hoon.model.AuthVO;
+import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 
@@ -19,6 +20,8 @@ public interface MemberMapper {
 	MemberVO findByEmail(String email);
 	
 	MemberVO read(Long uno);
+	
+	MemberVO getInfo(Long uno);
 	
 	void insertAuth(AuthVO authVO);
 	void updateApprove(MemberVO vo);

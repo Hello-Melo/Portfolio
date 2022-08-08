@@ -52,6 +52,13 @@
 		order by	bno desc
 		limit #{pageStart}, #{perPageNum}
 	</select>
+	
+	<select id="getUserBoardList" resultType="sh.hoon.model.BoardVO">
+		select * from board_tbl
+		order by	bno desc
+		where writer = ${writer}
+	</select>
+	
 
 	<select id="totalCount" resultType="Integer">
 		select count(*) from board_tbl

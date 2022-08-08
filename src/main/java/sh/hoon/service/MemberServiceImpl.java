@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import sh.hoon.mapper.MemberMapper;
 import sh.hoon.model.AuthVO;
+import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 
@@ -75,6 +76,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateDrop(MemberVO vo) {
 		mapper.updateDrop(vo);
+	}
+
+	@Override
+	public MemberVO getInfo(Long uno) {
+		return mapper.getInfo(uno);
 	}
 
 }

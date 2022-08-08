@@ -35,7 +35,6 @@
 				<result property="userGender" column="userGender" />
 				<result property="userStatus" column="userStatus" />
 				<result property="userPass" column="userPass" />
-				<result property="enabled" column="enabled" />
 				<result property="regDate" column="regDate" />
 				<result property="updateDate" column="updateDate" />
 				<collection property="authList" resultMap="authMap" />
@@ -60,6 +59,55 @@
 			where M.userEmail = #{userEmail};
 		</select>
 		
+			<resultMap type="sh.hoon.model.MemberVO" id="userInfo">
+				<id property="uno" column="uno" />
+				 <!--  property 는 자바 파라미터, column은 sql 파라미터 -->
+				 <result property="uno" column="uno" />
+				<result property="userEmail" column="userEmail" />
+				<result property="userName" column="userName" />
+				<result property="userPw" column="userPw" />
+				<result property="userPhone" column="userPhone" />
+				<result property="userAddr" column="userAddr" />
+				<result property="userAddrD" column="userAddrD" />
+				<result property="userBirth" column="userBirth" />
+				<result property="userGender" column="userGender" />
+				<result property="userStatus" column="userStatus" />
+				<result property="userPass" column="userPass" />
+				<result property="regDate" column="regDate" />
+				<result property="updateDate" column="updateDate" />
+				<collection property="userBoardList" resultMap="boardMap" />
+				<collection property="userReplyList" resultMap="replyMap" />
+		</resultMap>
+		
+		
+			 <resultMap type="sh.hoon.model.BoardVO" id="boardMap">
+				 	<result property="bno" column="bno" />
+				 	<result property="title" column="title" />
+				 	<result property="contents" column="contents" />
+				 	<result property="writer" column="writer" />
+				 	<result property="regDate" column="regDate" />
+				 	<result property="updateDate" column="updateDate" />
+				 	<result property="replyCnt" column="replyCnt" />
+		  </resultMap>
+		  
+		 <resultMap type="sh.hoon.model.ReplyVo" id="replyMap">
+				 	<result property="rno" column="rno" />
+				 	<result property="bno" column="bno" />
+				 	<result property="reply" column="reply" />
+				 	<result property="replyer" column="replyer" />
+				 	<result property="regDate" column="regDate" />
+				 	<result property="updateDate" column="updateDate" />
+		  </resultMap>
+		  
+	
+		<select id="getInfo" resultMap="userInfo">
+			select * from member_tbl M
+			inner join board_tbl B
+			on M.userName = B.writer
+			inner join reply_tbl R
+			on M.userName = R.replyer
+			where M.uno = #{uno};
+		</select>
 		
 		
 	<select id="totalCount" resultType="Integer">

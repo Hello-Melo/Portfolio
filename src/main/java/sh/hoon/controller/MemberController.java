@@ -88,7 +88,7 @@ public class MemberController {
 		service.updateApprove(member);
 
 		rtts.addFlashAttribute("result", "approve")
-		  	   .addFlashAttribute("bno", uno);
+		  	   .addFlashAttribute("uno", uno);
 		return "redirect:/member/list";
 	}
 	
@@ -100,7 +100,7 @@ public class MemberController {
 		service.updateDeni(member);
 
 		rtts.addFlashAttribute("result", "deni")
-		  	   .addFlashAttribute("bno", uno);
+		  	   .addFlashAttribute("uno", uno);
 		return "redirect:/member/list";
 	}
 	
@@ -111,8 +111,8 @@ public class MemberController {
 	
 		service.updateDrop(member);
 
-		rtts.addFlashAttribute("result", "deni")
-		  	   .addFlashAttribute("bno", uno);
+		rtts.addFlashAttribute("result", "drop")
+		  	   .addFlashAttribute("uno", uno);
 		return "redirect:/member/list";
 	}
 	

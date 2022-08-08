@@ -40,7 +40,8 @@ public class MemberTest extends AppTest{
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-
+			
+			for(int i = 0 ; i < 100 ; i++) {
 			pstmt.setString(1, "hoon@dream.com");
 			pstmt.setString(2, "옥승훈");
 			pstmt.setString(3, encoder.encode("1234"));
@@ -49,17 +50,17 @@ public class MemberTest extends AppTest{
 			pstmt.setString(6, "파크맨션");
 			pstmt.setString(7,"1987-04-21");
 			pstmt.setString(8, "M");
-			pstmt.setInt(9, 2);
-			pstmt.setInt(10, 1);
-
+			pstmt.setInt(9, 0);
+			pstmt.setInt(10, 0);
+			
 			pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	@Ignore
 	public void adminInsertTest2() throws ParseException {
 		String sql =
 				"insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender, userStatus, userPass)"

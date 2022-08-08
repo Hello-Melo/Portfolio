@@ -125,6 +125,8 @@
 
 <script>
 	let userId = "${userId}";
+	let bWriter = "${board.writer}" 
+		
 	$(function() {
 		
 		let getForm = $('#getForm');

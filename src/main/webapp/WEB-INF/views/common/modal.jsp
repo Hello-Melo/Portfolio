@@ -45,12 +45,10 @@
 				obj.titleName = "게시글 삭제";
 				obj.message = "${bno}번 글을 삭제하셨습니다.";
 			}
-
 			$(".titleName").append(obj.titleName);
 			$(".message").append(obj.message);
 			$('#feedback').modal('show');
 		}
-		
-		
 	})
+
 </script>

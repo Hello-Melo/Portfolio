@@ -62,7 +62,7 @@ $(function () {
 					bno : bno
 			}
 			replyService.add(reply, function(result) {
-				alert(result);
+				
 				modal.find('input').val('');
 				modal.modal('hide');
 				
@@ -89,7 +89,7 @@ $(function () {
 			replyService.get(rno, function(reply) {
 				if(userId != reply.replyer && userId  != "관리자") return; // 사용자 확인 
 				modalInputReply.val(reply.reply);
-				modalInputReplyer.val(reply.replyer).attr("readonly", "readonly");;
+				modalInputReplyer.val(reply.replyer).attr("readonly", "readonly");
 				modalInputReplyDate.val(replyService.displayTime(reply.updateDate)).attr("readonly", "readonly");
 				modal.data("rno", reply.rno)
 				

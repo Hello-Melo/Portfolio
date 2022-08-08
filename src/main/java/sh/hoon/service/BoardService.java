@@ -17,4 +17,5 @@ public interface BoardService {
 	
 	int totalCount(Criteria criteria);
 	List<BoardAttachVO> getAttachList(Long bno);
+	
 }
