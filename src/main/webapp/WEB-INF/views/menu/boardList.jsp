@@ -91,7 +91,7 @@
 							.append($('<input/>', {type:'hidden',name:'type',value:'${pageMaker.criteria.type}'}))
 							.append($('<input/>', {type:'hidden',name:'keyword',value:'${pageMaker.criteria.keyword}'}));
 			
-			pageForm.attr("action", "${contextPath}/get");
+			pageForm.attr("action", "${contextPath}/free/get");
 			pageForm.attr("method", "get");
 			pageForm.appendTo('body');
 			pageForm.submit();

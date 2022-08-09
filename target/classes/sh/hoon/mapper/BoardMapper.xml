@@ -59,6 +59,10 @@
 		where writer = ${writer}
 	</select>
 	
+	<select id="newList" resultType="sh.hoon.model.BoardVO">
+		select * from board_tbl  order by regDate desc limit 0, 5;
+	</select>
+	
 
 	<select id="totalCount" resultType="Integer">
 		select count(*) from board_tbl

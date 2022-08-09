@@ -6,6 +6,7 @@ import sh.hoon.model.AuthVO;
 import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
+import sh.hoon.model.ReplyVo;
 
 public interface MemberMapper {
 
@@ -22,6 +23,7 @@ public interface MemberMapper {
 	MemberVO read(Long uno);
 	
 	MemberVO getInfo(Long uno);
+	
 	
 	void insertAuth(AuthVO authVO);
 	void updateApprove(MemberVO vo);

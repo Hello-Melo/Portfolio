@@ -27,4 +27,7 @@ public interface ReplyMapper {
 	//댓글 삭제
 	int delete(Long bno);
 
+	List<ReplyVo> userReplyList(String replyer);
+	
 }
+

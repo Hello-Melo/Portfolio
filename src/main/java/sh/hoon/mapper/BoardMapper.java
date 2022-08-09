@@ -25,4 +25,5 @@ public interface BoardMapper {
 		
 	List<BoardAttachVO> attachList(Long bno);
 	
+	List<BoardVO> newList(Criteria criteria);
 }

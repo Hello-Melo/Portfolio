@@ -68,7 +68,7 @@ public class MenuBoardController {
 		return "menu/boardList";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping("/free/get")
 	public String read(Long bno, Model model) {
 		BoardVO vo = service.read(bno);
 		if(vo == null) throw new NotFoundBoardException();

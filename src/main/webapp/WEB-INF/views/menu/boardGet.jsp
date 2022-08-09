@@ -45,7 +45,7 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
-						<c:if test="${userId eq board.writer }">
+						<c:if test="${userId eq board.writer}">
 							<button class="btn btn-warning modify">수정</button>
 							<button class="btn btn-info remove">삭제</button>
 						</c:if>
@@ -138,7 +138,7 @@
 			getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'}))
 					      .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
 					      .append($('<input/>', {type:'hidden',name:'keyword',value:'${param.keyword}'}));
-			getForm.attr("action", "list/${board.category}");
+			getForm.attr("action", "${contextPath}/list/${board.category}");
 			getForm.attr("method", "get");
 			
 			//이건 키워드가 없을 경우 주소창 초기화 코드!

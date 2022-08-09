@@ -9,7 +9,7 @@
 		</div>
 	</div>
 		
-	<div class="container d-flex justify-content-around" style="border:1px solid red;">
+	<div class="container d-flex justify-content-around mb-5 mt-5" style="border:1px solid red;">
 	<!--  1st box -->
 		<div>
 			<div style="border:1px solid blue;">
@@ -34,7 +34,7 @@
 					name="userEmail" value="${member.userEmail}" readonly>
 					</div>
 					<div>
-						<label>주소</label> ><input type="text" class="form-control"
+						<label>주소</label><input type="text" class="form-control"
 					name="userAddr" value="${member.userAddr} ${member.userAddrD}" readonly>
 					</div>
 					<div>
@@ -109,34 +109,27 @@
 				<div>
 					<table class="table">
 						<tr>
-							<th>번호</th>
+							<th>글번호</th>
 							<th>작성자</th>
 							<th>댓글내용</th>
 							<th>등록일</th>
 						</tr>
-					 	<c:forEach items="${info.userReplyList}" var="r">
+			 	<c:forEach items="${replyVo}" var="r">
 							<c:if test="${r.replyer != null && r.replyer == member.userName}">
 								<tr>
-									<td>${r.rno}</td>
+									<td>${r.bno}</td>
 									<td>${r.replyer}</td>
 									<td><a href="${b.bno}">${r.reply}</a></td>
 									<td><fmt:parseDate var="regDate" value="${r.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 									<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
 								</tr>
 							</c:if>
-						</c:forEach>
+					</c:forEach>
 					</table>
 				</div>
 			</div>
 		</div><!--  2nd box end -->
 	</div>
-
-	<div class="container">
-			<c:if test="${not empty member }">
-			${member }
-		</c:if>
-	</div>
-
 	
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

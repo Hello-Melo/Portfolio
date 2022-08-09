@@ -48,7 +48,7 @@
             </li>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/member/list">회원게시판</a>
+              <a class="nav-link" href="${contextPath}/member/list">회원관리</a>
             </li>
              </sec:authorize>
             <li class="nav-item">

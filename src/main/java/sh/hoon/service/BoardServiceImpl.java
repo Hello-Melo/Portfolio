@@ -73,5 +73,10 @@ public class BoardServiceImpl implements BoardService {
 		return attachMapper.findByBno(bno);
 	}
 
+	@Override
+	public List<BoardVO> newList(Criteria criteria) {
+		return mapper.newList(criteria);
+	}
+
 	
 }

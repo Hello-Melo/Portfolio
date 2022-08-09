@@ -1,6 +1,7 @@
 package sh.hoon.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,7 @@ public class ReplyVo {
 	private String replyer;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate; 
+	
+	private List<ReplyVo> userReplyList;
 	
 }

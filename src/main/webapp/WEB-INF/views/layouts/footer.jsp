@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-
 		<footer>
 			<div class="container">
 				<div class="first-line pb-5 pt-5 logoname">봉곡태권도</div>

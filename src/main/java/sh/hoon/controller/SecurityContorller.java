@@ -12,15 +12,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import sh.hoon.exception.NotMatchUserIdException;
 import sh.hoon.model.BoardVO;
+import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
+import sh.hoon.model.ReplyVo;
 import sh.hoon.security.HoonUser;
+import sh.hoon.service.BoardService;
 import sh.hoon.service.MemberService;
+import sh.hoon.service.ReplyService;
 
 @Controller
 public class SecurityContorller {
 	
 	@Autowired
 	MemberService service;
+	
+	@Autowired
+	ReplyService replyService;
+	
+	@Autowired
+	BoardService boardService;
 
 	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@GetMapping("/sec/member")
@@ -30,7 +40,14 @@ public class SecurityContorller {
 	
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@GetMapping("/sec/admin")
-	public String adminPage() {
+	public String adminPage(@AuthenticationPrincipal HoonUser myUser ,Criteria criteria, Model model) {
+		List<MemberVO> memeber = service.readAll(criteria);
+		List<BoardVO> list = boardService.newList(criteria);
+		MemberVO vo = myUser.getMemberVO();
+		
+		model.addAttribute("member", vo);
+		model.addAttribute("list", list);
+		model.addAttribute("memberList", memeber);
 		return "member/admin";
 	}
 	
@@ -45,12 +62,14 @@ public class SecurityContorller {
 		
 		MemberVO info = service.getInfo(uno);
 		MemberVO vo = myUser.getMemberVO();
+		List<ReplyVo> replyVo = replyService.getReply(vo.getUserName());
 		if(!vo.getUno().equals(uno)) {
 			//예외 발생
 			throw new NotMatchUserIdException();
 		}
 		model.addAttribute("member", vo);
 		model.addAttribute("info", info);
+		model.addAttribute("replyVo", replyVo);
 		return "member/myPage";
 	}
 	

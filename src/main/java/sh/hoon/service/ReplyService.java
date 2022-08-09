@@ -15,5 +15,5 @@ public interface ReplyService {
 	int modify(ReplyVo vo);
 	int remove(Long bno);
 	 
-
+	List<ReplyVo> getReply(String writer);
 }

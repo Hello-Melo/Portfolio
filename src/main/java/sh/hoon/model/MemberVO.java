@@ -39,7 +39,6 @@ public class MemberVO {
 		enum GENDER {M, F};
 		
 		private List<BoardVO> userBoardList;
-		private List<ReplyVo> userReplyList;
 		
 		
 //		 public void setUserBirth() { StringBuilder builder = new StringBuilder();

@@ -137,7 +137,8 @@
 			let imgTag = "<img  src='${pageContext.request.contextPath}/display?fileName="+encodeURI(path)+"'>"
 			$('.oImg').html(imgTag);
 		}
-
-</script>
-</body>
-</html>
+	</script>
+	
+	
+	
+	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

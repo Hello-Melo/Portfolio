@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sh.hoon.mapper.ReplyMapper">
 
+		 		<resultMap type="sh.hoon.model.ReplyVo" id="replyMap">
+					 	<result property="rno" column="rno" />
+					 	<result property="bno" column="bno" />
+					 	<result property="reply" column="reply" />
+					 	<result property="replyer" column="replyer" />
+					 	<result property="regDate" column="regDate" />
+					 	<collection property="userReplyList" resultMap="boardMap2" />
+			  </resultMap>
+		  
+  			 <resultMap type="sh.hoon.model.BoardVO" id="boardMap2">
+				 	<result property="bno" column="bno" />
+				 	<result property="title" column="title" />
+				 	<result property="contents" column="contents" />
+				 	<result property="writer" column="writer" />
+				 	<result property="replyCnt" column="replyCnt" />
+		  	</resultMap>
+
+		<select id="userReplyList" resultMap="replyMap">
+			select B.bno, B.category, B.contents, B.title, B.writer, B.replyCnt,
+			R.bno, R.rno, R.reply, R.replyer, R.regDate
+			from reply_tbl R 
+			inner join board_tbl B
+			on R.bno = B.bno
+			where R.replyer = #{replyer};
+		</select>
+
 	<select id="getList" resultType="sh.hoon.model.ReplyVo">
 		select * from reply_tbl where bno = #{bno}
 	</select>

@@ -57,6 +57,12 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getList(criteria, bno);
 	}
 
+	@Override
+	public List<ReplyVo> getReply(String writer) {
+		// TODO Auto-generated method stub
+		return mapper.userReplyList(writer);
+	}
+
 	
 	
 }
