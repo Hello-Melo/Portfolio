@@ -28,15 +28,6 @@
 				</div>
 				<hr>
 				<!-- <p>Don't have an account!</p>  -->
-			
-			<div class="social-login">
-					<button class="btn facebook-btn social-btn" type="button">
-						<span><i class="fab fa-facebook-f"></i> FaceBook 로그인</span>
-					</button>
-					<button class="btn google-btn social-btn" type="button">
-						<span><i class="fab fa-google-plus-g"></i>Google+ 로그인</span>
-					</button>
-				</div>
 			</form>
 		
 			<form action="/reset/password/" class="form-reset">

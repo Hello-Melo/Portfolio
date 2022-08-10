@@ -72,6 +72,9 @@
 	</div>
 	
 	
+	
+		<%@ include file="/WEB-INF/views/common/pagenationMember.jsp" %>
+	
 		<!-- 모달 -->
 		<%@ include file="/WEB-INF/views/common/modalMember.jsp" %>
 

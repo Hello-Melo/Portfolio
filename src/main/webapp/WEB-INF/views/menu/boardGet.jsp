@@ -45,7 +45,7 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
-						<c:if test="${userId eq board.writer}">
+						<c:if test="${userId eq board.writer">
 							<button class="btn btn-warning modify">수정</button>
 							<button class="btn btn-info remove">삭제</button>
 						</c:if>

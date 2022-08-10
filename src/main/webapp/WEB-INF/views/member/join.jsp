@@ -116,20 +116,7 @@
 				</form>
 			</div>
 		</div>
-
-	
-				<form action="/signup/" class="form-signup">
-					<div class="social-login">
-							<button class="btn facebook-btn social-btn" type="button">
-								<span><i class="fab fa-facebook-f"></i> FaceBook으로 가입하기</span>
-							</button>
-							<button class="btn google-btn social-btn" type="button">
-								<span><i class="fab fa-google-plus-g"></i>Google+로 가입하기</span>
-							</button>
-						</div>
-				</form>
-	
-	</div>
+		</div>
 </section>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/join.css">

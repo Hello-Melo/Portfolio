@@ -9,13 +9,7 @@
       </div>
     </div>
     
-    <div>
-    	<form action="${contextPath}/register2" class="d-flex justify-content-end">
-    				<input type="hidden" name="category" id="category" value="${pageMaker.criteria.category}">
-    	<button>글쓰기</button>
-    	</form>
-    </div>
-    <div class="container notice">
+     <div class="container notice">
 	  	<div class="row row-cols-1 row-cols-md-3 g-4">
 	  
 		<c:forEach items="${list}" var="b">
@@ -49,6 +43,9 @@
 			</c:forEach>
 		</div>
 	</div>
+		
+		
+			<%@ include file="/WEB-INF/views/common/pagenationNotice.jsp" %>
 		
 		<%@ include file="/WEB-INF/views/common/modal.jsp" %>
 

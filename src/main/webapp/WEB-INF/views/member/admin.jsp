@@ -9,7 +9,7 @@
 		</div>
 	</div>
 		
-	<div class="container d-flex justify-content-around mb-10 mt-10" style="border:1px solid red;">
+	<div class="container d-flex justify-content-around mb-5 mt-5" style="border:1px solid red;">
 	<!--  1st box -->
 		<div>
 			<div style="border:1px solid blue;" class="d-flex justify-content-between">

@@ -66,8 +66,8 @@
 				$('#registerForm .reset').on('click', function(e) {
 					e.preventDefault();
 					//해당 태그들로 
-/* 					getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'}))
-							      .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
+					getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'})) ;
+							/*       .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
 							      .append($('<input/>', {type:'hidden',name:'keyword',value:'${param.keyword}'})); */
 					getForm.attr("action", "${contextPath}/notice/notice");
 					getForm.attr("method", "get");
