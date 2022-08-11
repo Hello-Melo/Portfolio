@@ -68,6 +68,11 @@
 								</c:when>					
 							</c:choose>					
 					</div>
+					<div class="row">
+							<form action="${contextPath}/member/update" class="col text-center" >
+								<button class="btn btn-info">수정하기</button>
+							</form>
+					</div>
 				</div>
 			</div>
 		</div><!--  1st box end -->

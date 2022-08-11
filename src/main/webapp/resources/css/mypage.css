@@ -1,0 +1,40 @@
+.clearfix::after{content: ''; display: block; clear: both;}
+
+button{border-radius: 5px; border: 1px solid gray;}
+input{border-radius: 5px; border: 1px solid gray;}
+
+.title{text-align: center;}
+
+.mypage_wrap{margin: auto; width: 1200px;}
+.profile_pic{
+    border-radius: 100px;
+    margin: auto; 
+    margin-top: 150px;
+    width: 200px; 
+    height: 200px; 
+    background-image: url(../img/blank-profile.png);
+    background-size: cover;
+    text-indent: -9999px;
+}
+.pic_modify{
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%);
+    margin-top: 20px; 
+    width: 200px; 
+    height: 30px; 
+    border: 1px solid gray;
+}
+.personal_info{margin: auto; margin-top: 30px; margin-bottom: 150px; width: 500px;}
+.personal_info .title{padding-top: 40px; padding-bottom: 7px; font-size: 20px; font-weight: 600; border-bottom: 1px solid gray;}
+.personal_info .name{padding-top: 10px;}
+.personal_info > p{margin-top: 20px; margin-bottom: 10px;}
+.personal_info input{width: 500px; height: 50px; padding-left:20px;}
+.personal_info .lower_button{width: 425px; padding-top: 50px; position: relative; left: 50%; transform: translateX(-50%);}
+.personal_info .lower_button > div{float: left;}
+.personal_info .lower_button > div button{width: 200px; height: 60px; border: 1px solid gray;}
+.personal_info .lower_button .modify{margin-right: 25px;}
+
+
+
+

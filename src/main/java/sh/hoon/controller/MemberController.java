@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,17 +69,20 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@GetMapping("/update")
 	public String updateForm() {
-		return "member/update";
+		return "member/modify";
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@PostMapping("/update")
 	public String update(MemberVO member) {
 		service.modify(member);
 		return "redirect:/";
 	}
 	
+	@Transactional
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@PostMapping("/approve")
 	public String approve(Long uno, AuthVO authVO, RedirectAttributes rtts) {
@@ -104,11 +108,13 @@ public class MemberController {
 		return "redirect:/member/list";
 	}
 	
+	@Transactional
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@PostMapping("/drop")
-	public String drop(Long uno, RedirectAttributes rtts) {
+	public String drop(Long uno, AuthVO authVO, RedirectAttributes rtts) {
 		MemberVO member = service.read(uno);
-	
+		
+		service.updateAuth(authVO);
 		service.updateDrop(member);
 
 		rtts.addFlashAttribute("result", "drop")

@@ -25,5 +25,5 @@ public interface MemberService {
 	void updateApprove(MemberVO vo);
 	void updateDeni(MemberVO vo);
 	void updateDrop(MemberVO vo);
-	
+	void updateAuth(AuthVO authVO);
 }

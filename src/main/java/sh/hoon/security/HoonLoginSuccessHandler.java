@@ -28,6 +28,7 @@ public class HoonLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		List<String> roleName = new ArrayList<String>();
 		
+		
 		//authroity로 설정해준 회원권한 얻어오기
 		authentication.getAuthorities().forEach(authoity -> {
 			roleName.add(authoity.getAuthority());

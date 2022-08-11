@@ -73,5 +73,20 @@ public class SecurityContorller {
 		return "member/myPage";
 	}
 	
+	
+	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
+	@GetMapping("/sec/get")
+	public String memeberInfo(Long uno, @AuthenticationPrincipal HoonUser user, Model model) {
+		MemberVO member = service.read(uno);
+		
+		if(!member.getUno().equals(uno)) {
+			//예외 발생
+			throw new NotMatchUserIdException();
+		}
+		model.addAttribute("member", member);
+		
+		return "member/get";
+	}
+	
 
 }

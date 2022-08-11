@@ -10,6 +10,7 @@
 		이 부분이 없으면 겟을 부를때 에러가 남-->
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.memberVO.userName" var="userId"/>
+		<sec:authentication property="principal.memberVO.userStatus" var="userStatus"/>
 	</sec:authorize>
 
 		<div class="p-5 mb-4 bg-light rounded-3">
@@ -45,7 +46,7 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
-						<c:if test="${userId eq board.writer">
+						<c:if test="${userId eq board.writer or userStatus eq 2 or userStatus eq 3}">
 							<button class="btn btn-warning modify">수정</button>
 							<button class="btn btn-info remove">삭제</button>
 						</c:if>

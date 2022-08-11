@@ -76,7 +76,8 @@ public class BoardController {
 		return "board/noticeModify";
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
+			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@PostMapping("/modify")
 	public String modify(BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
@@ -97,7 +98,8 @@ public class BoardController {
 	}
 	
 	
-	@PreAuthorize("isAuthenticated() and principal.memberVO.userName == #board.writer")
+	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
+			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		String category = service.read(bno).getCategory();

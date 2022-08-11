@@ -14,19 +14,27 @@
 	<div class="container py-2">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="name">이름</label> <input type="text"
-								class="form-control" id="userName" name="userName" placeholder="" value="" required>
-							<div class="invalid-feedback">성을 입력해주세요.</div>
-						</div>
-						<div class="col-md-6 mb-3">
+			<form:form id="joinForm" method="post" modelAttribute="memberVO" class="validation-form">
+				<%-- <form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post"> --%>
+					
+					<div class="col-md-6 mb-3">
+						<label for="name">이름</label> <input type="text"
+							class="form-control" id="userName" name="userName" placeholder="" value="" required>
+						<div class="invalid-feedback">이름을 입력해주세요.</div>
+					</div>
+				
+					<div class="col-md-6 mb-3">
 							<label for="password">비밀번호</label> <input type="password"
 								class="form-control" id="userPw" name="userPw" placeholder="" value=""
 								required>
 							<div class="invalid-feedback">이름을 입력해주세요.</div>
-						</div>
+					</div>
+					
+					<div class="col-md-6 mb-3">
+							<label for="password">비밀번호</label> <input type="password"
+								class="form-control" id="userPw" name="userPw" placeholder="" value=""
+								required>
+							<div class="invalid-feedback">이름을 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
@@ -113,7 +121,8 @@
 					<button class="btn btn-primary btn-lg btn-block" type="submit">가입
 						완료</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
-				</form>
+				<!-- </form> -->
+				</form:form>
 			</div>
 		</div>
 		</div>

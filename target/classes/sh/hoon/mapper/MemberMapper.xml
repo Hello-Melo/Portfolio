@@ -154,4 +154,8 @@
 		insert into member_auth(uno, auth) values(#{uno}, 'ROLE_MEMBER');
 	</insert>
 	
+	<update id="updateAuth">
+		update member_auth set auth="" where uno = ${uno};
+	</update>
+	
 </mapper>

@@ -83,4 +83,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getInfo(uno);
 	}
 
+	@Override
+	public void updateAuth(AuthVO authVO) {
+		mapper.updateAuth(authVO);
+	}
+
 }

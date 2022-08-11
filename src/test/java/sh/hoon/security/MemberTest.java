@@ -29,6 +29,15 @@ public class MemberTest extends AppTest{
 	PasswordEncoder encoder;
 
 	@Test
+	public void test() {
+		String str = "1234";
+		String str2 = encoder.encode(str);
+		
+		System.out.println(str2);
+		
+	}
+	
+	@Test
 	@Ignore
 	public void memberInsertTest() {
 		String sql =
@@ -61,6 +70,7 @@ public class MemberTest extends AppTest{
 	}
 
 	@Test
+	@Ignore
 	public void adminInsertTest2() throws ParseException {
 		String sql =
 				"insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender, userStatus, userPass)"

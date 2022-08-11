@@ -67,7 +67,7 @@
                <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
                 <sec:authentication property="principal.memberVO.uno" var="uno"/>
 		          <form class="d-flex">
-		            <a href="${contextPath}/sec/myPage/${uno}">마이페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		            <a href="${contextPath}/sec/myPage/${uno}">마이페이지</a> <span>|</span> <a class="logout" href="" onclick="javascript:logout()">로그아웃</a>
 		          </form>
 	           </sec:authorize>
 	              <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -80,4 +80,15 @@
     </nav>
 
 
+
+<script>
+function logout() {
+	let pageForm = $('<form></form>')
+	pageForm.attr('action', '${contextPath}/logout');
+	pageForm.attr('method', 'post');
+	pageForm.appendTo('body');
+	pageForm.submit();
+}
+
+</script>
 
