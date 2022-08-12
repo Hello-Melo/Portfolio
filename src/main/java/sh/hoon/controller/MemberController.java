@@ -43,16 +43,22 @@ public class MemberController {
 	@GetMapping("/register")
 	public String registerForm(MemberVO member, Errors errors) {
 	
-		return "member/register";
+		return "member/join";
 	}
 
 	@PostMapping("/register")
 	public String register(@Valid MemberVO member, Errors errors ) {
+		
 		/*
 		 * new MemberValidator().validate(member, errors); if(errors.hasErrors()) {
-		 * return "member/register"; }else { service.insert(member); }
+		 * return "member/register"; }else { }
 		 */
-		 service.register(member);
+		 
+		if(errors.hasErrors()) {
+			
+			return "member/join";
+		}
+		  service.register(member);
 		return "redirect:/";
 	}
 

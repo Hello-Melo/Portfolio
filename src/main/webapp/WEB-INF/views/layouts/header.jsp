@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구미 봉곡태권도에 오신 것을 환영합니다</title>
+<title><spring:message code="board.mainTitle" /></title>
 	<link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
@@ -35,44 +35,46 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <span><a href="${contextPath}"><img src="${contextPath}/resources/imgs/logo3-removebg-preview.png" class="logo"></a></span>
-        <a class="navbar-brand" href="#">봉곡태권도</a>
+        <a class="navbar-brand" href="#"><spring:message code="board.teak" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${contextPath}/notice/notice">공지사항</a>
+              <a class="nav-link active" aria-current="page" href="${contextPath}/notice/notice"><spring:message code="board.notice" /></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/table">수련시간표</a>
+              <a class="nav-link" href="${contextPath}/table"><spring:message code="board.schedule" /></a>
             </li>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/member/list">회원관리</a>
+              <a class="nav-link" href="${contextPath}/member/list"><spring:message code="board.memberPage" /></a>
             </li>
              </sec:authorize>
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/list/free">관원게시판</a>
+              <a class="nav-link" href="${contextPath}/list/free"><spring:message code="board.board" /></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="${contextPath}/map">상담 및 견학 안내</a>
+              <a class="nav-link" href="${contextPath}/map"><spring:message code="board.counseling" /></a>
             </li>
           </ul>
 	          <sec:authorize access="isAnonymous()">
 		          <form class="d-flex">
-		            <a href="${contextPath}/join">회원가입</a> <span>|</span> <a href="${contextPath}/login">로그인</a>
+		            <a href="${contextPath}/member/register"><spring:message code="board.join" /></a> <span>|</span> <a href="${contextPath}/login"><spring:message code="board.login" /></a>
 		          </form>
 	           </sec:authorize>
                <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
                 <sec:authentication property="principal.memberVO.uno" var="uno"/>
-		          <form class="d-flex">
-		            <a href="${contextPath}/sec/myPage/${uno}">마이페이지</a> <span>|</span> <a class="logout" href="" onclick="javascript:logout()">로그아웃</a>
+		          <form class="d-flex logoutForm">
+		            <a href="${contextPath}/sec/myPage/${uno}"><spring:message code="board.myPage" /></a> <span>|</span> 
+		            <a class="logout" ><spring:message code="board.logout" /></a>
 		          </form>
 	           </sec:authorize>
 	              <sec:authorize access="hasRole('ROLE_ADMIN')">
-		          <form class="d-flex">
-		            <a href="${contextPath}/sec/admin">관리자페이지</a> <span>|</span> <a href="${contextPath}/logout">로그아웃</a>
+		          <form class="d-flex logoutForm">
+		            <a href="${contextPath}/sec/admin"><spring:message code="board.adminPage" /></a> <span>|</span> 
+		            <a class="logout"><spring:message code="board.logout" /></a>
 		          </form>
 	           </sec:authorize>
         </div>
@@ -82,13 +84,16 @@
 
 
 <script>
-function logout() {
-	let pageForm = $('<form></form>')
-	pageForm.attr('action', '${contextPath}/logout');
-	pageForm.attr('method', 'post');
-	pageForm.appendTo('body');
-	pageForm.submit();
-}
+
+	$('.logoutForm .logout').on('click', function (e) {
+		e.preventDefault();	
+		let pageForm = $('<form></form>')
+		pageForm.append($('<input/>', {type:'hidden',name:'${_csrf.parameterName}',value:'${_csrf.token }'}));
+		pageForm.attr('action', '${contextPath}/logout');
+		pageForm.attr('method', 'post');
+		pageForm.appendTo('body');
+		pageForm.submit();
+	})
 
 </script>
 

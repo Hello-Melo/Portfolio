@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +33,7 @@ import sh.hoon.model.Criteria;
 import sh.hoon.model.ReplyVo;
 import sh.hoon.service.BoardService;
 import sh.hoon.service.ReplyService;
+import sh.hoon.validation.BoardValidatior;
 
 @Controller
 @RequestMapping("/board")
@@ -43,14 +47,19 @@ public class BoardController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
-	public String registerForm(Criteria criteria, Model model) {
+	public String registerForm(BoardVO vo, Criteria criteria, Model model) {
 		model.addAttribute("criteria", criteria);
 		return "board/register";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
-	public String register(BoardVO vo, RedirectAttributes rttr) {
+	public String register(@Valid BoardVO vo, Errors errors, RedirectAttributes rttr) {
+		
+		 new BoardValidatior().validate(vo, errors);
+		  if (errors.hasErrors()) {
+			  return "board/register"; 
+			  }
 		
 		service.register(vo);
 		rttr.addFlashAttribute("result", "register")
@@ -97,7 +106,6 @@ public class BoardController {
 		return "redirect:/notice/"+ vo.getCategory();
 	}
 	
-	
 	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
 			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@PostMapping("/remove")
@@ -112,7 +120,6 @@ public class BoardController {
 			  .addFlashAttribute("bno", bno);
 		return "redirect:/list/"+ category;
 	}
-	
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove2")

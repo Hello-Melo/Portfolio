@@ -12,25 +12,31 @@
 		</div>
 		
 		<div class="container">
-			<form  id="registerForm">
+			<form:form id="registerForm" modelAttribute="boardVO" method="post">
+		<!-- 	<form  id="registerForm"> -->
 			<input type="hidden" name="category" id="category" value="${criteria.category}">
 				<div class="form-group">
-					<label>제목 : </label> <input type="text" class="form-control" name="title">
+					<label>제목 : </label>
+					<form:input type= "text" path ="title" class="form-control" /><br>
+					<form:errors path="title" class="error" style="color:red;"/>
 				</div>
 				<div class="form-group">
 					<label>내용 : </label>
-					<textarea class="form-control" name="contents" id="contents"></textarea>
+					<form:textarea  path="contents" class="form-control"  />
+					<form:errors path="contents" class="error" style="color:red;"/>
 				</div>
 				<div class="form-group">
-					<label>작성자 : </label> <input class="form-control"	name="writer" readonly
-															value="<sec:authentication property="principal.memberVO.userName"/>"> 
+					<label>작성자 : </label>
+					<sec:authentication property="principal.memberVO.userName" var="name" />
+					<form:input type= "text"  path ="writer" value="${name}" class="form-control"   readonly="true" />
+					<form:errors path="writer"  style="color:red;"  />
 				</div>
 				<br>
 				<button type="button" class="btn btn-primary submit">등록</button>
 				<button type="reset" class="btn btn-info reset">뒤로</button>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
-			</form>
-
+		<!-- 	</form> -->
+		</form:form>	
 		<div class="row my-5">
   			<div class="col-lg-12">
   				<div class="card">

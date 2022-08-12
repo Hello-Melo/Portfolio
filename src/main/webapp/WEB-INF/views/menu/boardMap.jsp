@@ -4,7 +4,7 @@
 
 <div class="p-5 mb-4 bg-light rounded-3">
     <div class="d-flex justify-content-center">
-      <h1 class="display-5 fw-bold">찾아오시는 길</h1>
+      <h1 class="display-5 fw-bold"><spring:message code="board.load" /></h1>
     </div>
   </div>
 
@@ -17,12 +17,12 @@
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="d-flex justify-content-around">
               <div>
-                <p> <h2> 봉곡태권도</h2></p>
+                <p> <h2> <spring:message code="board.teak" /></h2></p>
                 <p>
                     <h4> - 010 . 0101 . 0101 -</h4><br>
-                    - 평일 14:00 ~ 20:00<br>
-                    - 주소 : 경북 구미시 봉곡동 391<br>
-                    - 대표 : 관장 최 정 욱  / 사업자등록번호 : 302 - 11 - 55148 <br>
+                    - <spring:message code="board.day" /><br>
+                    - <spring:message code="board.addr" /><br>
+                    - <spring:message code="board.master" />  / <spring:message code="footer.com" /> : 302 - 11 - 55148 <br>
                 </p>
             </div>
             <div>
@@ -70,7 +70,7 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 
 
-var iwContent = '<div  style="padding:5px; text-align : center;">봉곡태권도<br><a href="https://map.kakao.com/link/map/봉곡태권도,36.15078429523667, 128.3163783911749" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/봉곡태권도,36.15078429523667, 128.3163783911749" style="color:blue" target="_blank">길찾기기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div  style="padding:5px; text-align : center;"><spring:message code="board.teak" /><br><a href="https://map.kakao.com/link/map/봉곡태권도,36.15078429523667, 128.3163783911749" style="color:blue" target="_blank"><spring:message code="board.map" /></a> <a href="https://map.kakao.com/link/to/봉곡태권도,36.15078429523667, 128.3163783911749" style="color:blue" target="_blank"><spring:message code="board.findload" /></a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(36.15078429523667, 128.3163783911749); //인포윈도우 표시 위치입니다
 
 // 인포윈도우를 생성합니다

@@ -7,7 +7,7 @@
 
 <div class="p-5 mb-4 bg-light rounded-3">
     <div class="d-flex justify-content-center">
-      <h1 class="display-5 fw-bold">수련시간표</h1>
+      <h1 class="display-5 fw-bold"><spring:message code="board.schedule" /></h1>
     </div>
   </div>
 

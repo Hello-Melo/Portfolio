@@ -14,66 +14,62 @@
 	<div class="container py-2">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-			<form:form id="joinForm" method="post" modelAttribute="memberVO" class="validation-form">
-				<%-- <form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post"> --%>
+			 <form:form id="joinForm" method="post" modelAttribute="memberVO" class="validation-form"> 
+			<%-- <form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post">--%>
 					
 					<div class="col-md-6 mb-3">
-						<label for="name">이름</label> <input type="text"
-							class="form-control" id="userName" name="userName" placeholder="" value="" required>
-						<div class="invalid-feedback">이름을 입력해주세요.</div>
+						<label for="name">이름</label> 
+							<form:input path="userName" placeholder="이름을 입력해주세요" class="form-control" />
+							<form:errors path="userName" style="color:red;" />
 					</div>
 				
 					<div class="col-md-6 mb-3">
-							<label for="password">비밀번호</label> <input type="password"
-								class="form-control" id="userPw" name="userPw" placeholder="" value=""
-								required>
-							<div class="invalid-feedback">이름을 입력해주세요.</div>
+							<label for="password">비밀번호</label>
+								<form:input path="userPw" placeholder="비밀번호를 입력해주세요" class="form-control" type="password" />
+								<form:errors path="userPw" style="color:red;"/>
 					</div>
 					
 					<div class="col-md-6 mb-3">
-							<label for="password">비밀번호</label> <input type="password"
-								class="form-control" id="userPw" name="userPw" placeholder="" value=""
-								required>
-							<div class="invalid-feedback">이름을 입력해주세요.</div>
+							<label for="password">비밀번호 확인</label>
+								<form:input path="confirmPassword" placeholder="비밀번호를 확인해주세요" class="form-control" type="password"/>
+								<form:errors path="confirmPassword" style="color:red;"/>
 					</div>
 
 					<div class="mb-3">
-						<label for="email">이메일</label> <input type="email"
-							class="form-control" id="email" name="userEmail" placeholder="you@example.com"
-							required>
-						<div class="invalid-feedback">이메일을 입력해주세요.</div>
+						<label for="email">이메일</label> 
+							<form:input path="userEmail" placeholder="이메일을 입력해주세요" class="form-control"/>
+							<form:errors path="userEmail" style="color:red;"/>
 					</div>
 
 					<div class="mb-3">
-						<label for="email">연락처</label> <input type="text"
-							class="form-control" id="userPhone" name="userPhone" placeholder="000-0000-0000"
-							required>
-						<div class="invalid-feedback">연락처를 입력해주세요.</div>
+						<label for="email">연락처</label> 
+							<form:input path="userPhone" placeholder="000-0000-0000" class="form-control"/>
+							<form:errors path="userPhone" style="color:red;"/>
 					</div>
 
 					<div class="mb-3">
-						<label for="address">주소</label> <input type="text"
-							class="form-control" id="userAddr" name="userAddr" placeholder="경상북도 구미시 봉곡동"
-							required>
-						<div class="invalid-feedback">주소를 입력해주세요.</div>
+						<label for="address">주소</label>
+							<form:input path="userAddr" placeholder="경북 구미시 봉곡동" class="form-control"/>
+							<form:errors path="userAddr" style="color:red;"/>
 					</div>
 
 					<div class="mb-3">
 						<label for="address2">상세주소<span class="text-muted">&nbsp;(필수
-								아님)</span></label> <input type="text" class="form-control" id="userAddrD" name="userAddrD"
-							placeholder="상세주소를 입력해주세요.">
+								아님)</span></label>
+							 <input type="text" class="form-control" id="userAddrD" name="userAddrD"
+							placeholder="상세주소">
 					</div>
 
 					<div>
 						<label class="form-label mt-4">생년월일</label>
-						<div class="d-flex row">
-							<div class="bir_yy col-sm-4">
-								<span class="ps_box"> <input type="text"
-									class="form-control" id="birth1" placeholder="년(4자)" maxlength="4" name="birth1"
-									required>
+						<div class="row d-flex">
+							<div class="col-sm-4">
+								<span class="ps_box">
+									<form:input path="birth1" placeholder="0000" class="form-control"/>
+									<form:errors path="birth1" style="color:red;"/>
 								</span>
 							</div>
-							<div class="bir_mm col-sm-4">
+							<div class=" col-sm-4">
 								<span class="ps_box focus"> <select class="form-select"
 									id="birth2" name="birth2">
 										<option>월</option>
@@ -92,10 +88,10 @@
 								</select>
 								</span>
 							</div>
-							<div class="bir_dd col-sm-4">
-								<span class="ps_box"> <input type="text"
-									class="form-control" id="birth3" placeholder="일" maxlength="2" name="birth3"
-									required>
+							<div class="col-sm-4">
+								<span class="ps_box"> 
+									<form:input path="birth3" placeholder="00" class="form-control"/>
+									<form:errors path="birth3" style="color:red;"/>
 								</span>
 							</div>
 						</div>
@@ -111,18 +107,13 @@
 					</div>
 
 					<hr class="mb-4">
-
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="aggrement"
-							required> <label class="custom-control-label"
-							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-					</div>
+			
 					<div class="mb-4"></div>
 					<button class="btn btn-primary btn-lg btn-block" type="submit">가입
 						완료</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
-				<!-- </form> -->
-				</form:form>
+			<%--	</form>--%>
+			 </form:form> 
 			</div>
 		</div>
 		</div>
@@ -139,8 +130,6 @@
             event.preventDefault();
             event.stopPropagation();
           }
-
-          form.classList.add('was-validated');
         }, false);
       });
     }, false);

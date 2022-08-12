@@ -13,21 +13,21 @@ import sh.hoon.validation.FieldMatchValidator;
 
 
 @Documented
-@Constraint(validatedBy = {FieldMatchValidator.class})
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Constraint(validatedBy = { FieldMatchValidator.class })
+@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldMatch {
 
-		String message() default "이 필드들은 서로 부합되어야 합니다.";
-		Class<?>[] groups() default{};
-		Class<? extends Payload>[]  payload() default{};
-		String first(); //첫번째 필드
-		String second(); //두번째 필드
-	
-		@Documented
-		@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-		@Retention(RetentionPolicy.RUNTIME)
-		@interface List{
-			FieldMatch[] value();
-		}
+	String message() default "이 필드는 서로 부합되어야 함";
+	Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
+	String first(); // 첫 번째 필드
+	String second(); // 두 번째 필드
+
+	@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface List {
+		FieldMatch[] value();
+	}
 }

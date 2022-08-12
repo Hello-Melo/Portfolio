@@ -5,7 +5,7 @@
 		<!--  점보트론  -->
 		<div class="p-5 mb-4 bg-light rounded-3">
 			<div class="d-flex justify-content-center">
-				<h1 class="display-5 fw-bold">관원 게시판</h1>
+				<h1 class="display-5 fw-bold"><spring:message code="board.board" /></h1>
 			</div>
 
 		</div>
@@ -26,7 +26,7 @@
 					</select>
 					<input type="search" name="keyword" value="${pageMaker.criteria.keyword}" id="keyword">
 					<input type="hidden" name="category" value="${pageMaker.criteria.category}" id="category">
-					<button class="btn btn-secondary button"> 검색</button>
+					<button class="btn btn-secondary button"> <spring:message code="board.find" /></button>
 				</form>
 			</div>
 		</div>
@@ -37,11 +37,11 @@
 		<div class="container">
 			<table class="table">
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>등록일</th>
-					<th>수정일</th>
+					<th><spring:message code="board.bno" /></th>
+					<th><spring:message code="board.title" /></th>
+					<th><spring:message code="board.writer" /></th>
+					<th><spring:message code="board.regDate" /></th>
+					<th><spring:message code="board.view" /></th>
 				</tr>
 				<c:forEach items="${list}" var="b">
 						<tr>
@@ -57,7 +57,7 @@
 			</table>
 		
 				<form action="${contextPath}/board/register" class="d-flex justify-content-end">
-						<button class="btn btn-primary">글쓰기</button>
+						<button class="btn btn-primary"><spring:message code="board.newRegister" /></button>
 						<input type="hidden" name="category" value="${pageMaker.criteria.category}">
 						<input type="hidden" name="page" id="page" value="${pageMaker.criteria.page}">
 						<input type="hidden" name="type" id="type" value="${pageMaker.criteria.type}">

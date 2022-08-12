@@ -32,11 +32,11 @@
 
     <!-- 메인 하단 -->
     <div class="text-center mt-5 mb-5">
-        <h2>봉곡태권도</h2>
+        <h2><spring:message code="board.teak" /></h2>
         <p>아이들에게 건전한 마음과 건강한 신체를 선물하세요!</p>
        
         <button type="button" class="btn btn-dark"
-        onclick="location.href='${contextPath}/chat'">상담 신청하기</button>
+        onclick="location.href='${contextPath}/chat'"><spring:message code="board.counseling" /></button>
     
     </div>
 
@@ -46,7 +46,7 @@
                 <div class="card">
                     <img src="${contextPath}/resources/imgs/2.jpeg" class="card-img-top botLogo" alt="...">
                     <div class="card-body">
-                      <h2 class="card-text text-center"><a href="${contextPath}/table"> 수업시간표</a></h2>
+                      <h2 class="card-text text-center"><a href="${contextPath}/table"> <spring:message code="board.schedule" /></a></h2>
                     </div>
                   </div>
             </div>
@@ -55,7 +55,7 @@
                 <div class="card">
                     <img src="${contextPath}/resources/imgs/kids.jpg" class="card-img-top botLogo" alt="...">
                     <div class="card-body">
-                      <h2 class="card-text text-center"><a href="${contextPath}/list/free"> 회원게시판</a></h2>
+                      <h2 class="card-text text-center"><a href="${contextPath}/list/free"><spring:message code="board.board" /></a></h2>
                     </div>
                   </div>
             </div>
@@ -64,7 +64,7 @@
                 <div class="card">
                     <img src="${contextPath}/resources/imgs/6.jpg" class="card-img-top botLogo" alt="...">
                     <div class="card-body">
-                      <h2 class="card-text text-center"><a href="${contextPath}/map">상담 및 견학</a></h2>
+                      <h2 class="card-text text-center"><a href="${contextPath}/map"><spring:message code="board.counseling" /></a></h2>
                     </div>
                   </div>
             </div>

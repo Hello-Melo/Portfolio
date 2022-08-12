@@ -15,16 +15,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class BoardVO {
-
+	
+		
+	
 		private Long bno;
 		private String title;
 		private String contents;
 		private String writer;
-		private LocalDateTime regDate;
-		private LocalDateTime updateDate;
-		private int replyCnt;
-		private long viewCount;
+		
+		
 		private String category;
 		
+		private LocalDateTime regDate;
+		
+		private LocalDateTime updateDate;
+		
+		private int replyCnt;
+		private long viewCount;
 		private List<BoardAttachVO> attachList;
 }

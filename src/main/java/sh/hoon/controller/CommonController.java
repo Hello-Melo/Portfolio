@@ -2,8 +2,12 @@ package sh.hoon.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import sh.hoon.model.MemberVO;
 
 @Controller
 public class CommonController {
@@ -22,14 +26,9 @@ public class CommonController {
 		return "member/login";
 	}
 	
-	@GetMapping("/logout")
-	public String logout() {
-		return "member/logout";
-	}
-	
-	@GetMapping("/join")
-	public String join() {
-		return "member/join";
+	@PostMapping("/logout")
+	public String logoutForm() {
+		return "main";
 	}
 	
 }
