@@ -33,14 +33,14 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		return new Filter[] {encodingFilter};
 	}
 	
-	//파일 업로드 설정 물리주소/ 크기
+	//파일 업로드 설정 물리주소/ 크기 / 404에러 예외처리
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
     	MultipartConfigElement multipartConfigElement
     	= new MultipartConfigElement("c:\\upload", 20971520, 41943040, 20971520);
     	registration.setMultipartConfig(multipartConfigElement);
+    	registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
-	
 	
 }

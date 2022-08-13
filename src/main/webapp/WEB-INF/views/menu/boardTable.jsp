@@ -75,13 +75,15 @@
 
         <br>
         <div>
-            <div>
-                <p class="fs-5 fw-bold">태권도로 우리 아이 몸과 마음을 건강하게 키우세요!</p>
-                <p class="fs-6">사랑으로 가르치는 봉곡 태권도장 <br>
-                         아이들에게 튼튼한 신체와 건강한 정신을 가르치는 하루 한시간!</p>
+	        <div class="row">
+	            <div class="col text-center">
+	                <p class="fs-5 fw-bold">태권도로 우리 아이 몸과 마음을 건강하게 키우세요!</p>
+	                <p class="fs-6">사랑으로 가르치는 봉곡 태권도장 <br>
+	                         아이들에게 튼튼한 신체와 건강한 정신을 가르치는 하루 한시간!</p>
+	            </div>
             </div>
             <br>
-            <div class="container" >
+          <%--   <div class="container" >
                     <div class="d-flex justify-content-between">
                         <div>
                             <img src="${contextPath}/resources/imgs/empty.png" alt=""><br>
@@ -103,7 +105,7 @@
                             <p>사회성 발달</p>
                         </div> 
                     </div>
-            </div>
+            </div> --%>
         </div>
 
         <br>

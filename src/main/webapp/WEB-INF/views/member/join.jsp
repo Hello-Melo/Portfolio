@@ -6,7 +6,7 @@
 
 <div class="p-5 mb-4 bg-light rounded-3">
 	<div class="d-flex justify-content-center">
-		<h1 class="display-5 fw-bold">회원 가입</h1>
+		<h1 class="display-5 fw-bold"><spring:message code="board.join" /></h1>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@
 								<form:errors path="confirmPassword" style="color:red;"/>
 					</div>
 
-					<div class="mb-3">
+					<div class="col-md-6 mb-3">
 						<label for="email">이메일</label> 
 							<form:input path="userEmail" placeholder="이메일을 입력해주세요" class="form-control"/>
 							<form:errors path="userEmail" style="color:red;"/>

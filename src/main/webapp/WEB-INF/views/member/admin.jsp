@@ -5,7 +5,7 @@
 
 	<div class="p-5 mb-4 bg-light rounded-3">
 		<div class="d-flex justify-content-center">
-			<h1 class="display-5 fw-bold">관리자 페이지</h1>
+			<h1 class="display-5 fw-bold"><spring:message code="board.adminPage" /></h1>
 		</div>
 	</div>
 		
@@ -74,7 +74,7 @@
 							<c:if test="${b.userPass == 0}">
 								<tr>
 									<td>${b.uno}</td>
-									<td><a href="${b.uno}" class="get1">${b.userName}</a></td>
+									<td><a href="${contextPath }/sec/get?uno=${b.uno}&page=1" class="get1">${b.userName}</a></td>
 									<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 									<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
 									<td><a href="${contextPath}/member/list">관리페이지 이동</a></td>

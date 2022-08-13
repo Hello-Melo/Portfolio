@@ -5,7 +5,7 @@
 
 <div class="p-5 mb-4 bg-light rounded-3">
 	<div class="d-flex justify-content-center">
-		<h1 class="display-5 fw-bold">로 그 인</h1>
+		<h1 class="display-5 fw-bold"><spring:message code="board.login" /></h1>
 	</div>
 </div>
 

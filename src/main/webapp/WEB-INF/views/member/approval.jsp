@@ -4,7 +4,7 @@
 
 	<div class="p-5 mb-4 bg-light rounded-3">
 		<div class="d-flex justify-content-center">
-			<h1 class="display-5 fw-bold">회원 관리 게시판</h1>
+			<h1 class="display-5 fw-bold"><spring:message code="board.memberPage" /></h1>
 			<input type="hidden" name="bno2" value="${board.bno}" id="bno2">
 		</div>
 	</div>
