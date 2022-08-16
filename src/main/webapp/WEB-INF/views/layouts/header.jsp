@@ -26,8 +26,8 @@
 	<!-- <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script> -->
 	<script  src="${contextPath}/resources/ckeditor/ckeditor.js"></script>
  	<script  src="${contextPath}/resources/js/common/common.js"></script> 
-	<link rel="stylesheet"  href="${contextPath}/resources/css/style.css">
 	<link rel="stylesheet"  href="${contextPath}/resources/css/bootstrap-social.css">
+	<link rel="stylesheet"  href="${contextPath}/resources/css/style.css">
 </head>
 <body>
 

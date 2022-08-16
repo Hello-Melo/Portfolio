@@ -46,10 +46,12 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
+					
 						<c:if test="${userId eq board.writer or userStatus eq 2 or userStatus eq 3}">
 							<button class="btn btn-warning modify">수정</button>
 							<button class="btn btn-info remove">삭제</button>
 						</c:if>
+						
 							<button class="btn btn-secondary list">목록</button>
 						</div>
 						<div>

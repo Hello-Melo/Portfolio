@@ -9,10 +9,10 @@
 		</div>
 	</div>
 		
-	<div class="container d-flex justify-content-around mb-5 mt-5" style="border:1px solid red;">
+	<div class="container d-flex justify-content-around mb-5 mt-5" >
 	<!--  1st box -->
 		<div>
-			<div style="border:1px solid blue;" class="d-flex justify-content-between">
+			<div style="border:3px solid black;" class="d-flex justify-content-between">
 				<div>
 					<img src="${contextPath}/resources/imgs/admin.jpg" style="width:150px;">
 				</div>
@@ -57,9 +57,10 @@
 			</div>
 		</div><!--  1st box end -->
 		
-		<div style="border:1px solid green;"><!--  2nd box -->
+		
+		<div  style="border:3px solid black;"><!--  2nd box -->
 			<div>
-				<div style="border:1px solid yellow;">
+				<div>
 					<h4>승인 대기자 명단</h4>
 				</div>
 				<div>
@@ -85,24 +86,25 @@
 				</div>
 			</div>
 		
+		
 			<div>
-				<div style="border:1px solid brown;">
+				<div>
 					<h4>최신 작성 글</h4>
 				</div>
 				<div>
 					<table class="table boardV">
 						<tr>
 							<th>글번호</th>
-							<th>작성자</th>
-							<th>제목</th>
+							<th class="adminellipsis">작성자</th>
+							<th class="adminellipsis">제목</th>
 							<th>등록일</th>
 							<th>분류</th>
 						</tr>
 					 <c:forEach items="${list}" var="b" >
 						<tr>
 							<td>${b.bno}</td>
-							<td><a href="${contextPath }/${b.category}/get?bno=${b.bno}&page=1" class="get2">${b.title}<b>[${b.replyCnt}]</b></a></td>
-							<td>${b.writer}</td>
+							<td class="adminellipsis">${b.writer}</td>
+							<td class="adminellipsis"><a href="${contextPath }/${b.category}/get?bno=${b.bno}&page=1" class="get2 ">${b.title}<b>[${b.replyCnt}]</b></a></td>
 							<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 							<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
 							<c:if test="${b.category == 'free'}">

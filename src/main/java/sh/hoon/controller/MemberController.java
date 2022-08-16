@@ -13,8 +13,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sh.hoon.exception.NotFoundBoardException;
 import sh.hoon.model.AuthVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
@@ -63,7 +65,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/get")
-	public String findByid(Long uno, Model model) {
+	public String findByid( Long uno, Model model) {
 		MemberVO member = service.read(uno);
 		model.addAttribute("member", member);
 		return "member/get";
@@ -77,13 +79,20 @@ public class MemberController {
 	
 	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@GetMapping("/update")
-	public String updateForm() {
-		return "member/modify";
+	public ModelAndView updateForm(Long uno, Model model) {
+		MemberVO vo = service.read(uno);
+		if(vo == null) throw new NotFoundBoardException();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/modify");
+		mav.addObject("memberVO", vo);
+		
+		return mav;
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
 	@PostMapping("/update")
-	public String update(MemberVO member) {
+	public String update(@Valid MemberVO member, RedirectAttributes rtts) {
+		
 		service.modify(member);
 		return "redirect:/";
 	}

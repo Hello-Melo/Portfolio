@@ -17,10 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
@@ -41,9 +43,6 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
-	
-	@Autowired
-	private ReplyService replyService;
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
@@ -67,28 +66,37 @@ public class BoardController {
 		return "redirect:/list/" + vo.getCategory();
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
+			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@GetMapping("/modify")
-	public String modifyForm(Long bno, Model model) {
+	public ModelAndView modifyForm( Long bno, Model model) {
 		BoardVO read = service.read(bno);
 		if(read == null) throw new NotFoundBoardException();
-		model.addAttribute("board", read);
-		return "board/modify";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/modify");
+		mav.addObject("boardVO", read);
+		
+		return mav;
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
+			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@GetMapping("/modify2")
-	public String modifyForm2(Long bno, Model model) {
-		BoardVO read = service.read(bno);
-		if(read == null) throw new NotFoundBoardException();
-		model.addAttribute("board", read);
-		return "board/noticeModify";
+	public ModelAndView modifyForm2(  Long bno, Model model) {
+		BoardVO vo = service.read(bno);
+		
+		if(vo == null) throw new NotFoundBoardException();
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("/board/noticeModify");
+		mav.addObject("boardVO", vo);
+		return mav;
 	}
 	
 	@PreAuthorize("isAuthenticated() or principal.memberVO.userName == #board.writer"
 			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@PostMapping("/modify")
-	public String modify(BoardVO vo, RedirectAttributes rttr) {
+	public String modify(@Valid BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
 		System.out.println("카테고리 : "+vo.getCategory());
 		rttr.addFlashAttribute("result","modify")
@@ -98,7 +106,7 @@ public class BoardController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify2")
-	public String modify2(BoardVO vo, RedirectAttributes rttr) {
+	public String modify2(@Valid BoardVO vo, RedirectAttributes rttr) {
 		service.modify(vo);
 		System.out.println("카테고리 : "+vo.getCategory());
 		rttr.addFlashAttribute("result","modify")
@@ -111,10 +119,16 @@ public class BoardController {
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		String category = service.read(bno).getCategory();
+		int reply = service.read(bno).getReplyCnt();
 		System.out.println("카테고리는 : " + category);
 		List<BoardAttachVO> list = service.getAttachList(bno);
+		
+		if(reply == 0) {
 		deleteFiles(list);
 		service.remove(bno);
+		}else {
+			System.out.println("댓글이 존재합니다.");
+		}
 		
 		rttr.addFlashAttribute("result","remove")
 			  .addFlashAttribute("bno", bno);

@@ -16,7 +16,7 @@
 		
 				<c:forEach items="${list}" var="b">
 					<c:set var="list" value="${b.attachList}" />
-					<div class="col-md-3">
+					<div class="col-md-3" style="height:500px;">
 						<div class="card h-100">
 							<c:choose>
 								<c:when test="${list[0].fileType == 'true'}">
@@ -24,13 +24,14 @@
 										class="card-img-top" style="width: 100%; height: 238px;">
 								</c:when>
 								<c:otherwise>
-									<img src="${contextPath}/resources/img/attach.png"
+									<img src="${contextPath}/resources/img/Empty_Img.jpg"
 										class="card-img-top" style="width: 100%; height: 238px;">
 								</c:otherwise>
 							</c:choose>
-							<div class="card-body">
+							<div class="card-body ellipsis">
 								<h5 class="card-title">
-									<a href="get?bno=${b.bno}">${b.title} </a>
+									<a href="get?bno=${b.bno}">
+									${b.title} </a>
 								</h5>
 								<p class="card-text">${b.contents}</p>
 							</div>

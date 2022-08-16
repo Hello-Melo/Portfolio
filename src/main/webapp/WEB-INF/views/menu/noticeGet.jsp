@@ -5,6 +5,11 @@
 
 <script  src="${contextPath}/resources/js/board/get.js" ></script>
 
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.memberVO.userName" var="userId"/>
+		<sec:authentication property="principal.memberVO.userStatus" var="userStatus"/>
+	</sec:authorize>
+
 
 		<div class="p-5 mb-4 bg-light rounded-3">
 		    <div class="d-flex justify-content-center">
@@ -24,7 +29,7 @@
 		  </div>
 
 
-		<div class="container">
+		<div class="container mb-5 mt-3">
 			<form id="getForm">
 				<div class="card">
 					<div class="card-header">
@@ -51,9 +56,11 @@
 					</div>
 					<div class="card-footer d-flex justify-content-between">
 						<div>
-							<button class="btn btn-warning modify">수정</button>
-							<button class="btn btn-info remove">삭제</button>
-							<button class="btn btn-secondary list">목록</button>
+							<c:if test="${userId eq board.writer or userStatus eq 2 or userStatus eq 3}">
+								<button class="btn btn-warning modify">수정</button>
+								<button class="btn btn-info remove">삭제</button>
+								<button class="btn btn-secondary list">목록</button>
+							</c:if>
 						</div>
 						<div>
 							<fmt:parseDate var="regDate" value="${board.regDate}"	 pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
@@ -110,6 +117,7 @@
 			e.preventDefault();
 			getForm.append($('#bno'));
 			getForm.append($('<input/>', {type:'hidden',name:'page',value:'${board.category}'}))
+			getForm.append($('<input/>', {type:'hidden',name:'${_csrf.parameterName}',value:'${_csrf.token }'}));
 			getForm.attr("action", "${contextPath}/board/remove2");
 			getForm.attr("method", "post");
 			getForm.submit();

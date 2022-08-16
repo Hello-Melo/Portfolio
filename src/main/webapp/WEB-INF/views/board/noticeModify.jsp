@@ -6,36 +6,47 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
-let bno2 = '${board.bno}';
+let bno2 = '${boardVO.bno}';
 </script>
+
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.memberVO.userName" var="userId"/>
+		<sec:authentication property="principal.memberVO.userStatus" var="userStatus"/>
+	</sec:authorize>
 
 
 	<div class="p-5 mb-4 bg-light rounded-3">
 		<div class="d-flex justify-content-center">
 			<h1 class="display-5 fw-bold">공지사항 수정하기</h1>
-			<input type="hidden" name="bno2" value="${board.bno}" id="bno2">
+			<input type="hidden" name="bno" value="${boardVO.bno}" id="bno">
 		</div>
 	</div>
 
 	<div class="container">
-		<form action="${contextPath}/board/modify2" method="post" enctype="multipart/form-data" id="modifyForm">
-			<input type="hidden" name="category" value="${board.category}" readonly>
-			<input type="hidden" name="bno" value="${board.bno}" id="bno">
+		<%-- <form action="${contextPath}/board/modify2" method="post" enctype="multipart/form-data" id="modifyForm"> --%>
+		<form:form id="modifyForm" modelAttribute="boardVO" method="post"  action="${contextPath}/board/modify2">
+			<input type="hidden" name="category" value="${boardVO.category}" readonly>
+			<input type="hidden" name="bno" value="${boardVO.bno}" id="bno">
 			<div class="form-group">
-				<label>제목 : </label> <input type="text" class="form-control"
-					name="title" value="${board.title}">
+				<label>제목 : </label> 
+				<form:input type= "text" path ="title" class="form-control" value="${board.title}" /><br>
+				<form:errors path="title" class="error" style="color:red;"/>
 			</div>
 			<div class="form-group">
 				<label>내용 : </label>
-				<textarea rows="10" class="form-control" name="contents">${board.contents}</textarea>
+				<form:textarea  path="contents" class="form-control"  value="${contents}"/> 
+				<form:errors path="contents" class="error" style="color:red;"/>
 			</div>
 			<div class="form-group">
-				<label>작성자 : </label> <input type="text" class="form-control"	name="writer" value="${board.writer}" readonly="readonly">
+				<label>작성자 : </label> 
+				<sec:authentication property="principal.memberVO.userName" var="name" />
+				<form:input type= "text"  path ="writer" value="${name}" class="form-control"   readonly="true" />
+				<form:errors path="writer"  style="color:red;"  />
 			</div>
 			<br>
 			<button class="btn btn-primary">수정하기</button>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
-		</form>
+		</form:form>
 		
 			<!-- 등록된 파일 -->
 				<div class="row my-5">
@@ -58,10 +69,10 @@ let bno2 = '${board.bno}';
 		  		</div><!-- row end -->
 		  		
 	</div>
-
+	
 
 			<!--  ckEditor 불러오기 + 파일업로드!-->
-		<script  src="${contextPath}/resources/js/CkEditor.js" ></script> 
+		 <script  src="${contextPath}/resources/js/CkEditor.js" ></script>  
 			<!--  update Js 불러오기 -->
 		<script  src="${contextPath}/resources/js/board/update.js" ></script>
 

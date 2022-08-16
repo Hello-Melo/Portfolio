@@ -2,9 +2,12 @@ package sh.hoon.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import sh.hoon.model.BoardVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.PageMaker;
 import sh.hoon.service.BoardService;
+import sh.hoon.validation.BoardValidatior;
 
 @Controller
 @RequestMapping
@@ -79,13 +83,18 @@ public class MenuBoardController {
 	
 	
 	@GetMapping("/register2")
-	public String registerForm(Criteria criteria, Model model) {
+	public String registerForm(BoardVO vo, Criteria criteria, Model model) {
 		model.addAttribute("criteria", criteria);
 		return "board/noticeRegister";
 	}
 	
 	@PostMapping("/register2")
-	public String register(BoardVO vo, RedirectAttributes rttr) {
+	public String register(@Valid BoardVO vo, Errors errors, RedirectAttributes rttr) {
+		
+		 new BoardValidatior().validate(vo, errors);
+		  if (errors.hasErrors()) {
+			  return "/board/noticeRegister"; 
+			  }
 		
 		service.register(vo);
 		rttr.addFlashAttribute("result", "register")

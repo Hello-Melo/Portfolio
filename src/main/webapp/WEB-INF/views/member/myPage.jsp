@@ -9,10 +9,10 @@
 		</div>
 	</div>
 		
-	<div class="container d-flex justify-content-around mb-5 mt-5" style="border:1px solid red;">
+	<div class="container d-flex justify-content-around mb-5 mt-5" >
 	<!--  1st box -->
 		<div>
-			<div style="border:1px solid blue;">
+			<div >
 				<div>
 					<img src="">
 				</div>
@@ -77,9 +77,9 @@
 			</div>
 		</div><!--  1st box end -->
 		
-		<div style="border:1px solid green;"><!--  2nd box -->
+		<div><!--  2nd box -->
 			<div>
-				<div style="border:1px solid yellow;">
+				<div >
 					<h4>내가 작성한 글</h4>
 					
 				</div>
@@ -108,7 +108,7 @@
 			</div>
 		
 			<div>
-				<div style="border:1px solid brown;">
+				<div>
 					<h4>내가 작성한 댓글</h4>
 				</div>
 				<div>
