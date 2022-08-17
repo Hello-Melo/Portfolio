@@ -44,8 +44,6 @@ public class MemberVO {
 		private String userPhone; 
 		
 		
-		@NotEmpty(message = "주소를 입력하세요.")
-		@Pattern(regexp =  "^[가-힣]{2,30}$", message="주소는 한글만 입력 가능합니다.")
 		private String userAddr;
 		
 		private String userAddrD;

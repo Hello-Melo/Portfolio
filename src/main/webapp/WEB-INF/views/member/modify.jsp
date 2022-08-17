@@ -12,7 +12,8 @@
     <div class="mypage_wrap">
        <div class="profile_pic">프로필 사진</div>
       		 <button class="pic_modify">프로필 변경</button>
-   		 <form:form modelAttribute="memberVO" method="post" id="getForm">
+   		 <form:form modelAttribute="memberVO" method="post" id="getForm" action="update">
+   		 		<input type="hidden" id="userPw" name="userPw" value="${memberVO.userPw}">
 		        <div class="personal_info">
 		            <div class="title"  >개인 정보</div>
 			            <p class="name">회원번호</p>
@@ -25,9 +26,6 @@
 			            <p class="email">이메일</p>
 			           	 	<form:input path="userEmail" value="${memberVO.userEmail}" class="form-control"/>
 							<form:errors path="userEmail" style="color:red;"/>
-			           	 <p class="email">비밀번호</p>
-			         		<form:input path="userPw" value="${memberVO.userPw}" class="form-control" type="password" />
-					 		<form:errors path="userPw" style="color:red;"/>
 			            <p class="phone_num">연락처</p>
 			           	 	<form:input path="userPhone" value="${memberVO.userPhone}" class="form-control"/>
 							<form:errors path="userPhone" style="color:red;"/>
@@ -37,13 +35,13 @@
 			             <p class="adress">상세 주소</p>
 			            	<input type="text" value="${memberVO.userAddrD}"  name="userAddrD">
 		            	<p class="adress">생년월일</p>
-			            	<input type="text" value="${memberVO.userBirth}"  name="userBirth">
+			            	<input type="text" value="${memberVO.userBirth}"  name="userBirth" readonly="readonly">
 			             <p class="gender">가입일</p>
 			             	<fmt:parseDate var="regDate" value="${memberVO.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 			           	 	<input type="text" value="<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일"/>" readonly>
 			            <div class="lower_button clearfix">
 			                <div class="modify"><button>수정하기</button></div>
-			                <div class="back_to_list"><button>목록으로</button></div>
+			                <div class="back_to_list list"><button>목록으로</button></div>
 			            </div>
 		        </div>
         </form:form>
@@ -57,7 +55,7 @@ let getForm = $('#getForm');
 $('#getForm .list').on('click', function(e) {
 	e.preventDefault();
 	//해당 태그들로 
-	getForm.append($('<input/>', {type:'hidden',name:'page',value:'${param.page}'}))
+	getForm.append($('<input/>', {type:'hidden',name:'page',value:'1'}))
 			      .append($('<input/>', {type:'hidden',name:'type',value:'${param.type}'}))
 			      .append($('<input/>', {type:'hidden',name:'keyword',value:'${param.keyword}'}));
 	getForm.attr("action", "${contextPath}/member/list");

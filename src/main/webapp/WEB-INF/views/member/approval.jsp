@@ -6,8 +6,32 @@
 		<div class="d-flex justify-content-center">
 			<h1 class="display-5 fw-bold"><spring:message code="board.memberPage" /></h1>
 			<input type="hidden" name="bno2" value="${board.bno}" id="bno2">
+			  <input type="hidden" name="page" value="${pageMaker.criteria.page}" id="page">
 		</div>
 	</div>
+
+		<!--  검색창  -->
+		<div class="container d-flex justify-content-end">
+			<div class="searchArea ">
+				<form  id="searchForm">
+					<select name="type" id="type">
+						<option value="">=====</option>
+						<option value="T" ${pageMaker.criteria.type eq 'T' ? 'selected' : '' }>이름</option>
+						<option value="C" ${pageMaker.criteria.type eq 'C' ? 'selected' : '' }>내용</option>
+						<option value="W" ${pageMaker.criteria.type eq 'W' ? 'selected' : '' }>작성자</option>
+						<option value="TC" ${pageMaker.criteria.type eq 'TC' ? 'selected' : '' }>제목+내용</option>
+						<option value="TW" ${pageMaker.criteria.type eq 'TW' ? 'selected' : '' }>제목+작성자</option>
+						<option value="CW" ${pageMaker.criteria.type eq 'CW' ? 'selected' : '' }>내용+작성자</option>
+					</select>
+					<input type="search" name="keyword" value="${pageMaker.criteria.keyword}" id="keyword">
+					<input type="hidden" name="category" value="${pageMaker.criteria.category}" id="category">
+					<button class="btn btn-secondary button"> <spring:message code="board.find" /></button>
+				</form>
+			</div>
+		</div>
+	<!--  검색창  종료 -->
+
+
 
 	<div class="container">
 			<h2>게시판</h2>
@@ -103,6 +127,8 @@
 		//가입승인 버튼(누를시 관원 상태로 변경 및 가입 승인 상태 부여)
 		$('.appro').click(function(e){
 			e.preventDefault();
+			
+			if(regList() == true){
 			let Uno = $(this).data("userid");
 			let pageForm = $('<form></form>');
 			pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
@@ -110,11 +136,13 @@
 			pageForm.attr("method", "post");
 			pageForm.appendTo('body');
 			pageForm.submit();
+			}
 		})
 		
 		  // 가입거부 버튼 클릭시 요청 삭제
 		  $('.deni').click(function(e){
 				e.preventDefault();
+				if(deniList() == true){
 				let Uno = $(this).data("userid");
 				let pageForm = $('<form></form>');
 				pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
@@ -122,6 +150,7 @@
 				pageForm.attr("method", "post");
 				pageForm.appendTo('body');
 				pageForm.submit();
+				}
 		  });
 		  
 		  // 회원탈퇴 버튼 클릭시 탈퇴
@@ -129,16 +158,43 @@
 				e.preventDefault();
 				let Uno = $(this).data("userid");
 				
+				if(dropList() == true){
 				let pageForm = $('<form></form>');
 				pageForm.append($('<input/>', {type:'hidden',name:'uno',value:Uno}))
 				pageForm.attr("action", "${contextPath}/member/drop");
 				pageForm.attr("method", "post");
 				pageForm.appendTo('body');
 				pageForm.submit();
-				
+				}
 		  });
 		  		
 	})
+	
+	function regList() {
+		 if (confirm("정말 등록하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}	
+	
+	function deniList() {
+		 if (confirm("정말 거부하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}
+	
+	function dropList() {
+		 if (confirm("정말 탈퇴처리 하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}
+	
+	
 </script>							
 
 

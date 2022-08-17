@@ -28,6 +28,22 @@ $(function () {
 	showList(1);
 	
 	
+	function regList() {
+		 if (confirm("정말 등록하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}	
+	
+	function deleteList() {
+		 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}
+	
 	let bno = $('input[name="bno"]').val();
 		
 	// 모달
@@ -56,6 +72,7 @@ $(function () {
 	
 		// 댓글 등록 이벤트 처리
 		modalRegisterBtn.on('click', function(e) {
+			if(regList() == true){
 			let reply = {
 					reply : modalInputReply.val(),
 					replyer : modalInputReplyer.val(),
@@ -68,10 +85,11 @@ $(function () {
 				
 				showList(1);
 			})
+			}
 		})
 	
 	// 모달 이벤트 처리
-	$('#modalRegisterBtn').on('click', function () {
+/*	$('#modalRegisterBtn').on('click', function () {
 		let test = modalInputReply.val();
 		alert(test);
 		})
@@ -81,7 +99,7 @@ $(function () {
 		alert(test2);
 		})		
 		
-		console.log(userId)
+		console.log(userId)*/
 		// 댓글 이벤트처리
 	$('.chat').on('click','li', function(e) {
 			let rno = $(this).data('rno');
@@ -118,12 +136,14 @@ $(function () {
 	//댓글 삭제
 	
 	modalRemoveBtn.on("click", function(e) {
+		if(deleteList() == true){
 		let rno = modal.data("rno");
 		replyService.remove(rno, function(result) {
 			alert(result);
 			modal.modal("hide");
 			showList(1);
 		})
+		}
 	})
 	
 	

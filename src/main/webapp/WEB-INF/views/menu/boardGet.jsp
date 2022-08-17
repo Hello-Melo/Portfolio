@@ -166,12 +166,16 @@
 		//해당 글의 삭제 버튼
 		$('#getForm .remove').on('click', function(e) {
 			e.preventDefault();
+			
+			if(deleteList() == true){
 			getForm.append($('#bno'));
 			getForm.append($('<input/>', {type:'hidden',name:'page',value:'${board.category}'}));
 			getForm.append($('<input/>', {type:'hidden',name:'${_csrf.parameterName}',value:'${_csrf.token }'}));
 			getForm.attr("action", "${contextPath}/board/remove");
 			getForm.attr("method", "post");
 			getForm.submit();
+			}
+			
 		})
 		
 		//댓글 불러오기
@@ -185,8 +189,16 @@
 		});
 	})
 	
-
+	function deleteList() {
+		 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}	
+	
 </script>
+
 
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

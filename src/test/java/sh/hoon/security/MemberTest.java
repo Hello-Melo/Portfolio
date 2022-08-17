@@ -29,6 +29,7 @@ public class MemberTest extends AppTest{
 	PasswordEncoder encoder;
 
 	@Test
+	@Ignore
 	public void test() {
 		String str = "1234";
 		String str2 = encoder.encode(str);

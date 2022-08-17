@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-
+<link rel="stylesheet"  href="${contextPath}/resources/css/mypage.css">
 
 
 <div class="p-5 mb-4 bg-light rounded-3">
@@ -17,6 +17,7 @@
 			 <form:form id="joinForm" method="post" modelAttribute="memberVO" class="validation-form"> 
 			<%-- <form class="validation-form" novalidate id="joinForm" action="${contextPath}/member/register" method="post">--%>
 					
+				
 					<div class="col-md-6 mb-3">
 						<label for="name">이름</label> 
 							<form:input path="userName" placeholder="이름을 입력해주세요" class="form-control" />
@@ -40,7 +41,8 @@
 							<form:input path="userEmail" placeholder="이메일을 입력해주세요" class="form-control"/>
 							<form:errors path="userEmail" style="color:red;"/>
 					</div>
-
+					
+					
 					<div class="mb-3">
 						<label for="email">연락처</label> 
 							<form:input path="userPhone" placeholder="000-0000-0000" class="form-control"/>

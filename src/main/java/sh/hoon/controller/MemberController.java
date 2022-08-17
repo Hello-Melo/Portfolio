@@ -89,12 +89,13 @@ public class MemberController {
 		return mav;
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+	
 	@PostMapping("/update")
-	public String update(@Valid MemberVO member, RedirectAttributes rtts) {
-		
+	public String update(MemberVO member, Long uno, RedirectAttributes rtts) {
+		MemberVO read = service.read(uno);
+		System.out.println(read);
 		service.modify(member);
-		return "redirect:/";
+		return "redirect:/member/list";
 	}
 	
 	@Transactional

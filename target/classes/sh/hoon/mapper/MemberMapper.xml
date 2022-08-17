@@ -106,7 +106,10 @@
 
 
 	<select id="getList" resultType="sh.hoon.model.MemberVO">
-		select * from member_tbl order by uno desc
+		select * from
+		member_tbl
+		order by uno desc
+		limit #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="get" resultType="sh.hoon.model.MemberVO">

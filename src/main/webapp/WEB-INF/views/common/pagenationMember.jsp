@@ -48,7 +48,7 @@ $(function(){
 		//pageNumTag.val($(this).attr("href"));
 
 		//폼태그 안에 액션은 list!
-		pageForm.attr('action','${contextPath}/member/list/')
+		pageForm.attr('action','${contextPath}/member/list')
 		//기본은 get이지만 선언해줌으로써 코드 꼬임 방지
 						.attr('method','get');
 		pageForm.appendTo('body');

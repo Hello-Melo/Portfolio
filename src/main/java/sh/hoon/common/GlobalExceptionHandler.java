@@ -35,11 +35,10 @@ public class GlobalExceptionHandler {
 	}
 	
 	//500에러
-	@ExceptionHandler(Exception.class)
-	public String excption() {
-		System.out.println("NotFoundBoardException 에러 발생");
-		return "errors/error";
-	}
+	/*
+	 * @ExceptionHandler(Exception.class) public String excption() {
+	 * System.out.println("500 에러 발생"); return "errors/error"; }
+	 */
 	
 	
 	//404에러

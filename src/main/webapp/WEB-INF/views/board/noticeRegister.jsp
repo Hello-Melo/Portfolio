@@ -89,14 +89,27 @@
 					getForm.submit();
 				})
 				
-				//해당 글의 수정 버튼
+				//글 등록 버튼
 		$('#registerForm .submit').on('click', function(e) {
 			e.preventDefault();
+			
+			if(regList() == true){
 			getForm.attr("action", "${contextPath}/register2");
 			getForm.attr("method", "post");
 			getForm.submit();
+			}
 		})
 	})
+	
+	
+	
+		function regList() {
+		 if (confirm("정말 등록하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}	
 	</script>
 		
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
