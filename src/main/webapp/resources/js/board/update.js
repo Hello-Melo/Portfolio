@@ -36,21 +36,32 @@ $(function() {
 				})
 			}) //change event end			
 			
+			function updateList() {
+				 if (confirm("정말 수정 하시겠습니까??") == true){    //확인
+				     return true;
+				 }else{   //취소
+				     return false;
+				 }
+			}
+			
+			
 			
 			let modifyForm =$('#modifyForm');
 			let modifyBtn = $('#modifyForm button');
 			modifyBtn.on('click', function (e) {
 				e.preventDefault();
 				//console.log('멈춰!');
-				let str = "";
-				$('.uploadResult ul li').each(function(i, obj) {
-					let jobj = $(obj);
-					str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
-					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
-				})
-				modifyForm.append(str).submit();
+				if(updateList() == true){
+					let str = "";
+					$('.uploadResult ul li').each(function(i, obj) {
+						let jobj = $(obj);
+						str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>";
+						str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>";
+						str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
+						str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
+					})
+						modifyForm.append(str).submit();
+				}
 			})
 			
 		})

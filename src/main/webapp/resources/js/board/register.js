@@ -5,9 +5,17 @@ $(document).ready(function() {
 	let form = $('#registerForm');
 	let submitBtn = $('#registerForm button');
 	
+		function regList() {
+				 if (confirm("정말 등록 하시겠습니까??") == true){    //확인
+				     return true;
+				 }else{   //취소
+				     return false;
+				 }
+			}
 	
 	submitBtn.on("click", function(e){
-		let str ='';
+				if(regList() == true){
+				let str ='';
 				$('.uploadResult ul li').each(function (i, obj) {
 					let jobj = $(obj);
 					console.log(jobj.data('filename'));
@@ -17,6 +25,7 @@ $(document).ready(function() {
 					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
 				});
 				form.append(str).submit();
+			}
 	})
 	
 	//삭제 

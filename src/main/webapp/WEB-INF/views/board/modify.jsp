@@ -17,14 +17,15 @@ let bno2 = '${boardVO.bno}';
 	<div class="p-5 mb-4 bg-light rounded-3">
 		<div class="d-flex justify-content-center">
 			<h1 class="display-5 fw-bold">글 수정하기</h1>
-			<input type="hidden" name="bno2" value="${board.bno}" id="bno2">
+			<input type="hidden" name="bno2" value="${boardVO.bno}" id="bno2">
 		</div>
 	</div>
 
 	<div class="container">
-		<form:form id="modifyForm" modelAttribute="boardVO" method="post" enctype="multipart/form-data" action="/modify">
-			<input type="hidden" name="category" value="${board.category}" readonly>
-			<input type="hidden" name="bno" value="${board.bno}" id="bno">
+		<form:form id="modifyForm" modelAttribute="boardVO" method="post" enctype="multipart/form-data"
+			action="${contextPath}/board/modify">
+			<input type="hidden" name="category" value="${boardVO.category}" readonly>
+			<input type="hidden" name="bno" value="${boardVO.bno}" id="bno">
 			<div class="form-group">
 				<label>제목 : </label>
 				<form:input type= "text" path ="title" class="form-control" value="${board.title}" /><br>

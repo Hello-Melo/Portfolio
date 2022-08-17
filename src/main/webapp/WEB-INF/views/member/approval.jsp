@@ -16,12 +16,8 @@
 				<form  id="searchForm">
 					<select name="type" id="type">
 						<option value="">=====</option>
-						<option value="T" ${pageMaker.criteria.type eq 'T' ? 'selected' : '' }>이름</option>
-						<option value="C" ${pageMaker.criteria.type eq 'C' ? 'selected' : '' }>내용</option>
-						<option value="W" ${pageMaker.criteria.type eq 'W' ? 'selected' : '' }>작성자</option>
-						<option value="TC" ${pageMaker.criteria.type eq 'TC' ? 'selected' : '' }>제목+내용</option>
-						<option value="TW" ${pageMaker.criteria.type eq 'TW' ? 'selected' : '' }>제목+작성자</option>
-						<option value="CW" ${pageMaker.criteria.type eq 'CW' ? 'selected' : '' }>내용+작성자</option>
+						<option value="N" ${pageMaker.criteria.type eq 'N' ? 'selected' : '' }>이름</option>
+						<option value="E" ${pageMaker.criteria.type eq 'E' ? 'selected' : '' }>이메일</option>
 					</select>
 					<input type="search" name="keyword" value="${pageMaker.criteria.keyword}" id="keyword">
 					<input type="hidden" name="category" value="${pageMaker.criteria.category}" id="category">
@@ -101,6 +97,9 @@
 	
 		<!-- 모달 -->
 		<%@ include file="/WEB-INF/views/common/modalMember.jsp" %>
+		
+		<!-- 모달 -->
+		<%@ include file="/WEB-INF/views/common/modal.jsp" %>
 
 <script>
 	console.log(obj);
@@ -167,7 +166,34 @@
 				pageForm.submit();
 				}
 		  });
-		  		
+		  
+		  $('#searchForm .button').on('click', function(e) {
+				e.preventDefault();
+				// 각각 아이디로 지역 변수 선언
+				let option = $('#type').val();
+				let keyword = $('#keyword').val();
+				
+				// if문(return 반드시 설정), 그리고 필드 객체로 선언한 obj의 항목들입력
+				// 그리고 마지막에 play 함수로 입력한 값들을 모달창에 주입!!!!
+				if(option==""){
+					obj.titleName = "경고";
+					obj.message = "검색조건을 입력하세요.";
+					play()
+					return;
+				};
+				//검색조건이 잇어도, 검색창에 값이 없으면 뜨는 코드!
+				if(keyword.trim()==""){
+					obj.titleName = "경고";
+					obj.message = "검색어를 입력하세요.";
+					play()
+					return;
+				};
+				//if문이 둘다 false일때 그냥 검색 실행되는 코드!
+				$('#searchForm').attr('action','${contextPath}/member/list/${pageMaker.criteria.category}')
+				$('#searchForm').submit();
+			});
+		  
+		  
 	})
 	
 	function regList() {
@@ -193,6 +219,9 @@
 		     return false;
 		 }
 	}
+	
+	
+	
 	
 	
 </script>							

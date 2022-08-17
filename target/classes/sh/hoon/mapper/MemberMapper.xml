@@ -108,6 +108,7 @@
 	<select id="getList" resultType="sh.hoon.model.MemberVO">
 		select * from
 		member_tbl
+		<include refid="search" />
 		order by uno desc
 		limit #{pageStart}, #{perPageNum}
 	</select>

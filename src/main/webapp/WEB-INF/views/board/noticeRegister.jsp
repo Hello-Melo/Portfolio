@@ -102,7 +102,6 @@
 	})
 	
 	
-	
 		function regList() {
 		 if (confirm("정말 등록하시겠습니까??") == true){    //확인
 		     return true;
