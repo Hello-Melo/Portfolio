@@ -24,6 +24,9 @@ $(document).ready(function() {
 					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>";
 					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>";
 				});
+				
+				form.attr("action", contextPath + "/board/register");
+				form.attr("method", "post");
 				form.append(str).submit();
 			}
 	})

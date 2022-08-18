@@ -11,6 +11,7 @@
 	<div class="p-5 mb-4 bg-light rounded-3">
 		<div class="d-flex justify-content-center">
 			<h1 class="display-5 fw-bold">회원 정보</h1>
+			<input type="hidden" name="uno" value="${member.uno}" id="uno"> 
 		</div>
 	</div>
 
@@ -39,7 +40,6 @@
 			            <div class="lower_button clearfix">
 				                <div class="modify modi"><button>수정하기</button></div>
 				                <div class=" list"><button>목록으로</button></div>
-				                <input type="hidden" name="uno" value="${member.uno}" id="uno"> 
 			            </div>
 	                </form>
         </div>
@@ -49,7 +49,7 @@
 <script>
 
 let getForm = $('#getForm');
-
+let uno = '${member.uno}';
 //목록으로 돌어가기 버튼
 $('#getForm .list').on('click', function(e) {
 	e.preventDefault();

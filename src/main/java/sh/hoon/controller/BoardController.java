@@ -70,7 +70,7 @@ public class BoardController {
 			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@GetMapping("/modify")
 	public ModelAndView modifyForm( Long bno, Model model) {
-		BoardVO read = service.read(bno);
+		BoardVO read = service.read(bno, false);
 		if(read == null) throw new NotFoundBoardException();
 		
 		ModelAndView mav = new ModelAndView();
@@ -84,7 +84,7 @@ public class BoardController {
 			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@GetMapping("/modify2")
 	public ModelAndView modifyForm2(  Long bno, Model model) {
-		BoardVO vo = service.read(bno);
+		BoardVO vo = service.read(bno, false);
 		
 		if(vo == null) throw new NotFoundBoardException();
 		ModelAndView mav = new ModelAndView(); 
@@ -118,8 +118,8 @@ public class BoardController {
 			+ " or principal.memberVO.userStatus == 2 or principal.memberVO.userStatus == 3")
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
-		String category = service.read(bno).getCategory();
-		int reply = service.read(bno).getReplyCnt();
+		String category = service.read(bno, false).getCategory();
+		int reply = service.read(bno, false).getReplyCnt();
 		System.out.println("카테고리는 : " + category);
 		List<BoardAttachVO> list = service.getAttachList(bno);
 		
@@ -138,7 +138,7 @@ public class BoardController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove2")
 	public String remove2(Long bno, RedirectAttributes rttr) {
-		String category = service.read(bno).getCategory();
+		String category = service.read(bno, false).getCategory();
 		System.out.println("카테고리는 : " + category);
 		List<BoardAttachVO> list = service.getAttachList(bno);
 		deleteFiles(list);

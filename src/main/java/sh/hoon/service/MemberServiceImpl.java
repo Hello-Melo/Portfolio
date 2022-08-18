@@ -88,4 +88,14 @@ public class MemberServiceImpl implements MemberService {
 		mapper.updateAuth(authVO);
 	}
 
+	@Override
+	public List<MemberVO> newRead(Criteria criteria) {
+		return mapper.newList(criteria);
+	}
+
+	@Override
+	public int selectByEmail(String userEmail) {
+		return mapper.selectByEmail(userEmail);
+	}
+
 }

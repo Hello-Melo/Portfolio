@@ -5,12 +5,16 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +25,7 @@ import sh.hoon.model.AuthVO;
 import sh.hoon.model.Criteria;
 import sh.hoon.model.MemberVO;
 import sh.hoon.model.PageMaker;
+import sh.hoon.model.ReplyVo;
 import sh.hoon.service.MemberService;
 
 
@@ -137,5 +142,12 @@ public class MemberController {
 		  	   .addFlashAttribute("uno", uno);
 		return "redirect:/member/list";
 	}
+	
+	
+	@GetMapping(value = "/selectByEmail", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Integer> get(String userEmail){
+		return new ResponseEntity<Integer>(service.selectByEmail(userEmail), HttpStatus.OK);
+	}
+	
 	
 }

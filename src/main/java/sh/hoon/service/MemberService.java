@@ -10,11 +10,14 @@ import sh.hoon.model.MemberVO;
 public interface MemberService {
 
 	List<MemberVO> readAll(Criteria criteria);
+	List<MemberVO> newRead(Criteria criteria);
 	MemberVO read(Long uno);
 	void register(MemberVO vo);
 	void modify(MemberVO vo);
 	void remove(Long uno);
 	
+	
+	int selectByEmail(String userEmail);
 	int totalCount(Criteria criteria);
 	
 	MemberVO findByEmail(String email);

@@ -11,6 +11,8 @@ import sh.hoon.model.ReplyVo;
 public interface MemberMapper {
 
 	List<MemberVO> getList(Criteria criteria);
+	List<MemberVO> newList(Criteria criteria);
+	
 	MemberVO get(Long uno);
 	void insert(MemberVO vo);
 	void update(MemberVO vo);
@@ -19,6 +21,7 @@ public interface MemberMapper {
 	int totalCount(Criteria criteria);
 	
 	MemberVO findByEmail(String email);
+	int selectByEmail(String userEmail);
 	
 	MemberVO read(Long uno);
 	

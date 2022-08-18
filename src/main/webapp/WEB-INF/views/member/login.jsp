@@ -24,21 +24,19 @@
 					</button>
 				</span>
 				<div class="d-flex justify-content-between">
-				<span><input type="checkbox" name="remember-me">E-Mail 기억하기<a href="#" id="forgot_pswd">비밀번호 찾기</a></span>
+				<span><input type="checkbox" name="remember-me">E-Mail 기억하기</span><br>
 				</div>
 				<hr>
 				<!-- <p>Don't have an account!</p>  -->
+				<div>
+					<c:if test="${not empty errorMessage}">
+							<p> Your login attempt was not successful due to <br></p>
+						<p style="color:red;">	${ errorMessage}</p>
+					</c:if>
+				</div>
 			</form>
 		
-			<form action="/reset/password/" class="form-reset">
-				<input type="email" id="resetEmail" class="form-control"
-					placeholder="Email address" required="" autofocus="">
-				<button class="btn btn-primary btn-block" type="submit">Reset
-					Password</button>
-				<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i>
-					Back</a>
-			</form>
-
+		
 			<br>
 		
 		</div>

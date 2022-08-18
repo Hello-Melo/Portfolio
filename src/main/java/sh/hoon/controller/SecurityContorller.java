@@ -41,7 +41,7 @@ public class SecurityContorller {
 	@PreAuthorize("hasRole( 'ROLE_ADMIN')")
 	@GetMapping("/sec/admin")
 	public String adminPage(@AuthenticationPrincipal HoonUser myUser ,Criteria criteria, Model model) {
-		List<MemberVO> memeber = service.readAll(criteria);
+		List<MemberVO> memeber = service.newRead(criteria);
 		List<BoardVO> list = boardService.newList(criteria);
 		MemberVO vo = myUser.getMemberVO();
 		
@@ -59,7 +59,7 @@ public class SecurityContorller {
 	public String myPage(@PathVariable Long uno,
 			@AuthenticationPrincipal HoonUser myUser, Model model) {
 		//pathvariable 어노테이션은 해당 파라미터를 경로로 사용 할 수 있게 해준다.
-		
+		MemberVO memberVO = service.read(uno);
 		MemberVO info = service.getInfo(uno);
 		MemberVO vo = myUser.getMemberVO();
 		List<ReplyVo> replyVo = replyService.getReply(vo.getUserName());
@@ -67,6 +67,7 @@ public class SecurityContorller {
 			//예외 발생
 			throw new NotMatchUserIdException();
 		}
+		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("member", vo);
 		model.addAttribute("info", info);
 		model.addAttribute("replyVo", replyVo);

@@ -41,7 +41,13 @@
 			           	 	<input type="text" value="<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일"/>" readonly>
 			            <div class="lower_button clearfix">
 			                <div class="modify"><button>수정하기</button></div>
-			                <div class="back_to_list list"><button>목록으로</button></div>
+	           				<sec:authorize access="hasRole('ROLE_ADMIN')">			
+			              	  <div class="back_to_list list"><button>목록으로</button></div>
+        	             	</sec:authorize>
+        	             	<sec:authorize access="hasRole('ROLE_MEMBER')">			
+			              	  <div class="back_to_list main"><button>목록으로</button></div>
+        	             	</sec:authorize>
+        	             	
 			            </div>
 		        </div>
         </form:form>
@@ -71,6 +77,17 @@ $('#getForm .list').on('click', function(e) {
 	}
 	getForm.submit();
 })
+
+//목록으로 돌어가기 버튼
+$('#getForm .main').on('click', function(e) {
+	e.preventDefault();
+	//해당 태그들로 
+	getForm.attr("action", "${contextPath}/");
+	getForm.attr("method", "get");
+	getForm.submit();
+})
+
+
 
 //해당 글의 수정 버튼
 $('#getForm .modify').on('click', function(e) {

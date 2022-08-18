@@ -8,7 +8,7 @@
 			<h1 class="display-5 fw-bold"><spring:message code="board.adminPage" /></h1>
 		</div>
 	</div>
-		
+
 	<div class="container d-flex justify-content-around mb-5 mt-5" >
 	<!--  1st box -->
 		<div>

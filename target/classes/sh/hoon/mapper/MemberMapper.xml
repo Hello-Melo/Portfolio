@@ -2,103 +2,109 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sh.hoon.mapper.MemberMapper">
 
-		<sql id="search">
-				<where>
-					<trim prefixOverrides="OR">
-						<foreach collection="typeCollection">
-							<trim prefix="OR">
-								<choose>
-									<when test="type == 'N'.toString()">
-										userName like concat('%', #{keyword}, '%')
-									</when>
-									<when test="type == 'E'.toString()">
-										email like concat('%', #{keyword}, '%')
-									</when>
-								</choose>
-							</trim>
-						</foreach>
+	<sql id="search">
+		<where>
+			<trim prefixOverrides="OR">
+				<foreach collection="typeCollection">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'N'.toString()">
+								userName like concat('%', #{keyword}, '%')
+							</when>
+							<when test="type == 'E'.toString()">
+								email like concat('%', #{keyword}, '%')
+							</when>
+						</choose>
 					</trim>
-				</where>
-			</sql>
-		
-		<resultMap type="sh.hoon.model.MemberVO" id="memberMap">
-				<id property="uno" column="uno" />
-				 <!--  property 는 자바 파라미터, column은 sql 파라미터 -->
-				 <result property="uno" column="uno" />
-				<result property="userEmail" column="userEmail" />
-				<result property="userName" column="userName" />
-				<result property="userPw" column="userPw" />
-				<result property="userPhone" column="userPhone" />
-				<result property="userAddr" column="userAddr" />
-				<result property="userAddrD" column="userAddrD" />
-				<result property="userBirth" column="userBirth" />
-				<result property="userGender" column="userGender" />
-				<result property="userStatus" column="userStatus" />
-				<result property="userPass" column="userPass" />
-				<result property="regDate" column="regDate" />
-				<result property="updateDate" column="updateDate" />
-				<collection property="authList" resultMap="authMap" />
-		</resultMap>
-		
-		<resultMap type="sh.hoon.model.AuthVO" id="authMap">
-				<result property="uno" column="uno" />
-				<result property="auth" column="auth" />
-		</resultMap>
-		
-		<select id="read" resultMap="memberMap">
-			select * from member_tbl M
-			inner join member_auth A
-			on M.uno = A.uno
-			where M.uno = #{uno};
-		</select>
-		
-		<select id="findByEmail" resultMap="memberMap">
-			select * from member_tbl M
-			inner join member_auth A
-			on M.uno = A.uno
-			where M.userEmail = #{userEmail};
-		</select>
-		
-			<resultMap type="sh.hoon.model.MemberVO" id="userInfo">
-				<id property="uno" column="uno" />
-				 <!--  property 는 자바 파라미터, column은 sql 파라미터 -->
-				 <result property="uno" column="uno" />
-				<result property="userEmail" column="userEmail" />
-				<result property="userName" column="userName" />
-				<result property="userPw" column="userPw" />
-				<result property="userPhone" column="userPhone" />
-				<result property="userAddr" column="userAddr" />
-				<result property="userAddrD" column="userAddrD" />
-				<result property="userBirth" column="userBirth" />
-				<result property="userGender" column="userGender" />
-				<result property="userStatus" column="userStatus" />
-				<result property="userPass" column="userPass" />
-				<result property="regDate" column="regDate" />
-				<result property="updateDate" column="updateDate" />
-				<collection property="userBoardList" resultMap="boardMap" />
-				
-		</resultMap>
-		
-		
-			 <resultMap type="sh.hoon.model.BoardVO" id="boardMap">
-				 	<result property="bno" column="bno" />
-				 	<result property="title" column="title" />
-				 	<result property="contents" column="contents" />
-				 	<result property="writer" column="writer" />
-				 	<result property="regDate" column="regDate" />
-				 	<result property="updateDate" column="updateDate" />
-				 	<result property="replyCnt" column="replyCnt" />
-		  </resultMap>
-		  
-	
-		<select id="getInfo" resultMap="userInfo">
-			select * from member_tbl M
-			inner join board_tbl B
-			on M.userName = B.writer
-			where M.uno = #{uno};
-		</select>
-		
-		
+				</foreach>
+			</trim>
+		</where>
+	</sql>
+
+	<resultMap type="sh.hoon.model.MemberVO" id="memberMap">
+		<id property="uno" column="uno" />
+		<!-- property 는 자바 파라미터, column은 sql 파라미터 -->
+		<result property="uno" column="uno" />
+		<result property="userEmail" column="userEmail" />
+		<result property="userName" column="userName" />
+		<result property="userPw" column="userPw" />
+		<result property="userPhone" column="userPhone" />
+		<result property="userAddr" column="userAddr" />
+		<result property="userAddrD" column="userAddrD" />
+		<result property="userBirth" column="userBirth" />
+		<result property="userGender" column="userGender" />
+		<result property="userStatus" column="userStatus" />
+		<result property="userPass" column="userPass" />
+		<result property="regDate" column="regDate" />
+		<result property="updateDate" column="updateDate" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap>
+
+	<resultMap type="sh.hoon.model.AuthVO" id="authMap">
+		<result property="uno" column="uno" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+		select * from member_tbl M
+		inner join member_auth A
+		on M.uno = A.uno
+		where M.uno = #{uno};
+	</select>
+
+	<select id="findByEmail" resultMap="memberMap">
+		select * from member_tbl M
+		inner join member_auth A
+		on M.uno = A.uno
+		where M.userEmail = #{userEmail};
+	</select>
+
+	<resultMap type="sh.hoon.model.MemberVO" id="userInfo">
+		<id property="uno" column="uno" />
+		<!-- property 는 자바 파라미터, column은 sql 파라미터 -->
+		<result property="uno" column="uno" />
+		<result property="userEmail" column="userEmail" />
+		<result property="userName" column="userName" />
+		<result property="userPw" column="userPw" />
+		<result property="userPhone" column="userPhone" />
+		<result property="userAddr" column="userAddr" />
+		<result property="userAddrD" column="userAddrD" />
+		<result property="userBirth" column="userBirth" />
+		<result property="userGender" column="userGender" />
+		<result property="userStatus" column="userStatus" />
+		<result property="userPass" column="userPass" />
+		<result property="regDate" column="regDate" />
+		<result property="updateDate" column="updateDate" />
+		<collection property="userBoardList" resultMap="boardMap" />
+
+	</resultMap>
+
+
+	<resultMap type="sh.hoon.model.BoardVO" id="boardMap">
+		<result property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="writer" column="writer" />
+		<result property="regDate" column="regDate" />
+		<result property="updateDate" column="updateDate" />
+		<result property="replyCnt" column="replyCnt" />
+	</resultMap>
+
+
+	<select id="getInfo" resultMap="userInfo">
+		select * from member_tbl M
+		inner join board_tbl B
+		on M.userName = B.writer
+		where M.uno = #{uno};
+	</select>
+
+	<select id="selectByEmail" resultType="Integer">
+		select count(*) from
+		member_tbl where
+		userEmail = #{userEmail}
+	</select>
+
+
 	<select id="totalCount" resultType="Integer">
 		select count(*) from member_tbl
 		<include refid="search" />
@@ -112,17 +118,31 @@
 		order by uno desc
 		limit #{pageStart}, #{perPageNum}
 	</select>
-	
+
+	<select id="newList" resultType="sh.hoon.model.MemberVO">
+		select * from
+		member_tbl
+		<include refid="search" />
+		order by regDate desc
+		limit 0, 5;
+	</select>
+
+
 	<select id="get" resultType="sh.hoon.model.MemberVO">
-		select * from member_tbl where uno = #{uno}
+		select * from member_tbl where uno =
+		#{uno}
 	</select>
 
 	<insert id="insert">
-		<selectKey keyProperty="uno" resultType="java.lang.Long" order="AFTER"> 
+		<selectKey keyProperty="uno" resultType="java.lang.Long"
+			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into member_tbl(userEmail, userName, userPw, userPhone, userAddr, userAddrD, userBirth, userGender)
-		value(#{userEmail}, #{userName}, #{userPw}, #{userPhone}, #{userAddr}, #{userAddrD}, #{userBirth}, #{userGender})
+		insert into member_tbl(userEmail, userName, userPw, userPhone,
+		userAddr, userAddrD, userBirth, userGender)
+		value(#{userEmail},
+		#{userName}, #{userPw}, #{userPhone}, #{userAddr}, #{userAddrD},
+		#{userBirth}, #{userGender})
 	</insert>
 
 	<update id="update">
@@ -133,7 +153,8 @@
 		userPhone = #{userPhone},
 		userAddr = #{userAddr},
 		userAddrD = #{userAddrD},
-		userBirth = #{userBirth},
+		userBirth =
+		#{userBirth},
 		userGender = #{userGender}
 		where uno = #{uno}
 	</update>
@@ -143,23 +164,25 @@
 	</delete>
 
 	<update id="updateApprove">
-		update member_tbl set userPass=1 , userStatus = 1 where uno = #{uno};
+		update member_tbl set userPass=1 , userStatus = 1
+		where uno = #{uno};
 	</update>
 
 	<update id="updateDeni">
-		update member_tbl set userPass=2  where uno = #{uno};
+		update member_tbl set userPass=2 where uno = #{uno};
 	</update>
 
 	<update id="updateDrop">
-		update member_tbl set userPass=3  where uno = #{uno};
+		update member_tbl set userPass=3 where uno = #{uno};
 	</update>
-	
+
 	<insert id="insertAuth">
-		insert into member_auth(uno, auth) values(#{uno}, 'ROLE_MEMBER');
+		insert into member_auth(uno, auth) values(#{uno},
+		'ROLE_MEMBER');
 	</insert>
-	
+
 	<update id="updateAuth">
 		update member_auth set auth="" where uno = ${uno};
 	</update>
-	
+
 </mapper>

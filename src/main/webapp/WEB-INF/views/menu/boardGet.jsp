@@ -15,7 +15,7 @@
 
 		<div class="p-5 mb-4 bg-light rounded-3">
 		    <div class="d-flex justify-content-center">
-		      <h1 class="display-5 fw-bold">관원 게시판</h1>
+		      <h1 class="display-5 fw-bold"><spring:message code="board.board" /></h1>
 			      
 						<input type="hidden" name="page" id="page" value="${param.page}">
 						<input type="hidden" name="type" id="type" value="${param.type}">
@@ -36,7 +36,8 @@
 					<div class="card-header">
 						<div class="row">
 							<div class="col-sm-1">${board.bno}</div>
-							<div class="col-sm-11">${board.title}</div>
+							<div class="col-sm-10">${board.title}</div>
+							<div class="col-sm-1">${board.writer }</div>
 						</div>
 					</div>
 					<div class="card-body">

@@ -2,12 +2,15 @@ package sh.hoon.security;
 
 import java.io.IOException;
 
+import javax.security.auth.login.CredentialExpiredException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -52,6 +55,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		//메시지 출력은 instaceof(타입이 맞냐 아니냐 체크_
 		if(exception instanceof BadCredentialsException) {
 			errormsg = "비밀번호가 일치하지 않습니다";
+		}else if(exception instanceof InternalAuthenticationServiceException) {
+			errormsg = "아이디나 비밀번호가 일치하지 않습니다";
+		}else if(exception instanceof DisabledException) {
+			errormsg = "계정이 비활성화 되었습니다.";
 		}
 		
 		// jsp 처럼 setattribute를 통해 앞은 jsp로 던져줄 표현식 파라미터, 뒤는 뒤에서설정한 이름들

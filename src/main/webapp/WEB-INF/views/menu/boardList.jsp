@@ -50,8 +50,7 @@
 							<td>${b.writer}</td>
 							<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 							<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
-							<td><fmt:parseDate var="updateDate" value="${b.updateDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
-							 <fmt:formatDate value="${updateDate}" pattern="yyyy년 MM월 dd일" /></td>
+							<td>${b.viewCount}</td>
 						</tr>
 				</c:forEach>
 			</table>

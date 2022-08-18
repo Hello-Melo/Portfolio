@@ -74,7 +74,7 @@
 	              <sec:authorize access="hasRole('ROLE_ADMIN')">
 		          <form class="d-flex logoutForm">
 		            <a href="${contextPath}/sec/admin"><spring:message code="board.adminPage" /></a> <span>|</span> 
-		            <a class="logout"><spring:message code="board.logout" /></a>
+		            <a class="logout" ><spring:message code="board.logout" /></a>
 		          </form>
 	           </sec:authorize>
         </div>
@@ -87,13 +87,25 @@
 
 	$('.logoutForm .logout').on('click', function (e) {
 		e.preventDefault();	
+		
+		if(checkList() == true){
 		let pageForm = $('<form></form>')
 		pageForm.append($('<input/>', {type:'hidden',name:'${_csrf.parameterName}',value:'${_csrf.token }'}));
 		pageForm.attr('action', '${contextPath}/logout');
 		pageForm.attr('method', 'post');
 		pageForm.appendTo('body');
 		pageForm.submit();
+		}
 	})
 
+
+	
+		function checkList() {
+		 if (confirm("정말 로그아웃 하시겠습니까??") == true){    //확인
+		     return true;
+		 }else{   //취소
+		     return false;
+		 }
+	}	
 </script>
 

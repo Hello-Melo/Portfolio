@@ -8,7 +8,8 @@
 			<h1 class="display-5 fw-bold"><spring:message code="board.myPage" /></h1>
 		</div>
 	</div>
-		
+	
+	
 	<div class="container d-flex justify-content-around mb-5 mt-5" >
 	<!--  1st box -->
 		<div>
@@ -68,9 +69,11 @@
 								</c:when>					
 							</c:choose>					
 					</div>
+					<br>
 					<div class="row">
 							<form action="${contextPath}/member/update" class="col text-center" >
 								<button class="btn btn-info">수정하기</button>
+								<input type="hidden" name="uno" value="${member.uno}" id="uno"> 
 							</form>
 					</div>
 				</div>
@@ -96,7 +99,7 @@
 					<c:if test="${b.writer != null && b.writer == member.userName}">
 						<tr>
 							<td>${b.bno}</td>
-							<td><a href="${b.bno}">${b.title}<b>[${b.replyCnt}]</b></a></td>
+							<td><a href="${contextPath}/free/get?bno=${b.bno}">${b.title}<b>[${b.replyCnt}]</b></a></td>
 							<td>${b.writer}</td>
 							<td><fmt:parseDate var="regDate" value="${b.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 							<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
@@ -124,7 +127,7 @@
 								<tr>
 									<td>${r.bno}</td>
 									<td>${r.replyer}</td>
-									<td><a href="${b.bno}">${r.reply}</a></td>
+									<td><a href="${contextPath}/free/get?bno=${r.bno}">${r.reply}</a></td>
 									<td><fmt:parseDate var="regDate" value="${r.regDate}" 	pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 									<fmt:formatDate	value="${regDate}" pattern="yyyy년 MM월 dd일" /></td>
 								</tr>

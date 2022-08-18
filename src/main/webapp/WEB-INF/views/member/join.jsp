@@ -37,12 +37,18 @@
 					</div>
 
 					<div class="col-md-6 mb-3">
-						<label for="email">이메일</label> 
-							<form:input path="userEmail" placeholder="이메일을 입력해주세요" class="form-control"/>
-							<form:errors path="userEmail" style="color:red;"/>
+						<div class=" d-flex justify-content-between">
+							<div class="col-md-8">
+								<label for="email">이메일</label> 
+									<form:input path="userEmail" placeholder="이메일을 입력해주세요" class="form-control" readonly="true"/>
+									<form:errors path="userEmail" style="color:red;"/>
+							</div>
+							
+							<span>
+								<button type="button" class="email_check" >이메일<br>중복체크</button>
+							</span>
+						</div>
 					</div>
-					
-					
 					<div class="mb-3">
 						<label for="email">연락처</label> 
 							<form:input path="userPhone" placeholder="000-0000-0000" class="form-control"/>
@@ -121,6 +127,29 @@
 		</div>
 </section>
 
+
+		<div class="fade modal" id="select_email">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h4 class="modal-title">이메일 중복 확인</h4>
+		          <button type="button" class="close" data-bs-dismiss="modal">×</button>
+		        </div>
+		        <div class="modal-body">
+		        	<div class="form-group">
+		        		<input type="text" class="userEmail form-control">
+		        	</div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary findEmail">조회</button>
+		          <button type="button" class="btn btn-danger modalClose" data-bs-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+
+
+
 <link rel="stylesheet" href="${contextPath}/resources/css/join.css">
 <script>
     window.addEventListener('load', () => {
@@ -135,6 +164,43 @@
         }, false);
       });
     }, false);
+  
+  </script>
+  
+  <script>
+
+			$('.email_check').on('click',function(){
+				$('#select_email').find('.userEmail').val('');
+				$('#select_email').modal('show');
+			});
+			
+			$('.modalClose').on('click',function(){
+				$(this).closest('#select_email').modal('hide')
+			});
+			
+			$('.findEmail').on('click',function(){
+				let userEmail = $('#select_email').find('.userEmail').val();
+				alert(userEmail);
+				if(userEmail.trim() == '' || userEmail == null) {
+					alert('이메일을 입력하세요')
+					return; 
+				}
+				let url = contextPath + "/member/selectByEmail";
+				$.getJSON(url, {userEmail : userEmail},  function(data){
+					if(data == 0){ // 사용가능
+						alert('사용가능한 이메일 입니다.')
+						$('#joinForm').find('input[name="userEmail"]').val(userEmail);
+						$('#select_email').modal('hide');
+						
+					} else if(data == 1) { // 사용 불가능
+						alert('이메일 중복입니다. 사용할 수 없습니다.')
+					}else {
+						alert('이메일을 입력해주세요.')
+					}			
+				})
+			});
+
+  
   </script>
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

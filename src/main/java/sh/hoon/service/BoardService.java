@@ -10,7 +10,7 @@ public interface BoardService {
 
 	
 	List<BoardVO> readAll(Criteria criteria);
-	BoardVO read(Long bno); 
+	BoardVO read(Long bno,  boolean isAddCount); 
 	void register(BoardVO vo);
 	void modify(BoardVO vo);
 	void remove(Long bno);

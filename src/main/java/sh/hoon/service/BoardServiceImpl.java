@@ -21,11 +21,16 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardAttachMapper attachMapper;
 
+	@Transactional
 	@Override
-	public BoardVO read(Long bno) {
+	public BoardVO read(Long bno, boolean isAddCount) {
+		if(isAddCount == true) {
+			mapper.addViewCount(bno);
+		}
 		return mapper.get(bno);
 	}
 
+	
 	@Transactional
 	@Override
 	public void register(BoardVO vo) {
