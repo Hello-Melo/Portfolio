@@ -82,6 +82,7 @@
 		values
 		(#{title}, #{contents}, #{writer}, #{category})
 	</insert>
+	
 	<update id="update">
 		update board_tbl set
 		title = #{title},
@@ -89,6 +90,7 @@
 		updateDate = now()
 		where bno = #{bno}
 	</update>
+	
 	<delete id="delete">
 		delete from board_tbl where bno = #{bno}
 	</delete>

@@ -26,7 +26,7 @@ public class FileCheckTask {
 	//오늘 폴더와 과거 폴더를 비교해서 사용되지 않는 파일 자동 삭제 메서드
 	@Scheduled(cron="0 0 2 * * * ")
 	public void checkFiles() {
-		System.out.println("되냥");
+		System.out.println("작동되는가?");
 		
 		List<BoardAttachVO> fileList = attachMapper.getOldFiles();
 		

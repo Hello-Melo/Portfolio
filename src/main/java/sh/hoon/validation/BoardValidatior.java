@@ -18,6 +18,7 @@ public class BoardValidatior implements Validator {
 	private static final String writerRegExp = " ^[가-힣]*$";
 	private Pattern pattern;
 	
+	//욕설 체크 리스트
 	private String[] words = new String[] {"씨발", "개새끼", "조까", "좆같네", "니미", "닥쳐", "미쳤냐", "디져", "18새끼","시발새끼", "씨팔새끼", "니애미", "니 애미"};
 
 	public BoardValidatior() {
